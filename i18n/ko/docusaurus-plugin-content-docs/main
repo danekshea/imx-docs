@@ -1,99 +1,61 @@
 ---
-title: "Metadata schema registration"
-slug: "/metadata-schema-registration"
-sidebar_position: 3
+title: "Project registration"
+slug: "./project-registration"
+sidebar_position: 1
 keywords:
-  - imx-games
+  - imx-dx
 ---
 
-Prior to metadata registration, you need to [register your collection](./collection-registration.mdx).
+For project registration, you first need to [register as a user with Immutable X](../getting-started-guide.md#register-a-user-account).
 
-## Add collection metadata schema
+A project is an administrative-level entity that is associated with an owner address, which is your [wallet address](../getting-started-guide.md#wallet). One project can have many associated collections. :::caution Project ownership cannot be transferred
+Once a project is registered to a particular wallet address (public key), it cannot be changed. Make sure that the wallet you use to register a project is one that you have adequate security management for
+:::
+## Create a project
+The following fields in [imx-examples](https://github.com/immutable/imx-examples/blob/main/docs/onboarding.md) require values to create a project:
+- `name` - The name of the project.
+- `company_name` - The name of the company.
+- `contact_email` - Your associated company email.
 
-Only the project owner (wallet owner) can add a metadata schema to a collection. [See an example schema here](../asset-management/asset-metadata.mdx#example-metadata-schema).
-
-Each property of the metadata schema contains the following fields:
-<table>
-  <thead>
-  <tr>
-    <th>Field</th>
-    <th>Required (Default value)</th>
-    <th>Value Type / Notes</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>
-      <code>name</code>
-    </td>
-    <td>yes</td>
-    <td>text</td>
-  </tr>
-  <tr>
-    <td>
-      <code>type</code>
-    </td>
-    <td>no (<code>"text"</code>)</td>
-    <td><a href='https://docs.x.immutable.com/docs/asset-metadata#property-type-mapping'>See Property Type Mapping</a></td>
-  </tr>
-  <tr>
-    <td>
-      <code>filterable</code>
-    </td>
-    <td>no (<code>false</code>)</td>
-    <td>boolean. If set to <code>true</code>, then the particular metadata's <code>name</code> will show up in the filters that are used by marketplaces and other ecosystem projects.
-</td>
-  </tr>
-  </tbody>
-</table>
-
-Example payload:
-```json title="Metadata Schema sample"
-{
-  "metadata": [
-    {
-      "name": "some-metadata-name",
-      "type": "discrete",
-      "filterable": true
-    },
-    {
-      "name": "rare",
-      "type": "boolean",
-      "filterable": true
-    },
-    {
-      "name": "image_url"
-    }
-  ]
-}
+After you've edited those fields in the file named: 2-create-project.ts, run the following script to create your project:
+```bash title="Create a project"
+npm run onboarding:create-project
 ```
-**[Learn more about asset metadata](../asset-management/asset-metadata.mdx)**
+# Project limits
+All projects have set limitations on how many collections can be created, and how many mint requests can be made within a four-week period.
 
-:::info View example code The repository [imx-examples](https://github.com/immutable/imx-examples) provides easy to use examples. Follow the instructions in the README to get started. :::
+## Collection limits
+- Projects are limited to **five** collections within a four-week period.
+- The four-week period starts from the moment a collection is created.
+- If a collection's request is sent that exceeds this limit, the request will fail, returning an error with a status code of `429` and a message of `Collection limit exceeded`.
+- If four weeks have elapsed since the previous collection was created, a new four-week window starts from the time the next request is made.
 
-## Edit metadata schema
-To add missing attributes to your collection's metadata schema that were not submitted in the original request, you can [execute this call](https://github.com/immutable/imx-examples/blob/main/src/admin/update-metadata-by-name.ts) multiple times. Just add the missing attributes and they will be appended.
+Project limit information will be included in response headers when a request fails due to the limit being exceeded, and also when a request is successful.
 
-Submitting the same metadata schema attribute will cause the error:
+Response header limit information includes:
+- `collection_remaining` - How many collections remain for the four-week time period.
+- `collection_limit_reset` - The expiry date of the current four-week window.
+- `collection_limit` - The collection limit available to the project for each four-week window.
 
-```json title="Error that happens when submitting the same metadata schema"
-{
-  "code": "metadata_key_already_exists",
-  "message": "Metadata key(s) already exist"
-}
-```
+:::info Increase project limits Project limits, for both minting and collections, can be increased by [contacting support](https://support.immutable.com) about your project. Be sure to include your reason for an increase. Our team will respond to your request within 2 business days." :::
+## Minting limits
+- Projects are limited to **50,000** mints within a four-week period.
+- The four-week period starts when a project's first mint request is made.
+- If a mint request is sent that exceeds the limit, the request will fail returning an error with a status code of `429` and a message of `Mint limit exceeded`.
+- If four weeks have elapsed since the previous mint, a new four-week window starts from the time the next request is made.
 
-:::caution Metadata refreshing requires support While you can register your own collections and metadata on Ropsten, you **cannot** execute a metadata refresh yourself.
+Project limit information will be included in response headers when a request fails due to the limit being exceeded, and also when a request is successful.
 
-To refresh metadata changes, you need to [contact support](https://support.immutable.com) and identify the tokens that need to be re-crawled, and the updates that have been made to them.
+Response header limit information includes:
+- `mint_remaining` - How many mints remain for the four-week time period.
+- `mint_limit_reset` - The expiry date of the current four-week window.
+- `mint_limit` - The mint limit available to the project for each four-week window.
 
-Requests may take up to 2 business days (AEST). :::
+## Check limits
+Project owners can retrieve project limit information at any time using [get project by ID](https://github.com/immutable/imx-examples/blob/main/docs/administration.md#get-a-project-by-id).
 
-## Other attributes
-You can update the "filterable" attribute of a metadata schema property.
+## Project API calls
+- List projects: This will return a list of projects that you are the owner of.
+- List project by ID: Get project data according to the ID specified. You must be the owner of the project to retrieve this data.
 
-**Expensive API call on "filterable": true** This API call may take a few seconds to a few minutes as it will trigger a re-scan of all the assets for the {{contract-address}} to get the up to date the filter values.
-
-You can also edit the "type" attribute of a metadata schema property.
-
-**Filterable text is not allowed** If passing both "filterable": true and the "type": "text", this API call will return an error. This error will also be triggered when passing "filterable": true and the metadata "type" is already "text".
+See our [imx-examples](https://github.com/immutable/imx-examples) repo on GitHub for a [full list of commands](https://github.com/immutable/imx-examples/blob/main/package.json).
