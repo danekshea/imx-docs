@@ -1,0 +1,3 @@
+files:
+  - source: /docs/main
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/main
