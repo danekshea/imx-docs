@@ -166,10 +166,10 @@ const configuration = {
         },
         items: [
           // to be added once we support Korean
-          {
-            type: 'localeDropdown',
-            position: 'left',
-          },
+          // {
+          //   type: 'localeDropdown',
+          //   position: 'left',
+          // },
           {
             to: '/',
             position: 'left',
