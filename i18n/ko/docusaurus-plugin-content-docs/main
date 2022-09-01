@@ -1,62 +1,69 @@
 ---
-id: "developer-faq"
-title: "FAQ"
-slug: "/developer-faq"
-sidebar_position: 2
-keywords:
-  - imx-games
-  - imx-dx
+id: "error-codes"
+title: "API error codes"
+slug: "/error-codes"
+sidebar_position: 1
 ---
 
-## General
-**How is asset custody managed in Immutable X? **
+## contract_already_exists
 
-Immutable X is a self-custodial protocol, meaning all users are responsible for their own security. Users can manage their own private keys and maintain full control of their own assets, or opt for a custodial wallet flow. Users can deposit and withdraw their assets to and from the protocol at any time. Every transaction requires a signature from the user, and Immutable can’t authorise any actions on behalf of the user.
+The collection has already been registered. A collection can only be registered once. Check that the value of the `contract_address` field passed to the [register collection API](/reference#/operations/createCollection) is correct.
 
-**Does Immutable X have a block explorer? How do I keep track of user inventories?**
+If you have previously registered a collection and want to update some of its details, view the [update collection API](/reference#/operations/updateCollection) documentation.
 
-[Immutascan](https://immutascan.io/) is a block explorer where Immutable X transactions can be viewed.
+## missing_metadata_key
 
-We also have API endpoints that are available for you to listen on. We recommend polling our mints, transfers, trades, etc endpoints at regular intervals to listen on events within Immutable X, and these endpoints can be filtered depending on your requirements.
+At least one *required* metadata key was not provided in the request. The `message` field of the error response specifies the specific metadata key(s) that are missing. Example:
 
-**How do I port or build smart contract logic on Immutable X?**
+```json
+{
+  "code": "missing_metadata_key",
+  "message": "Missing required metadata key: name"
+}
+```
 
-This is not supported at the moment, though most NFT projects don’t have a need for general computation. For example, game-related NFTs can have off-chain events and interactions within the client’s application, and only need to interact with Immutable X for minting, transferring, burning, updating metadata, etc. A current limitation of ZK-rollups is general computation, but this challenge is rapidly being addressed by our partner StarkWare.
+## metadata_key_already_exists
 
-## Metadata
+The metadata you are trying to add to a collection is already present. To update collection metadata, view the [update collection metadata API](/reference#/operations/updateCollection).
 
-**Can I update the metadata of an ERC721 token in Layer 2?**
+## mint_validation_failed
 
-It is not possible to update immutable metadata (otherwise known as the blueprint) of an NFT that has been minted to Layer 2 because this is trustlessly passed to the Layer 1 smart contract when withdrawing — alongside the client token ID. However, you can update mutable metadata by changing the data returned by your metadata API.
+The mint request payload has failed validation. The `message` field has more details on the validation error.
 
-Currently, our metadata crawler only runs once at the time of minting so if you make changes to the off-chain metadata that we retrieve from your endpoint, you need to [inform our customer support team](https://support.immutable.com) so it can be updated on Immutable X.
+## asset_invalid_id
+`/assets/{address}/{id}` - Contract address and token id is a unique composite key.  
+The contract address is not a hex (e.g.'0x02311ab2...') or the token id is not an integer. Both params stored in DB as a varchars.
 
-:::info "Pre-approval to refresh metadata" **Jan 2022:** If you intend to refresh metadata after your collection is minted, you need to have approval from our Customer Success team in advance of your initial mint. We are working on making this process entirely self-service, but in the meantime, please [submit a request here](https://support.immutable.com). :::
+## asset_not_found
 
-## Orders
+`/assets/{address}/{id}` - Contract address and token id is a unique composite key. The assets with such ID was not found in database (join of imx_nft + imx_collection + imx_royalty)
 
-**Does Immutable X automatically match buy and sell orders for NFTs of the same value?**
+## asset_invalid_format
 
-There is currently no automatic matching of orders as Immutable X only supports the maker/taker model at present. An NFT will be listed for sale for a specified price by the maker, and the trade occurs when this order is accepted by the taker. This will change in the future as we are working on implementing metadata orders where you can place buy orders on metadata properties (e.g. name = Demogorgon), which will bring more liquidity to functionally identical NFTs.
+The response from DB `[]store.Asset` could not be transformed into `[]api.Asset`
 
-**Can I authorize others to create buy/sell orders on my behalf? **
+## invalid_mint_id
 
-Immutable X is a self-custodial protocol, and every transaction requires a signature from the owner of the wallet. No third party (including us) can touch your assets unless they have access to your private key.
+The provided mint `id` is invalid. It was either not correctly provided as a valid integer, or there was some other issue parsing the `id`, e.g. integer overflow, negative integer.
 
-## NFTs
+## mint_not_found
 
-**Is it possible to transfer assets between Immutable X and Ethereum freely?**
+The provided mint `id` is valid, however it does not exist. Please ensure that you are providing the `id` of a minted token.
 
-Absolutely, that’s a key benefit of being a Layer 2 scaling solution. Even if Immutable X (the company) ceases to exist, users will always have the ability to withdraw all assets back to mainnet. Currently the Immutable X marketplace has yet to implement the withdrawals of NFTs on our frontend, however it is possible to withdraw NFTs using the Immutable X APIs.
+## mint_unwithdrawable
 
-**If I mint an NFT on Immutable X, does it exist on-chain? What happens when I withdraw to mainnet?**
+The token attempting to be minted did not pass the validation to ensure it can be withdrawn on the L1 layer at a later stage. This is usually caused by a mismatch between the token ID/blueprint and your smart contracts `mintFor` logic.
 
-If your NFT started off on mainnet Ethereum and was deposited into Immutable X, the asset will be locked in our L1 smart contract and will now be tradable on L2. When the asset is successfully withdrawn, The asset is released from the smart contract and sent to the withdrawing user’s wallet.
+This error will log log the token address, id and blueprint of the attempted mint.
 
-If your NFT was minted directly on to Immutable X (for no gas cost!), the asset will have Layer 1 representation, immutability, and cryptographic security via the merkle tree construct, but won’t be an ERC721 on mainnet ethereum until withdrawn from Immutable X. At the time of withdrawal, the asset will be minted onto L1.
+## unique_project_error
 
-## Smart Contracts
+The provided request object contains collection addresses that belong to different projects. Ensuring that the collection addresses provided belong to the same project will solve this error.
 
-**Does Immutable X support ERC-1155s?**
+## mint_limit_exceeded
 
-No, Immutable X does not support or recommend the use of ERC1155. We recommend that you use as few smart contracts as possible and consider merging your smart contracts, differentiating NFTs with metadata rather than by which smart contract they originated in. Immutable X supports ERC721 smart contracts and recommends that you create a new ERC721 contract for each meaningfully different type of asset.
+The request to mint is in danger of exceeding the allowable number of mints per project in the given timeframe. In order to increase project limits, contact the customer support team.
+
+## collection_limit_exceeded
+
+The request to create a collection is in danger of exceeding the allowable number of collections per project created in the given timeframe. In order to increase project limits, contact the customer support team.
