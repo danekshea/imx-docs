@@ -1,61 +1,27 @@
 ---
-id: "linkbatchnfttransfer"
-title: "Link.batchNftTransfer"
-slug: "/linkbatchnfttransfer"
-sidebar_position: 2
+id: "linkcompletewithdrawal"
+title: "Link.completeWithdrawal"
+slug: "/linkcompletewithdrawal"
+sidebar_position: 6
 keywords:
   - imx-wallets
 ---
 
-As of `1.3.52`, the `@imtbl/imx-sdk` supports transferring large amounts of NFT assets in batches. To begin a new batch transfer flow, link should be called like so:
+:::note Link reference tool Check out our **[Link reference tool](https://tools.immutable.com/link-reference/)** to understand how `Link` methods work without having to write any code. :::
 
-```javascript
-const response = await link.batchNftTransfer(payload)
-```
+Here's how you can complete the withdrawal of ETH:
 
-Where the payload is of type `LinkParams.BatchNftTransfer`:
+The response can be obtained by saving the results of the Promise returned by `completeWithdrawal`:
 
 ```typescript
-const payload: LinkParams.BatchNftTransfer = [
-  {
-    type: ERC721TokenType.ERC721, // Must be of type ERC721
-    tokenId: string, // the token ID
-    tokenAddress: string, // the collection address / contract address this token belongs to
-    toAddress: string, // the wallet address this token is being transferred to
-  },
-  //...remainingTransfers
-]
+const response = await link.completeWithdrawal({
+  type: ETHTokenType.ETH,
+})
+
+console.log(response)
+// returns { transactionId: '0x...' }
 ```
-
-The response type is the same as [Link.transfer](./linktransfer.md).
-
-## Notes
-
-- Requests will be batched in groups of **100** (This is the current batch size, it is subject to change, however this will not affect your implementation)
-
-- Only tokens of type `ERC721TokenType.ERC721` can be used in `link.batchNftTransfer`
-
-- If any validation errors are present in the current batch, the entire batch will not be performed
-
-- If any API errors are received as part of processing the current batch, the entire batch will fail
-
-- If any errors are present (due to validation, API or otherwise) for a particular batch, you will still be able progress to the next batch
-
-- Each confirmation is accompanied by a signing process on the user wallet
-
-## Screenshots from user journey
-
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
-
-![Confirm Transfer Batch](/img/linkbatchnfttransfer/confirm-transfer-batch.png "Confirm Transfer Batch")
-
-![First Batch Complete](/img/linkbatchnfttransfer/first-batch-complete.png "First Batch Complete")
-
-![All Batches Complete](/img/linkbatchnfttransfer/batch-complete.png "All Batches Complete")
-
-![Example Validation Error](/img/linkbatchnfttransfer/example-validation-error.png "Example Validation Error")
 
 ## Errors
 
-See error responses [here](./link-errors.md#transfer).
+See error responses [here](./link-errors.md#complete-withdrawal).
