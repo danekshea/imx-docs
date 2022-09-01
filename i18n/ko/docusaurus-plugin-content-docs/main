@@ -1,64 +1,56 @@
 ---
-id: "link-buy2"
-title: "Link.buy"
-slug: "/link-buy2"
-excerpt: "Link can now be used to kick off buy flows containing multiple order ID's"
-sidebar_position: 4
+id: "architecture-overview"
+title: "Architecture overview"
+slug: "/architecture-overview"
+excerpt: "The core components of Immutable X"
+sidebar_position: 5
 keywords:
-  - imx-wallets
+  - imx-dx
 ---
 
-:::note Link reference tool Check out our **[Link reference tool](https://tools.immutable.com/link-reference/)** to understand how `Link` methods work without having to write any code. :::
+The Immutable X stack consists primarily of: the ZK-Rollup scaling engine, Link UI, and the APIs. Together, these components lower the barriers of entry in the NFT space for developers and users, enabling instant trade confirmation, massive scalability, and gas-free minting and trading — all without compromising user custody.
 
-Here's how you can initiate a buy order:
+There are three distinctions to make when referring to Immutable X:
+- **Immutable X platform** is the core infrastructure that allows for the minting, depositing, withdrawing and trading of assets on Layer 2 blockchain.
+- **Immutable X token** (IMX) is the ERC-20 utility token of the Immutable X protocol, used to reward users for their contribution to the platform.
+- **Immutable X marketplace** is the first exchange venue for gas-free minting and trading of NFTs, developed by Immutable and powered by Immutable X.
 
-```typescript
-import { Link, ImmutableXClient, ImmutableOrderStatus} from ‘@imtbl/imx-sdk’;
-const link = new Link("https://link.ropsten.x.immutable.com")
-buyResults: BuyResponse = await link.buy({ orderIds: ['1', '2', '3'] });
-```
+## Immutable X APIs
+In Layer 1 blockchains there are no APIs, so any elements that require tracking are tracked individually, then recorded and stored in your own records. The Immutable X APIs wrap the logic of Immutable X’s exchange engine so that developers do not need to interact directly with smart contracts via custom logic to build on the Immutable X platform.
 
+Every interaction, from minting to trading to transferring, is performed via simple API calls. The Immutable X APIs contain both the read and write functionality required to build applications without building a backend, meaning Immutable X abstracts the complexity of the blockchain to function as a backend.
 
-Just like all other link SDK methods, **buy** returns a promise, which resolves once all operations are complete, or rejects once the link encounters a critical error.
+The read functionality also offers various filtering options. This includes filters that can present a list of all orders submitted by a specific user, or more complete filters like metadata filters. Using the API’s read function we can give developers a list of:
 
-Once a multi-buy flow is confirmed by the user, **Buy** will asynchronously try to buy each order in the list and then display the results.
+- mints
+- trades
+- withdrawals & deposits
+- assets minted
+- orders (e.g. display all the orders made).
 
-In order to handle the various new kinds of error states that this functionality allows, `link.buy` will now resolve with a response report payload which matches the following types:
+**[View the API reference documentation](/reference)**
 
-```typescript
-type SuccessOrError = 'success' | 'error'
+## ZK-Rollups
+Immutable X combines NFT-specific exchange and proof logic with the cutting edge rollup technology developed by StarkWare to create one of the most advanced tools for trading NFTs ever built. Rollups allow for world-class scalability and user experience while retaining the underlying security of Ethereum.
 
-type OrderStatus = {
-  status: SuccessOrError
-  message?: string
-}
+ZK-STARKs (Zero-Knowledge Scalable Transparent ARguments of Knowledge) are a type of cryptographic-proof technology that enable users to share validated data or perform computations with a third party, without the data or computation being revealed to the third party in a publicly verifiable way. This is also known as a zero-knowledge proof (ZKP).
 
-type BuyResults = {
-  [orderId: string]: OrderStatus
-}
+Prior to the creation of ZK-STARKs, ZK-SNARKs were used to create ZK proof systems. This required a trusted party, or parties, to initially set up the ZK proof system, which introduced a vulnerability: those “trusted parties” could compromise the privacy of the entire system. ZK-STARKs improve on this technology by removing the need for a trusted setup.
 
-type BuyResponse = {
-  result: BuyResults
-}
-```
+A ZK-Rollup requires an “operator”. The operator is responsible for linearising transactions, which means putting them into a consistent, global incremental order with no gaps. In this instance Immutable X is the operator.
 
-An example resolve payload from a semi-successful `buy()` flow:
+Immutable X’s rollup technology allows for more than 9,000 NFT transfers, trades and mints per second, meeting and exceeding the scale required by mainstream NFT projects.
 
-```typescript
-{
-  result: {
-     '1': { status: 'success' },
-     '2': {
-        status: 'error',
-        message: 'Cannot purchase own order',
-     },
-     '3': { status: 'success' },
-  }
-}
-```
+To learn more, check out [Vitalik's Incomplete Guide to Rollups](https://vitalik.ca/general/2021/01/05/rollup.html).
 
-If the multi-buy flow is found to contain 0 valid orders after minimal client-side validation, then link will error out (and reject the promise it returned from the buy() method) and no orders will be purchased.
+## Link UI
+The Link is the conduit that we use to connect users to the Immutable X protocol. This allows Immutable X to support a thriving third-party marketplace ecosystem, without presenting a security risk.
 
-## Errors
+Unlike other blockchains or sidechains, Immutable X currently supports all desktop Ethereum wallets without forcing the user to switch networks. All new Immutable X users are required to [register as a user](../guides/getting-started-guide.md#register-a-user-account), which means setting up a Layer 2 wallet via Link.
 
-See error responses [here](./link-errors.md#buy).
+Immutable X partners can embed the Link directly into their site’s transaction flow, making buying and selling NFTs more efficient and intuitive. The Link screens will show up in the site’s transaction flow, allowing their users to authorize purchases, listings, and transfers of ETH and NFTs, all without leaving the page.
+
+**[Learn more about Link SDK](../guides/link-sdk/index.md)**
+
+## Immutable X SDK
+The Immutable X SDK, combined with the APIs, will allow partners to build NFT projects in hours rather than weeks. Currently, a Typescript SDK implementation is available, designed to make it easy to integrate the protocol into websites. The SDK allows for types access to the Immutable X APIs and wallet.
