@@ -1,120 +1,62 @@
 ---
-id: "create-react-app-webpack-5-errors"
-title: "Webpack 5 Errors"
-slug: "/create-react-app-webpack-5-errors"
-sidebar_position: 3
+id: "developer-faq"
+title: "FAQ"
+slug: "/developer-faq"
+sidebar_position: 2
 keywords:
+  - imx-games
   - imx-dx
 ---
 
-If you're using the latest version of [create-react-app](https://create-react-app.dev/) with the [@imtbl/imx-sdk](https://www.npmjs.com/package/@imtbl/imx-sdk) module, you may see errors like this when trying to start up the app:
+## General
+**How is asset custody managed in Immutable X? **
 
-```shell
-Module not found: Error: Can't resolve 'https' in '/Users/{username}/{project-name}/node_modules/@imtbl/imx-sdk/dist'
-BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
-This is no longer the case. Verify if you need this module and configure a polyfill for it.
-```
+Immutable X is a self-custodial protocol, meaning all users are responsible for their own security. Users can manage their own private keys and maintain full control of their own assets, or opt for a custodial wallet flow. Users can deposit and withdraw their assets to and from the protocol at any time. Every transaction requires a signature from the user, and Immutable can’t authorise any actions on behalf of the user.
 
-### Why is this happening?
-The reason for this error is that create-react-app uses a version of webpack greater than 5, which, unlike versions < 5, does not include NodeJS polyfills by default. This means that they need to be configured manually for each module that requires them.
+**Does Immutable X have a block explorer? How do I keep track of user inventories?**
 
-Normally, this involves updating the webpack config file inside a project, however, create-react-app uses another package called [react-scripts](https://www.npmjs.com/package/react-scripts) to manage webpack (and other build dependencies). As we cannot update the webpack config within react-scripts, we will need to override it.
+[Immutascan](https://immutascan.io/) is a block explorer where Immutable X transactions can be viewed.
 
-### How to fix this
-#### 1. Install [react-app-rewired](https://www.npmjs.com/package/react-app-rewired)
-This package allows us to update the webpack config file to fix the polyfill node core module error.
+We also have API endpoints that are available for you to listen on. We recommend polling our mints, transfers, trades, etc endpoints at regular intervals to listen on events within Immutable X, and these endpoints can be filtered depending on your requirements.
 
-Install with **npm**:
-```shell
-npm install --save-dev react-app-rewired
-```
+**How do I port or build smart contract logic on Immutable X?**
 
-Install with **yarn**:
-```shell
-yarn add --dev react-app-rewired
-```
-#### 2. Install the missing dependencies
+This is not supported at the moment, though most NFT projects don’t have a need for general computation. For example, game-related NFTs can have off-chain events and interactions within the client’s application, and only need to interact with Immutable X for minting, transferring, burning, updating metadata, etc. A current limitation of ZK-rollups is general computation, but this challenge is rapidly being addressed by our partner StarkWare.
 
-The following missing dependencies will have to be installed: ***crypto-browserify, stream-browserify, assert, stream-http, https-browserify, os-browserify, url, process***
+## Metadata
 
-Install with **npm**:
-```shell
-npm install --save-dev crypto-browserify stream-browserify assert stream-http https-browserify os-browserify url buffer process
-```
-Install with **yarn**:
-```shell
-yarn add process crypto-browserify stream-browserify assert stream-http https-browserify os-browserify url buffer
-```
+**Can I update the metadata of an ERC721 token in Layer 2?**
 
-#### 3. Override the create-react-app webpack config file
+It is not possible to update immutable metadata (otherwise known as the blueprint) of an NFT that has been minted to Layer 2 because this is trustlessly passed to the Layer 1 smart contract when withdrawing — alongside the client token ID. However, you can update mutable metadata by changing the data returned by your metadata API.
 
-This is how we override the webpack config file in react-scripts and tell it how to resolve the missing polyfill dependencies.
+Currently, our metadata crawler only runs once at the time of minting so if you make changes to the off-chain metadata that we retrieve from your endpoint, you need to [inform our customer support team](https://support.immutable.com) so it can be updated on Immutable X.
 
-In the root folder of your project, create a new file called `config-overrides.js`, and add the following code to it:
-```javascript "config-overrides.js"
-const webpack = require('webpack');
-module.exports = function override(config) {
-    const fallback = config.resolve.fallback || {};
-    Object.assign(fallback, {
-        "crypto": require.resolve("crypto-browserify"),
-        "stream": require.resolve("stream-browserify"),
-        "assert": require.resolve("assert"),
-        "http": require.resolve("stream-http"),
-        "https": require.resolve("https-browserify"),
-        "os": require.resolve("os-browserify"),
-        "url": require.resolve("url")
-    })
-    config.resolve.fallback = fallback;
-    config.plugins = (config.plugins || []).concat([
-        new webpack.ProvidePlugin({
-            process: 'process/browser',
-            Buffer: ['buffer', 'Buffer']
-        })
-    ])
-    config.module.rules.push({
-        test: /\.m?js/,
-        resolve: {
-            fullySpecified: false
-        }
-    })
-    return config;
-}
-```
+:::info "Pre-approval to refresh metadata" **Jan 2022:** If you intend to refresh metadata after your collection is minted, you need to have approval from our Customer Success team in advance of your initial mint. We are working on making this process entirely self-service, but in the meantime, please [submit a request here](https://support.immutable.com). :::
 
-#### 4. Override package.json to include the webpack configuration
+## Orders
 
-Now, to implement the new config, we need to call `react-app-rewired` instead of `react-scripts` in the following scripts in our package.json:
-* start
-* build
-* test
+**Does Immutable X automatically match buy and sell orders for NFTs of the same value?**
 
-This is what the package.json file looks like **before**:
-```json
-"scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject" 
-},
-```
-This is what it looks like **after**:
-```json
-"scripts": {
-  "start": "react-app-rewired start",
-  "build": "react-app-rewired build",
-  "test": "react-app-rewired test",
-  "eject": "react-scripts eject" 
-},
-```
-Once you've done this, the development server should be up and running again.
+There is currently no automatic matching of orders as Immutable X only supports the maker/taker model at present. An NFT will be listed for sale for a specified price by the maker, and the trade occurs when this order is accepted by the taker. This will change in the future as we are working on implementing metadata orders where you can place buy orders on metadata properties (e.g. name = Demogorgon), which will bring more liquidity to functionally identical NFTs.
 
-### How to deal with 'failed to parse source map' warnings
+**Can I authorize others to create buy/sell orders on my behalf? **
 
-You will still have a large amount of `failed to parse source map` from modules warnings. They can be ignored for now, however, should you want to get rid of them, you can disable them (see [this discussion](https://github.com/facebook/create-react-app/discussions/11767#discussioncomment-2092902)) by adding `GENERATE_SOURCEMAP=false` to the `start` script in package.json:
+Immutable X is a self-custodial protocol, and every transaction requires a signature from the owner of the wallet. No third party (including us) can touch your assets unless they have access to your private key.
 
-```json
-"scripts": {
-    "start": "GENERATE_SOURCEMAP=false react-app-rewired start",
-    // ...
-},
-```
+## NFTs
+
+**Is it possible to transfer assets between Immutable X and Ethereum freely?**
+
+Absolutely, that’s a key benefit of being a Layer 2 scaling solution. Even if Immutable X (the company) ceases to exist, users will always have the ability to withdraw all assets back to mainnet. Currently the Immutable X marketplace has yet to implement the withdrawals of NFTs on our frontend, however it is possible to withdraw NFTs using the Immutable X APIs.
+
+**If I mint an NFT on Immutable X, does it exist on-chain? What happens when I withdraw to mainnet?**
+
+If your NFT started off on mainnet Ethereum and was deposited into Immutable X, the asset will be locked in our L1 smart contract and will now be tradable on L2. When the asset is successfully withdrawn, The asset is released from the smart contract and sent to the withdrawing user’s wallet.
+
+If your NFT was minted directly on to Immutable X (for no gas cost!), the asset will have Layer 1 representation, immutability, and cryptographic security via the merkle tree construct, but won’t be an ERC721 on mainnet ethereum until withdrawn from Immutable X. At the time of withdrawal, the asset will be minted onto L1.
+
+## Smart Contracts
+
+**Does Immutable X support ERC-1155s?**
+
+No, Immutable X does not support or recommend the use of ERC1155. We recommend that you use as few smart contracts as possible and consider merging your smart contracts, differentiating NFTs with metadata rather than by which smart contract they originated in. Immutable X supports ERC721 smart contracts and recommends that you create a new ERC721 contract for each meaningfully different type of asset.
