@@ -1,34 +1,81 @@
 ---
-id: "generate-imx-signature"
-title: "Generate IMX-Signature"
-slug: "/generate-imx-signature"
-sidebar_position: 5
+id: "token-data-object"
+title: "Token data object"
+slug: "/token-data-object"
+sidebar_position: 4
 keywords:
   - imx-games
 ---
 
-Some of our API endpoints require **IMX-Signature** in the Headers:
-* **collections**
-    * [createCollection](https://docs.x.immutable.com/reference#/operations/createCollection)
-    * [updateCollection](https://docs.x.immutable.com/reference#/operations/updateCollection)
-* **metadata**
-    * [addMetadataSchemaToCollection](https://docs.x.immutable.com/reference#/operations/addMetadataSchemaToCollection)
-    * [updateMetadataSchemaByName](https://docs.x.immutable.com/reference#/operations/updateMetadataSchemaByName)
-* **projects**
-    * [getProjects](https://docs.x.immutable.com/reference#/operations/getProjects)
-    * [getProject](https://docs.x.immutable.com/reference#/operations/getProject)
-    * [createProject](https://docs.x.immutable.com/reference#/operations/createProject)
+Currently, in our API reference, we have a `token.data` object required as a parameter for a bunch of endpoints.
 
-### How to get the `IMX-Signature`?
-IMX-Signature consists of a **Unix epoch timestamp** (ie. "1654483072") signed with the project owner's **ETH key (wallet address)** (ie. "0x...").
+**Example:** ![Token data](/img/token-data.png "Token data param")
 
-#### How are `timestamp` and `signature` generated?
+However, it is not clear from the API reference what this object should look like. This page is to provide that clarification.
+
+### Endpoints requiring `token.data`:
+* [getSignableOrder](https://docs.x.immutable.com/reference#/operations/getSignableOrder)
+* [getSignableTransferV1](https://docs.x.immutable.com/reference#/operations/getSignableTransferV1)
+* [getSignableTransfer](https://docs.x.immutable.com/reference/#/operations/getSignableTransfer) (Get bulk details of a signable transfer)
+* [getSignableWithdrawal](https://docs.x.immutable.com/reference#/operations/getSignableWithdrawal)
+
+### token
+
+The `token` param is made up of two fields:
+* **type**
+* **data**
+
+`type` can be one of: **ETH**, **ERC20**, or **ERC721**
+
+`data` depends on the `type` that is used. Fields are:
+* **decimals** (required for ETH, ERC20)
+* **token_address** (required for ERC20, ERC721)
+* **token_id** (required for ERC721)
+
+If any of the required fields are missing, the request will error out.
+
+### Example requests:
+
+#### type: 'ETH'
+
 ```typescript
-const timestamp = Math.floor(Date.now() / 1000).toString();
-const signature = await signRaw(timestamp, signer); // IMX-Signature
+{
+  ...
+  "token": {
+      "type": "ETH",
+      "data": {
+          "decimals": 18
+      }
+  }
+}
 ```
 
-where:
-* **signer**: Signer from [@ethersproject/abstract-signer](https://www.npmjs.com/package/@ethersproject/abstract-signer)
-* **signRaw**: function in [imx-core-sdk](https://github.com/immutable/imx-core-sdk/blob/main/src/utils/crypto/crypto.ts#L79-L85)
+#### type: 'ERC20'
 
+```typescript
+{
+  ...
+  "token": {
+      "type": "ERC20",
+      "data": {
+          "decimals": 18,
+          "token_address": "0x..."
+      }
+  }
+}
+```
+
+#### type: 'ERC721'
+
+```typescript
+{
+  ...
+  "token": {
+      "type": "ERC721",
+      "data": {
+          "token_address": "0x...",
+          "token_id": "123"
+      }
+  }
+}
+```
