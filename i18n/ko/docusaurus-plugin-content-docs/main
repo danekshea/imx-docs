@@ -1,49 +1,58 @@
 ---
-id: "withdrawing-payouts"
-title: "Withdrawing payouts"
-slug: "/withdrawing-payouts"
-sidebar_position: 3
+id: "link-crypto-to-fiat"
+title: "Link.cryptoToFiat"
+slug: "/link-crypto-to-fiat"
+sidebar_position: 12
 keywords:
-  - imx-traders
+  - imx-wallets
 ---
 
-To withdraw your funds from Immutable X (Layer 2), you can do so via the API or Immutable X Marketplace.
+The crypto to fiat functionality is available in SDK v1.21.3+ and is a collaboration between Immutable X and Moonpay.
 
-## Steps to Withdraw via Immutable X Marketplace
-1. Go to the [Immutable X Marketplace](https://market.x.immutable.com).
-2. Connect wallet on Ethereum mainnet.
+The exchange process allows users to sell crypto held on L2 on the Immutable X platform directly for fiat funds. These funds will be deposited directly into the users nominated bank account. There is no gas fee for this exchange, only a [Moonpay transaction fee](https://support.moonpay.com/hc/en-gb/articles/360011930117-What-fees-do-you-charge-).
 
-![Connect to Ethereum Mainnet](/img/withdrawing-payouts/connect-to-ethereum.png)
+The withdraw happens directly on L2 via the transfer to Moonpay accounts.
 
-![Connect Wallet](/img/withdrawing-payouts/connect-wallet.png)
+:::info Minimal withdraw amount
+There's a minimal withdraw amount of 0.015 ETH.
+:::
 
-3. Go to your inventory page.
+The current available cryptocurrencies are:
+- ETH
 
-![Inventory](/img/withdrawing-payouts/inventory.jpg)
 
-4. Click on "Immutable X" balance next to the deposit button on the far right.
+:::caution Supported countries
 
-![Click on Immutable X](/img/withdrawing-payouts/click-on-immutable-x.jpg)
+The crypto to fiat off-ramp only available in EU, UK, and select US states.
 
-5. Select either ETH or the ERC-20 token you would like to withdraw.
-6. Specify the amount and hit continue to follow the link process to sign the transaction. This will prepare your withdrawal from Layer 2 to Layer 1.
+For more information please refer to [Moonpay’s help desk](https://support.moonpay.com/hc/en-gb/articles/4406268234641-What-countries-are-supported-to-sell-crypto-with-MoonPay-) :::
 
-![Specify Amount](/img/withdrawing-payouts/specify-amount.jpg)
+:::danger Exchange requires authenticated user `Link.cryptoToFiat({})` should only be called when user is authenticated and logged in, otherwise it will require user to reconnect :::
 
-![Confirm Prepare Withdrawal](/img/withdrawing-payouts/confirm-prepare-withdrawal.jpg)
+To initialize the offramp process with an option to choose any available currency and amount, marketplace needs to call the offramp function:
 
-![Preparing Withdrawal](/img/withdrawing-payouts/preparing-withdrawal.jpg)
+```typescript
+await link.cryptoToFiat({})
+```
 
-7. After some time (currently around 12 hours), your withdrawal should be ready to be taken onto Layer 1. At this point if you go back into the Immutable X Marketplace, you should see "preparing withdrawal" change to "withdrawal ready".
+This displays the Link UI with a screen when a user need to choose currency and anter amount:
 
-![Withdrawal Ready](/img/withdrawing-payouts/withdrawal-ready.jpg)
+![Offramp without parameters](/img/link-sdk-cryptotofiat/offramp-without-params.png "Offramp without parameters")
 
-8. Click on "withdrawal ready" and select ETH or the ERC-20 token you would like to withdraw to Layer 1.
+To initialize the offramp process for a specific currency:
+```typescript
+await link.cryptoToFiat({ cryptoCurrencies: ['ETH'] })
+```
 
-![Withdraw Ready](/img/withdrawing-payouts/withdraw-ready.jpg)
+This displays the Link UI with a screen when a user can only enter amount with already populated currency:
 
-9. Follow the confirmation process in Link.
+![Offramp with specific currency](/img/link-sdk-cryptotofiat/offramp-with-currency.png "Offramp with specific currency")
 
-![Confirmation](/img/withdrawing-payouts/confirmation.jpg)
+To initialize the offramp process with defined currency and amount:
 
-10. Your balance should show in your Layer 1 wallet soon (currently around 12 hours). There is a delay because we  batch transactions and send a single proof on-chain to reduce gas costs.
+```typescript
+await link.cryptoToFiat({ cryptoCurrencies: ['ETH'], amount: '0.01' })
+```
+This displays the Link UI with loaded Moonpay widget:
+
+![Offramp with specific currency and amount](/img/link-sdk-cryptotofiat/offramp-with-currency-and-amount.png "Offramp with specific currency and amount")
