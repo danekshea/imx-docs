@@ -1,66 +1,150 @@
 ---
-id: "linksign"
-title: "Link.sign"
-slug: "/linksign"
-sidebar_position: 10
+id: "linktransfer"
+title: "Link.transfer"
+slug: "/linktransfer"
+excerpt: "Link can now be used to kick off flows containing multiple token transfers"
+sidebar_position: 1
 keywords:
   - imx-wallets
 ---
 
+:::caution Registration is required for Receiver Wallet `link.transfer` will only work if the receiver wallet was previously registered with Immutable X.
+
+To register the wallet, simply do `Connect Wallet` in the Immutable X Marketplace and follow through all the steps until the wallet is fully connected to Immutable X Marketplace :::
+
 :::note Link reference tool Check out our **[Link reference tool](https://tools.immutable.com/link-reference/)** to understand how `Link` methods work without having to write any code. :::
 
-SDK v1.14.1+ used with Link UI add support to request arbitrary L1 signatures. This feature provide some flexibility for the developer to request L1 signatures for different actions that are not core to the platform such as like, follow, comment, etc.
+As of `1.0.0`, the `@imtbl/imx-sdk` supports transferring multiple tokens at once. To begin a new transfer flow, link should be called like so:
 
-## Parameters
-
-This method requires message that an engineer wants to sign and description that presents a user friendly message that will be shown to a user
-
-```json
-{
-  "message": "NonEmptyString",
-  "description": "NonEmptyString"
-}
-```
-
-## Usage
-To sign a message an engineer needs to call the method sign()
 ```typescript
-link.sign({
-    message: 'My awesome message',
-    description: 'Message that a user will see',
-});
+// eg: here is a sample link.transfer call:
+const transferResponsePayload: TransferV2ResultsCodec = await link.transfer([
+  {
+    amount: '1.23',
+    symbol: 'GODS',
+    type: ERC20TokenType.ERC20,
+    tokenAddress: '0x4c04c39fb6d2b356ae8b06c47843576e32a1963e',
+    toAddress: 'replace-this-with-a-receiver-address',
+  },
+  {
+    amount: '0.23',
+    type: ETHTokenType.ETH,
+    toAddress: 'replace-this-with-a-receiver-address',
+  },
+])
 ```
 
-![Sign Message](/img/link-sign/sign-msg.png "Sign Message")
+To make this change possible, the `link.transfer` SDK method has had the following interface & type changes:
 
-If a user successfully signed a message, link.sign() will be resolved with the value:
-```json
+```typescript
+// The below interfaces have not changed, they're just supplied here for context ...
+const EthAddress = t.brand(
+  t.string,
+  (s: any): s is t.Branded<string, EthAddressBrand> => isAddress(s),
+  'EthAddress'
+)
+export type EthAddress = t.TypeOf<typeof EthAddress>
+const FlatETHTokenCodec = t.interface({
+  type: ETHTokenTypeT,
+})
+const FlatETHTokenWithAmountCodec = t.intersection([
+  FlatETHTokenCodec,
+  t.interface({ amount: PositiveNumberStringC }),
+])
+const FlatERC20TokenCodec = t.interface({
+  type: ERC20TokenTypeT,
+  tokenAddress: EthAddress,
+  symbol: t.string,
+})
+const FlatERC721TokenCodec = t.interface({
+  type: ERC721TokenTypeT,
+  tokenId: NonEmptyString,
+  tokenAddress: EthAddress,
+})
+export const FlatTokenWithAmountCodec = t.union([
+  FlatETHTokenWithAmountCodec,
+  FlatERC721TokenCodec,
+  FlatERC20TokenWithAmountCodec,
+])
+
+// The old interface:
+const TransferParamsCodec = t.intersection([
+  FlatTokenWithAmountCodec,
+  t.interface({
+    to: EthAddress,
+  }),
+])
+
+// The new interfaces:
+export const FlatTokenWithAmountAndToAddressCodec = t.intersection([
+  FlatTokenWithAmountCodec,
+  t.type({
+    toAddress: EthAddress,
+  }),
+])
+
+const TransferV2ParamsCodec = t.array(FlatTokenWithAmountAndToAddressCodec)
+```
+
+The promise response signature from the old `link.transfer` method is `void`
+
+To better allow transparency and show which transfers failed and which transfers passed, the new `link.transfer` method resolves with a transaction status report:
+
+```typescript
+// the old interface:
+void
+
+// The new interfaces:
+const SuccessCodec = t.literal('success');
+const ErrorCodec = t.literal('error');
+
+const TransferV2TokenWithResult = t.intersection([
+  FlatTokenWithAmountAndToAddressCodec,
+  t.union([
+    t.type({ status: SuccessCodec, txId: t.Int }),
+    t.type({ status: ErrorCodec, message: t.string }),
+  ]),
+]);
+
+const TransferV2ResultsCodec = t.interface({
+  result: t.array(TransferV2TokenWithResult),
+});
+
+// eg: a sample results block:
 {
-    "result": "0x0d8705969ea15dac4f684f5f5a7a3447f514b07c96c7a9bb21588ef33821caed63f204c11f0ed69777132c8fa25af62c883627169c7b5b46f23b132db46e7d8d1c"
+  result: [
+    {
+      type: 'ERC20',
+      amount: '1.5',
+      symbol: 'GODS',
+      status: 'success',
+      toAddress: '0x12345...',
+      txId: 1
+    }, {
+      type: 'ETH',
+      amount: '0.5',
+      status: 'success',
+      toAddress: '0x12345...',
+      txId: 12
+    }, {
+      type: 'ERC721',
+      tokenId: '654987',
+      tokenAddress: '0x123456...',
+      status: 'success',
+      toAddress: '0x12345...',
+      txId: 123
+    }, {
+      type: 'ERC721',
+      tokenId: '1234',
+      tokenAddress: '0x123456...',
+      status: 'error',
+      message: 'Cannot transfer to your own wallet',
+      toAddress: '0x12345...',
+    },
+  ]
 }
 ```
 
 ## Errors
-If a user denied to sign a message, link.sign() will return rejected promise.
 
-Also, there is an error screen that will be appeared if a message cannot be sign as contains forbidden message
-
-![Sign Message Error](/img/link-sign/error.png "Sign Message Error")
-
-## Encryption public key
-
-To get an encryption public key an engineer needs to call the method getPublicKey(). This method is available from SDK v1.16.0+
-```typescript
-link.getPublicKey({});
-```
-
-An example for Metamask provider:
-
-![Request Encryption Public Key](/img/link-sign/public-key.png "Request Encryption Public Key")
-
-If a user allowed to provide a public encryption key, link.getPublicKey() will be resolved with the value:
-```json
-{
-    "result": "1Afjjdub580LjsizQtlDmrSZ+BZIiydkx4BGRb2DDBI="
-}
-```
+See error responses [here](./link-errors.md#transfer).
