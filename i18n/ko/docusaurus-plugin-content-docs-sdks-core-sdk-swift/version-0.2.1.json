@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "0.2.1",
+    "description": "The label for version 0.2.1"
+  },
+  "sidebar.mainSidebar.category.Core SDK Swift": {
+    "message": "Core SDK Swift",
+    "description": "The label for category Core SDK Swift in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.link.Reference": {
+    "message": "Reference",
+    "description": "The label for link Reference in sidebar mainSidebar, linking to https://docs.x.immutable.com/sdk-references/core-sdk-swift/0-2-1/documentation/immutablexcore"
+  }
+}

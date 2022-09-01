@@ -15,7 +15,7 @@ const pageOptions = {
 const configuration = {
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'ko'],
   },
   title: 'Immutable X Documentation',
   tagline:
@@ -165,6 +165,11 @@ const configuration = {
           srcDark: 'img/logo-dark.svg',
         },
         items: [
+          // to be added once we support Korean
+          {
+            type: 'localeDropdown',
+            position: 'left',
+          },
           {
             to: '/',
             position: 'left',

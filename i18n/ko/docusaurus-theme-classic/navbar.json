@@ -1,0 +1,50 @@
+{
+  "item.label.Home": {
+    "message": "Home",
+    "description": "Navbar item with label Home"
+  },
+  "item.label.Docs": {
+    "message": "Docs",
+    "description": "Navbar item with label Docs"
+  },
+  "item.label.APIs": {
+    "message": "APIs",
+    "description": "Navbar item with label APIs"
+  },
+  "item.label.SDKs": {
+    "message": "SDKs",
+    "description": "Navbar item with label SDKs"
+  },
+  "item.label.IMX Whitepaper": {
+    "message": "IMX Whitepaper",
+    "description": "Navbar item with label IMX Whitepaper"
+  },
+  "item.label.IMX Tokenomics": {
+    "message": "IMX Tokenomics",
+    "description": "Navbar item with label IMX Tokenomics"
+  },
+  "item.label.Immutascan.io": {
+    "message": "Immutascan.io",
+    "description": "Navbar item with label Immutascan.io"
+  },
+  "item.label.Careers at Immutable": {
+    "message": "Careers at Immutable",
+    "description": "Navbar item with label Careers at Immutable"
+  },
+  "item.label.Overview": {
+    "message": "Overview",
+    "description": "Navbar item with label Overview"
+  },
+  "item.label.Core SDKs": {
+    "message": "Core SDKs",
+    "description": "Navbar item with label Core SDKs"
+  },
+  "item.label.Wallet SDKs": {
+    "message": "Wallet SDKs",
+    "description": "Navbar item with label Wallet SDKs"
+  },
+  "item.label.Link SDK": {
+    "message": "Link SDK",
+    "description": "Navbar item with label Link SDK"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "0.6.0",
+    "description": "The label for version 0.6.0"
+  },
+  "sidebar.mainSidebar.category.Core SDK TypeScript": {
+    "message": "Core SDK TypeScript",
+    "description": "The label for category Core SDK TypeScript in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.link.Reference": {
+    "message": "Reference",
+    "description": "The label for link Reference in sidebar mainSidebar, linking to https://docs.x.immutable.com/sdk-references/core-sdk-ts/0-6-0/"
+  }
+}

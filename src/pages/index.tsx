@@ -18,24 +18,29 @@ import DevelopersDarkIcon from '@site/static/icons/pictograms/DevelopersDark';
 import DevelopersLightIcon from '@site/static/icons/pictograms/DevelopersLight';
 import ContributorsDarkIcon from '@site/static/icons/pictograms/ContributorsDark';
 import ContributorsLightIcon from '@site/static/icons/pictograms/ContributorsLight';
+import Translate, { translate } from '@docusaurus/Translate';
 
 const Homepage = () => {
   const articleStackSectionData = [
     {
       LightIcon: SdkLightIcon,
       DarkIcon: SdkDarkIcon,
-      title: 'IMX SDKs',
-      subtitle:
-        'View all the SDKs on offer to easily integrate with Immutable X.',
-      buttonText: 'Learn More',
+      title: translate({ message: 'IMX SDKs' }),
+      subtitle: translate({
+        message:
+          'View all the SDKs on offer to easily integrate with Immutable X.',
+      }),
+      buttonText: translate({ message: 'Learn More' }),
       link: '/docs/sdks',
     },
     {
       LightIcon: ContractLightIcon,
       DarkIcon: ContractDarkIcon,
-      title: 'Code Examples',
-      subtitle: 'Accelerate your build with code snippets and samples.',
-      buttonText: 'Learn More',
+      title: translate({ message: 'Code Examples' }),
+      subtitle: translate({
+        message: 'Accelerate your build with code snippets and samples.',
+      }),
+      buttonText: translate({ message: 'Learn More' }),
       link: '/docs/code-examples',
     },
     {
@@ -52,26 +57,32 @@ const Homepage = () => {
     {
       LightIcon: DevelopersLightIcon,
       DarkIcon: DevelopersDarkIcon,
-      title: 'Developer Grants',
+      title: translate({ message: 'Developer Grants' }),
       subtitle: (
-        <>Immutable X offers grants to help you fund your next web3 project.</>
+        <>
+          <Translate>
+            Immutable X offers grants to help you fund your next web3 project.
+          </Translate>
+        </>
       ),
       cta: [
         {
           link: '/docs/contact#building-on-immutable-x',
-          text: 'Learn More',
+          text: translate({ message: 'Learn More' }),
         },
       ],
     },
     {
       LightIcon: ContributorsLightIcon,
       DarkIcon: ContributorsDarkIcon,
-      title: 'Help Contribute',
-      subtitle: 'Help us improve our documentation by contributing!',
+      title: translate({ message: 'Help Contribute' }),
+      subtitle: translate({
+        message: 'Help us improve our documentation by contributing!',
+      }),
       cta: [
         {
           link: '/docs/contributing',
-          text: 'Contributor Guidelines',
+          text: translate({ message: 'Contributor Guidelines' }),
         },
       ],
     },
@@ -79,33 +90,41 @@ const Homepage = () => {
 
   const communitySectionData = [
     {
-      title: 'ImmutableX forum',
-      subtitle:
-        'Review past questions & get answers to your queries over on the forum.',
-      buttonText: 'Visit the Forum',
+      title: translate({ message: 'ImmutableX forum' }),
+      subtitle: translate({
+        message:
+          'Review past questions & get answers to your queries over on the forum.',
+      }),
+      buttonText: translate({ message: 'Visit the Forum' }),
       isLongCard: true,
       url: 'https://forum.immutable.com',
     },
     {
-      title: 'Discord',
-      subtitle:
-        'Join the conversation! Interact with the Immutable X developer community on Discord.',
-      buttonText: 'Join the Discord',
+      title: translate({ message: 'Discord' }),
+      subtitle: translate({
+        message:
+          'Join the conversation! Interact with the Immutable X developer community on Discord.',
+      }),
+      buttonText: translate({ message: 'Join the Discord' }),
       isLongCard: false,
       url: 'https://discord.com/invite/Dmhp398dna',
     },
     {
-      title: 'Twitter',
-      subtitle:
-        'Follow us on Twitter for the latest product updates & company news.',
-      buttonText: 'Follow Us',
+      title: translate({ message: 'Twitter' }),
+      subtitle: translate({
+        message:
+          'Follow us on Twitter for the latest product updates & company news.',
+      }),
+      buttonText: translate({ message: 'Follow Us' }),
       isLongCard: false,
       url: 'https://twitter.com/Immutable',
     },
     {
-      title: 'Reddit',
-      subtitle: 'Join our subreddit for community memes, updates and more.',
-      buttonText: 'Join Subreddit',
+      title: translate({ message: 'Reddit' }),
+      subtitle: translate({
+        message: 'Join our subreddit for community memes, updates and more.',
+      }),
+      buttonText: translate({ message: 'Join Subreddit' }),
       isLongCard: true,
       url: 'https://www.reddit.com/r/ImmutableX/',
     },
@@ -119,14 +138,16 @@ const Homepage = () => {
           <Title
             title={
               <div className={clsx('grad', styles.title)}>
-                Build with
+                <Translate>Build with</Translate>
                 <br className={styles.displayForExtraSmall} /> Immutable X
               </div>
             }
             subtitle={
               <>
-                Everything you need to superpower your next web3 project,
-                without comprising security or scalability.
+                <Translate>
+                  Everything you need to superpower your next web3 project,
+                  without comprising security or scalability.
+                </Translate>
               </>
             }
             className={styles.heroTitle}
@@ -134,9 +155,11 @@ const Homepage = () => {
           <div className={styles.heroButtonSection}>
             <a href="/docs/welcome">
               <Button onClick={() => console.log('')}>
-                Explore{' '}
-                <span className={styles.displayFromExtraSmall}>Developer</span>{' '}
-                Docs
+                <Translate>Explore</Translate>{' '}
+                <span className={styles.displayFromExtraSmall}>
+                  <Translate>Developer</Translate>
+                </span>{' '}
+                <Translate>Docs</Translate>
               </Button>
             </a>
           </div>
@@ -145,8 +168,14 @@ const Homepage = () => {
           <br />
 
           <Title
-            title="Developer Tools"
-            subtitle={<>Everything you need to start building today.</>}
+            title={translate({ message: 'Developer Tools' })}
+            subtitle={
+              <>
+                <Translate>
+                  Everything you need to start building today.
+                </Translate>
+              </>
+            }
           />
           <div className={styles.articleStackSection}>
             {articleStackSectionData.map((article, index) => (
@@ -168,8 +197,12 @@ const Homepage = () => {
           </div>
 
           <Title
-            title="Join The Community"
-            subtitle={<>Be a part of our community!</>}
+            title={translate({ message: 'Join The Community' })}
+            subtitle={
+              <>
+                <Translate>Be a part of our community!</Translate>
+              </>
+            }
           />
           <div className={styles.communityCardSection}>
             {communitySectionData.map((communityInfo, index) => (

@@ -1,0 +1,50 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.mainSidebar.category.Overview": {
+    "message": "Overview",
+    "description": "The label for category Overview in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Guides": {
+    "message": "Guides",
+    "description": "The label for category Guides in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Onboarding": {
+    "message": "Onboarding",
+    "description": "The label for category Onboarding in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Integrate your Application": {
+    "message": "Integrate your Application",
+    "description": "The label for category Integrate your Application in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Asset Management": {
+    "message": "Asset Management",
+    "description": "The label for category Asset Management in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Fees": {
+    "message": "Fees",
+    "description": "The label for category Fees in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Link SDK": {
+    "message": "Link SDK",
+    "description": "The label for category Link SDK in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Tutorials": {
+    "message": "Tutorials",
+    "description": "The label for category Tutorials in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Troubleshooting": {
+    "message": "Troubleshooting",
+    "description": "The label for category Troubleshooting in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.category.Resources": {
+    "message": "Resources",
+    "description": "The label for category Resources in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.link.SDKs": {
+    "message": "SDKs",
+    "description": "The label for link SDKs in sidebar mainSidebar, linking to /docs/sdks"
+  }
+}

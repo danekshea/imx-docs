@@ -1,0 +1,10 @@
+{
+  "version.label": {
+    "message": "0.5.2",
+    "description": "The label for version 0.5.2"
+  },
+  "sidebar.mainSidebar.category.Core SDK Kotlin": {
+    "message": "Core SDK Kotlin",
+    "description": "The label for category Core SDK Kotlin in sidebar mainSidebar"
+  }
+}

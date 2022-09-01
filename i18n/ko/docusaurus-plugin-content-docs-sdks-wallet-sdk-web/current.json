@@ -1,0 +1,10 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.mainSidebar.category.Wallet SDK Web": {
+    "message": "Wallet SDK Web",
+    "description": "The label for category Wallet SDK Web in sidebar mainSidebar"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.mainSidebar.category.Core SDK Golang": {
+    "message": "Core SDK Golang",
+    "description": "The label for category Core SDK Golang in sidebar mainSidebar"
+  },
+  "sidebar.mainSidebar.link.Examples": {
+    "message": "Examples",
+    "description": "The label for link Examples in sidebar mainSidebar, linking to https://github.com/immutable/imx-core-sdk-golang/tree/main/examples"
+  },
+  "sidebar.mainSidebar.link.API client reference": {
+    "message": "API client reference",
+    "description": "The label for link API client reference in sidebar mainSidebar, linking to https://docs.x.immutable.com/sdk-references/core-sdk-golang/0-1-0/apiclient/"
+  },
+  "sidebar.mainSidebar.link.Package reference": {
+    "message": "Package reference",
+    "description": "The label for link Package reference in sidebar mainSidebar, linking to https://pkg.go.dev/github.com/immutable/imx-core-sdk-golang/"
+  }
+}

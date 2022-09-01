@@ -1,0 +1,10 @@
+{
+  "version.label": {
+    "message": "0.5.0",
+    "description": "The label for version 0.5.0"
+  },
+  "sidebar.mainSidebar.category.Core SDK TypeScript": {
+    "message": "Core SDK TypeScript",
+    "description": "The label for category Core SDK TypeScript in sidebar mainSidebar"
+  }
+}
