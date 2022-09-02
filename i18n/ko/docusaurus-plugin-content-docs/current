@@ -1,213 +1,86 @@
 ---
-id: "introduction-smart-contracts"
-title: "Smart contracts"
-slug: "/introduction-smart-contracts"
-excerpt: "An introduction to smart contracts"
-sidebar_position: 4
+id: "ethereum-scalability"
+title: "Ethereum scalability"
+slug: "/ethereum-scalability"
+excerpt: "Immutable X's solution for Ethereum scalability issues"
+sidebar_position: 3
 keywords:
   - imx-dx
 ---
 
-스마트 계약 개발이 처음이라면 여기에서 시작할 수 있습니다. GitHub에 스마트 계약 템플릿이 있으며 이 기사에서는 기본 사항과 Immutable X와의 통합을 위한 스마트 계약 요구 사항을 다룹니다.
+Scalability refers to a blockchain network's ability to support high transactional throughput and future growth. It’s critical because it represents the only way for a blockchain network to reasonably compete with the rapid settlement times of centralized platforms.
 
-If you are planning to mint assets or launch a collection of NFTs on Immutable X Marketplace, you need a smart contract. You don’t need a smart contract for building a marketplace or block explorer.
+Everyone who uses, mints or trades NFTs on Ethereum knows that it is slow. The main contributing factor is the need for every node to process each and every transaction on the network. Unless resolved, transaction congestion will continue to rise and lead to long wait times for all users.
 
-# The basics
-A smart contract is simply a program that runs on the Ethereum blockchain. It’s a collection of code (its *functions*) and data (its *state*) that resides at a specific address on the blockchain. It’s similar to a mobile application that runs on iOS or Android, but unlike most of the apps on your smartphone, a smart contract has an address that can easily be looked up on a block explorer such as etherscan.
+High network demand can also affect gas fee consistency. Currently, gas prices are set by demand for the network which means that fees can fluctuate significantly depending on the time of day and the volume of transactions passing over the network. It makes it nearly impossible to predict how much each transaction will cost.
 
-Currently, the most popular language for writing smart contracts on Ethereum is Solidity, which was created by the [Ethereum Foundation](https://ethereum.org/en/). If you have experience with Javascript, C++, Python, or other object-oriented scripting languages, you should find Solidity easy enough to understand.
+With high gas fees, there is a likelihood of very low liquidity in the NFT market, as a single transaction can cost more than the value of the NFT. This is a serious blocker for growth in the NFT market.
 
-Here's an annotated, Hello World example of a smart contract:
-```solidity title="HelloWorld.sol"
-// Specifies the version of Solidity, using semantic versioning.
-// Learn more: https://solidity.readthedocs.io/en/v0.5.10/layout-of-source-files.html#pragma
-pragma solidity ^0.5.10;
-​
-// Defines a contract named `HelloWorld`.
-// A contract is a collection of functions and data (its state).
-// Once deployed, a contract resides at a specific address on the Ethereum blockchain.
-// Learn more: https://solidity.readthedocs.io/en/v0.5.10/structure-of-a-contract.html
-contract HelloWorld {
-​
-    // Declares a state variable `message` of type `string`.
-    // State variables are variables whose values are permanently stored in contract storage.
-    // The keyword `public` makes variables accessible from outside a contract
-    // and creates a function that other contracts or clients can call to access the value.
-    string public message;
-​
-    // Similar to many class-based object-oriented languages, a constructor is
-    // a special function that is only executed upon contract creation.
-    // Constructors are used to initialize the contract's data.
-    // Learn more: https://solidity.readthedocs.io/en/v0.5.10/contracts.html#constructors
-    constructor(string memory initMessage) public {
-        // Accepts a string argument `initMessage` and sets the value
-        // into the contract's `message` storage variable).
-        message = initMessage;
-    }
-​
-    // A public function that accepts a string argument
-    // and updates the `message` storage variable.
-    function update(string memory newMessage) public {
-        message = newMessage;
-    }
-}
+# Layer 1 versus layer 2
 
-```
-## ERC-721 standard
-The information on this page is specific to smart contracts for ERC-721 tokens, commonly known as [non-fungible tokens](./core-concepts.md#non-fungible-tokens) (NFTs). NFTs allow you to tokenize ownership of any arbitrary data and represent a unique digital asset on the blockchain. The ERC-721 standard outlines a set of common rules that all tokens can follow on the Ethereum network to produce expected results.
+Layer 1 (L1) refers to a blockchain, while layer 2 (L2) refers to a network or technology that operates in conjunction with L1 to improve its scalability and efficiency. Ethereum is a layer 1 blockchain.
 
-[Token standards](./core-concepts.md#token-standards) primarily stipulate the following characteristics about a token:
-* How is ownership decided?
-* How are tokens created?
-* How are tokens transferred?
-* How are tokens burned?
+Layer 1 scaling solutions augment the base layer of the blockchain protocol itself in order to afford scalability. Layer 1 solutions change the rules of the protocol in order to increase transaction capacity and speed, while managing more users and data. Layer 1 scaling solutions can, for example, increase the amount of data contained in each block, or accelerate the rate at which blocks are confirmed, to increase overall network throughput.
 
-The ERC-721 standard is provided to you as an interface that your NFT contract can inherit functions from, or override for custom implementations.
+Layer 2 refers to a network or technology that operates on top of an underlying blockchain protocol. This category of scaling solutions requires shifting a portion of a blockchain protocol’s transactional burden to an adjacent system architecture, which then handles the brunt of the network’s processing and only subsequently reports back to the main blockchain to finalize its results, improving its scalability and efficiency.
 
-Below we’ve defined a very simple NFT. The constructor initializes the contract name as **Doggo** and the token symbol as **DOG**. Although *very* basic, this is a perfectly valid NFT inheriting all the functions from the ERC-721 base contract, sourced from [OpenZeppelin](https://docs.openzeppelin.com/openzeppelin/).
-```solidity title="Doggo.sol"
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-​
-contract Doggo is ERC721 {
-  constructor() public ERC721("Doggo", "DOG") {}
-}
+By abstracting the majority of data processing to auxiliary architecture, the base layer blockchain becomes less congested and ultimately more scalable.
 
-```
-## Metadata
-Now that we have an NFT, we can define some on-chain metadata, which refers to properties or characteristics that you want to set for your NFT and store within the smart contract itself.
-```solidity title="MyNFT.sol"
-contract MyNFT is ERC721 {
-  mapping(uint256 => string) public idToName;
-​
-  function setName(uint256 tokenId, string _name) public {
-    idToName[tokenId] = _name
-  }
-}
-```
-The `idToName` mapping is stored on-chain and is available for anyone to read from the smart contract. You can set on-chain metadata properties like this through a public function, which means that the name for any token can be changed by anyone sending a transaction calling the `setName` function.
+## Existing layer 1 solutions
+While the solutions do address the scalability issue to some degree and offer some improvements, they do not completely solve the scalability issues raised and experienced. Existing solutions include:
 
-You can set immutable properties for your NFT if you don't expose a way to change it, for example, setting the name at the time of minting. However, there are costs associated with storing data on the blockchain. Operations that involve writing to the blockchain, like the `setName` example above, are relatively expensive for the sender of the transaction.
+## Sharding
+Sharding involves dividing a chain state into smaller partitions called shards. Nodes within a shard must process all transactions that originate in that shard. By reducing the number of nodes that must process each transaction, overall network throughput can be improved. However the issues that can arise with sharding are the ‘single point of failure’, which means corruption of shard due to network/hardware/system problems causes failure of the entire table.
 
-Read more about on-chain versus off-chain metadata, and data storage, in our [minting guide](../guides/minting-on-immutable-x.md#on-chain-versus-off-chain).
+## Side chains
+Side chains have their own consensus mechanism meaning they don't inherit security from mainnet, and are therefore far less secure, meaning valuable assets can be stolen. Side chains are also not **truly** scalable; they are heavily constrained at the upper limits as security and censorship risks continue to increase with volume. They also offer poor liquidity, lacking interoperability with layer 1.
 
-# Integration requirements
-A crucial part of building on Immutable X is having a Layer 1 (L1) Ethereum smart contract, which is required for minting assets that can be withdrawn from Immutable X on Layer 2 (L2).
+## Ethereum PoS Merge
+The Ethereum Merge to Proof of Stake (Pos), previously known as Eth2.0, is a significant consensus mechanism update scheduled to take place in Q3 2022. The move to Proof of Stake will see significant reduction in energy usage, uniform block time, more resilient network and build the foundation for sharding to be implemented (https://ethereum.org/en/upgrades/merge/). However the Merge itself does not scale the network in terms of transaction processing capabilities, this will be addressed in the sharding update scheduled for much later (2023 and beyond).
 
-For a smart contract to work with Immutable X, we need an implementation of a `mintFor` function, which is what our Stark contract calls at the time of withdrawing a minted token from L2 to L1. StarkEx is the L2 scalability solution used by Immutable X.
+Even after the Merge and Sharding are implemented on Ethereum, layer 2 will still be the solution to provide real scale, read the Ethereum foundation's vision on layer 2s here (https://ethereum.org/en/layer-2/).
 
-**[Read a high-level overview of the StarkEx service](https://docs.starkware.co/starkex-v3/overview)**
+# Existing layer 2 solutions
 
-There is no smart contract interaction at the time of minting on L2, although the minted token will have a L1 representation, token ID, and immutable metadata. When minting on Immutable X, you will give us the token ID, which is the L1 token ID representing the token in your smart contract. You also have to provide a [blueprint for each token](../guides/minting-on-immutable-x.md#metadata-blueprint). The blueprint represents the immutable, [on-chain metadata](../guides/minting-on-immutable-x.md#on-chain-versus-off-chain) of the NFT that will be passed (along with the token ID) to your `mintFor` function.
+## State channels
+State channels are a general-purpose scaling solution that are useful in interactions between a defined number of users in a closed system. State channels require an opening and closing transaction on-chain, but all the intermediate states are sent directly between the parties. Only a proof is submitted to the main chain after the transactions are processed as off-chain.
 
-## Example contracts
-In our smart contract templates on Github (visit [imx-contracts](https://github.com/immutable/imx-contracts)) you can find a simple implementation of an ERC-721 token with the `mintFor` function implemented correctly to work with Immutable X.
+The key issue with state channels is that they require of all participants involved in order to complete the final on-chain transaction. The participants can use someone to represent them if they go offline, but this third-party could be bribed or attacked (particularly if one entity is fulfilling this function for the entire ecosystem). This limits both the security and scalability of state channels.
 
-### Asset contract
-The Asset.sol contract in our repo inherits from the ERC-721 standard, as well as our custom Mintable contract, explained further down.
+## Plasma
+Plasma is another off-chain scaling technique that relies on off-chain transactions (in the child chains) with minimal interactions with the main chain. However, withdrawals from the plasma chain can take up to 2 weeks, as there is a requirement for a challenge period (‘exit game’) where users can report fraud. This presents a significant disadvantage and dramatically impacts the user experience of the system.
 
-This contract implements the `_mintFor` function which is called by a function in Mintable.sol when the asset is minted to L1, mainnet Ethereum at the time of withdrawal from Immutable X on L2.
-```solidity title="Asset.sol"
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
-​
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "./Mintable.sol";
-​
-contract Asset is ERC721, Mintable {
-    constructor(
-        address _owner,
-        string memory _name,
-        string memory _symbol,
-        address _imx
-    ) ERC721(_name, _symbol) Mintable(_owner, _imx) {}
-​
-    function _mintFor(
-        address user,
-        uint256 id,
-        bytes memory
-    ) internal override {
-        _safeMint(user, id);
-    }
-}
-```
-In the `_mintFor` function we call `_safeMint` which is an inherited function from the ERC-721 contract that mints the NFT [in a safe way](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721#ERC721-_safeMint-address-uint256-). You can use this contract for your NFT as is. The name, symbol, owner, and Immutable X contract address is passed in the constructor. :::info Solidity naming standard The use of an underscore before a function name or variable (e.g. `_mintFor`) is a naming standard in Solidity to indicate that it is an internal function or variable. :::
-### Mintable contract
-In the Mintable.sol contract below, you can see the asset will be initialized in the constructor with an owner and an imx address. More details on these below.
-```solidity title="Mintable.sol"
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
-​
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "./IMintable.sol";
-import "./utils/Minting.sol";
-​
-abstract contract Mintable is Ownable, IMintable {
-    address public imx;
-    mapping(uint256 => bytes) public blueprints;
-​
-    event AssetMinted(address to, uint256 id, bytes blueprint);
-​
-    constructor(address _owner, address _imx) {
-        imx = _imx;
-        require(_owner != address(0), "Owner must not be empty");
-        transferOwnership(_owner);
-    }
-​
-    modifier onlyIMX() {
-        require(msg.sender == imx, "Function can only be called by IMX");
-        _;
-    }
-​
-    function mintFor(
-        address user,
-        uint256 quantity,
-        bytes calldata mintingBlob
-    ) external override onlyIMX {
-        require(quantity == 1, "Mintable: invalid quantity");
-        (uint256 id, bytes memory blueprint) = Minting.split(mintingBlob);
-        _mintFor(user, id, blueprint);
-        blueprints[id] = blueprint;
-        emit AssetMinted(user, id, blueprint);
-    }
-​
-    function _mintFor(
-        address to,
-        uint256 id,
-        bytes memory blueprint
-    ) internal virtual;
-}
-```
-More information about these smart contract examples:
-- Owner is the wallet address you choose to be the minter of the contract, so it should be a very safe, secure wallet.
-- `transferOwnership(_owner)` does exactly as described, and transfers the ownership of the contract from the contract deployer to the specific wallet address.
-- The imx address refers to the Immutable X contract address that is interacting with your smart contract to perform minting operations. You can find this address for each environment in the readme of the imx-contracts repository (see the table at the top). This address is used in the `onlyIMX` modifier, which checks if the sender of the transaction is our contract or not. This is a way of whitelisting our contract and ensuring that no one else can mint assets through your smart contract.
-- The `mintFor` function is called by the Immutable X smart contract at the time of withdrawing the NFT to mainnet. The function has the `onlyIMX` modifier, explained above. Because you’re minting NFTs, which are unique, ensure that quantity = 1.
-- The [blueprint](../guides/minting-on-immutable-x.md#metadata-blueprint) is saved as on-chain, immutable metadata in the mapping blueprints. For custom blueprint decoding, you can override the mintFor function in Asset.sol to save it in something like tokenURI, or split the string into different components.
-- The function emits an event `AssetMinted` when the mintFor completes successfully, and this can be listened on by applications.
+## Rollups
+Rollups, like the name suggests, “roll up” large numbers of transactions into a big batch, then generate a “proof” for that batch. This proof, rather than each individual transaction, is then posted on mainnet. Rollups are the latest of the scaling technologies and are the subject of significant excitement for everyone involved in Ethereum.
 
-## General advice
-Here are some extra tips and guidance related to smart contract development:
+Rollups perform transaction executions outside the main Ethereum chain (layer 1), but post transaction data on layer 1. As transaction data is included on a layer 1 block, this allows rollups to be secured by layer 1, inheriting Ethereum's security properties. Performing execution outside of layer 1, is a defining characteristic of rollups.
 
-## Development and testing
-Smart contracts are immutable once deployed, which is good for trust but also means that bugs in the code will be much more difficult to deal with. This is why it’s crucial to ensure that your smart contract is bug-free and works as expected before deploying it to mainnet Ethereum. Even small bugs can have devastating consequences when you are handling tokens with market value.
+### Optimistic rollups
+Optimistic rollups are “optimistic” because they assume that the proof provided for each transaction batch is valid.
 
-A general tip is to keep your smart contract simple and make use of open source libraries like OpenZeppelin. These contracts have been battle-tested so there’s a much lower chance of bugs, but that’s still not a 100% guarantee.
+During a pre-defined challenge period (usually 1-2 weeks), anyone can challenge the submitted proof and assert fraud. These are therefore called ‘fraud proofs'. The advantage of optimistic rollups is that they easily support general computation: you will be able to copy/paste your mainnet Solidity code. However, they have significant limitations for scaling NFTs.
 
-### Tools and test environments
-You can use tools like [Remix IDE](https://remix.ethereum.org/) to quickly experiment and iterate your code, and set up local testing environments by using local blockchains like [Ganache](https://trufflesuite.com/ganache/). There’s also Ethereum testnets like Ropsten, Kovan, etc. to use as staging environments, allowing you to test contract deployment and make sure everything works as intended.
+Firstly, there is no possibility for fast NFT withdrawals. Taking your NFT out of the system can require a 1-2 week wait. Secondly, if an optimistic rollup is very successful and contains a significant amount of value, it can become a target for attacks, as the cost of stealing funds from the optimistic rollup is unrelated to the size of the potential theft; a penalty for the growth that we and others expect in the NFT ecosystem.
 
-The Immutable X test environment uses Ropsten, so you should be deploying your contract there first to integrate and play around with the functions on-chain, and test the integration with Immutable X. It’s also important to write unit tests and integration tests for your smart contracts. We have some [example unit tests in Gitbhub](https://github.com/immutable/imx-contracts/blob/main/test/Asset.test.ts) to give you an idea of what these can look like.
+### Zero knowledge rollups
+Zero knowledge rollups, also known as ZK-rollups, bundle or "roll up" hundreds of transfers off-chain and generate a cryptographic proof, known as a SNARK (Succinct Non-interactive ARgument of Knowledge) or STARK (Scalable Transparent ARgument of Knowledge).
 
-## Gas fees and metadata
-A gas fee is required to successfully conduct a transaction or execute a smart contract on a blockchain platform. The fee is determined by the gas used, multiplied by the gas price. While Immutable X is completely gas free within the L2 ecosystem, it’s still useful to know about the implications of fees for smart contract development.
+ZK-rollups use “validity proofs” rather than the fraud proofs described above, using either SNARKs or STARKs and plenty of complex mathematics to prove the validity of the transactions in the rollup. Using validity proofs means that once a proof has been accepted on-chain, users have immediate confirmation that those transactions were valid and are now immutable.
 
-Reading data from the blockchain is free, unless executed in a transaction, but writing data to the blockchain costs gas and can be quite expensive, especially when minting tokens because all of the information about that token is being written to the blockchain and verified by nodes all across the network. This is why you’ll see some very large gas costs for minting certain NFTs on L1.
+In an NFT context, this solves both the problems identified with optimistic rollups above: users can withdraw immediately and no-one is able to attack the system. In terms of scale, ZK-rollups have been able to reach speeds of thousands of transactions per second and can reach even higher limits in future.
 
-Your code should therefore try to be as efficient as possible with fewer operations and writes to the blockchain, without compromising security. Where possible, most computations required in the minting process should be moved off-chain. While minting on Immutable X is gas-free, withdrawing the token to mainnet will incur a gas fee which has to be paid by the user to mint the token.
+The current disadvantage of ZK-rollups is general computation. This is because it is more challenging to port smart contract logic directly into the rollup, meaning there is only limited functionality available e.g. transfers and trades. This challenge is rapidly being addressed.
 
-### Usage example
-Let’s look at [Gods Unchained](https://godsunchained.com/) (GU) as an example:
+# The Immutable X solution
+The NFT ecosystem desperately needs liquidity and scalability. With Immutable X, we’re offering that scalability to everyone without forcing applications or users to compromise on the security of their assets. When comparing scaling solutions, the key things we wanted were:
+* Unlimited scalability
+* Instant transaction confirmation and mainstream-quality UX
+* No compromise on user security
+* Retaining access to Ethereum’s ecosystem and network effects
 
-GU cards pass only the proto (the card ID) and the quality in the blueprint to save on-chain, and these two properties alone can uniquely determine the value of the card. All other properties for the cards — such as attack, defense, image_url, etc. — are stored in the off-chain metadata (which is accessed via a [metadata API endpoint](https://docs.x.immutable.com/docs/minting-on-immutable-x#metadata-api)). This makes it cheaper for a user (player) to withdraw a card from Immutable X as they are writing less data to the blockchain.
+This is why Immutable X is built as a ZK-rollup in partnership with [StarkWare](https://starkware.co/). We chose the ZK-rollups because it is the only solution capable of scale without compromise. This means whenever you mint or trade an NFT on Immutable X, you pay zero gas, and the validity of all transactions are directly enforced by Ethereum’s security using zero-knowledge proofs -- the first “layer 2” for NFTs on Ethereum.
 
-Having the metadata stored at a separately hosted (off-chain) endpoint is useful for the Gods Unchained engineering team to be able to make changes to it, for example, increasing the attack of a particular card as part of a balance patch.
+
+**References**
+1. ZK & Optimistic Rollup - https://ethereum.org/en/developers/docs/scaling/layer-2-rollups/#zk-rollups
+2. Layer 1, Layer 2 and Layer 2 Scaling - https://www.gemini.com/cryptopedia/blockchain-layer-2-network-layer-1-network#section-layer-1-scaling-solutions
