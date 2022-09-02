@@ -1,34 +1,46 @@
 ---
-id: "api-rate-limiting"
-title: "API rate limiting"
-slug: "/api-rate-limiting"
-sidebar_position: 9
+id: "getting-started-guide"
+title: "Getting started"
+slug: "/getting-started-guide"
+excerpt: "Register with Immutable X and prepare for testing"
+sidebar_position: 1
 keywords:
-  - imx-core
+  - imx-wallets
 ---
 
-All calls to the API are allotted a specific number of requests per refresh period. Our rate limits depend on if you're an individual or project, as well as what environment of ours you are targeting. If you're a partner, your limit is determined by your project. Otherwise, your limit is determined on a per-IP-address basis.
+These are the core components of the Immutable X stack:
+- **API** - Our API contains both the read and write functionality required to build applications without building a backend.
+- **Immutable X SDK** - Our TypeScript SDK implementation makes it easy for you to integrate the protocol easily into websites.
+- **Link** - Immutable X projects can embed the Link UI directly into their site’s transaction flow.
+- **ZK-Rollups** - Immutable X combines NFT-specific exchange and proof logic with the cutting edge rollup technology developed by [StarkWare](https://starkware.co/).
 
-We set the limits based on an analysis of the last quarter's traffic and review and update this quarterly. Once this threshold has been reached, we will return a status code `429` response.
+**[Learn more about Immutable X architecture](../overview/architecture-overview.md)**
 
-Integrations with the API that do not contain an api-key (see below for an example), must not exceed 5 requests per second, per-IP-address. This is measured across all endpoints of the API.
+## Prepare to test
+No matter what your goal is for building on Immutable X — for example: drop an NFT collection, launch a marketplace or ecosystem product, integrate with your crypto game — there are three things you’ll need to get started:
 
-## Integration
-To have a higher rate limit, you will need to obtain an API key to use with all of your calls to our API. It also uniquely identifies your company project and should not be shared.
+## Wallet
+To hold tokens or trade on Immutable X, you need an Ethereum wallet. Currently we support [MetaMask](https://metamask.io/), which is a crypto-wallet that’s accessible as a browser extension. It allows you to store and transact Ethereum, and access the services of decentralized applications, known as **dApps**.
 
-If you haven’t already, [register your project with us](../guides/onboarding/project-registration.md). This will provide you with a numeric project ID. To obtain an API key, [please contact support](../resources/contact.mdx) and quote your project ID. We'll evaluate if a higher rate limit with an API key can be granted.
+MetaMask also makes it really easy to access testnet blockchains like Ropsten, which is what we use, and provides you with a wallet address, which you’ll need to [register an account with us](#register-a-user-account).
 
-:::info Increasing your rate limit
-In the majority of applications a higher rate limit does not improve the usability of your application. Consider how frequently trades or mints are happening and how that impacts the user experience. Caching of data can be a great way to help you manage bursts of high traffic on your application and minimise your network load. This can also create a better user experience.
-:::
+To create a MetaMask wallet:
+1. Open [metamask.io](https://metamask.io/) to install the browser extension.
+2. Follow the steps in the plugin to create a new wallet, then record and store your seed phrase in a safe location.
+3. Change the network selection from Main Ethereum Network to **Ropsten Test Network**.
 
-The API key must be added to all calls to our API in the http header:
-```curl
-curl -is 'https://api.x.immutable.com/v1/orders/1337' --header 'x-api-key: xxx'
-```
+Again, be mindful of how you store your seed phrase. If you lose this, you will lose access to your wallet forever, and neither we nor MetaMask are able to restore it for you. :::tip Already have a wallet? If you already have an Ethereum wallet, you can [import it into MetaMask](https://metamask.zendesk.com/hc/en-us/articles/360015489331-How-to-import-an-Account). :::
+## Test ETH
+In order to make transactions while testing on Ropsten, you’ll need to fund your wallet with some ETH. Here are some faucets where you can get some:
+- https://imxfaucet.xyz/
+- https://faucet.metamask.io/
+- https://faucet.dimensions.network/
 
-## Best practices
-Here are some best practices to follow for a successful integration:
-- **Limit your clients** - Proactively limiting your outgoing call rate will prevent you from being externally rate-limited and overall encourage you to handle those cases in which you are limited more gracefully. Additionally, if you build your clients with this logic then you can also sub-divide your aggregate limit more granularly (as appropriate for your project) so that none of them consume too much quota. For example, you might choose to subdivide your total limit by country, region or other.
-- **Retry and back-off** - When you are rate-limited, retry your requests after waiting some time. Use an [exponential backoff](https://en.wikipedia.org/wiki/Exponential_backoff) to progressively increase this wait time.
-- **Avoid polling** - Polling our API (especially "short polling", in which you do not wait for a response) is an anti-pattern and will quickly consume your quota.
+Sometimes all faucets are dried up at once. There are others. [Join the conversation](https://discord.gg/TkVumkJ9D6) in Discord for help or advice on stuff like this.
+
+## Register a user account
+To begin testing, you need to register as a user with Immutable X. Registration sets up an account using the [private key from your MetaMask wallet](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
+
+To register, visit the [testnet version of our marketplace](https://market.ropsten.immutable.com/), then click **Connect Wallet** and follow the prompts. You'll need to repeat these steps again when registering on mainnet, by visiting: https://market.immutable.com/
+
+Registration enables you to use our authentication system, which protects your project's administrative-level assets from being accessed or updated by someone else. [Learn more about user security](../guides/user-registration.md#user-security).
