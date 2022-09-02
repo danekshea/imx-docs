@@ -1,150 +1,109 @@
 ---
-id: "linktransfer"
-title: "Link.transfer"
-slug: "/linktransfer"
-excerpt: "Link can now be used to kick off flows containing multiple token transfers"
-sidebar_position: 1
+title: "Collection registration"
+slug: "/collection-registration"
+sidebar_position: 2
 keywords:
-  - imx-wallets
+  - imx-games
 ---
 
-:::caution Registration is required for Receiver Wallet `link.transfer` will only work if the receiver wallet was previously registered with Immutable X.
+Prior to collection registration, you need to [register your project](./project-registration.md).
 
-To register the wallet, simply do `Connect Wallet` in the Immutable X Marketplace and follow through all the steps until the wallet is fully connected to Immutable X Marketplace :::
+A collection refers to a deployed smart contract. All minted assets belong to a collection, and in order to mint assets on L2 you must first register your collection (smart contract) with Immutable X.
 
-:::note Link reference tool Check out our **[Link reference tool](https://tools.immutable.com/link-reference/)** to understand how `Link` methods work without having to write any code. :::
+Each collection belongs to a project, and all projects are limited to creating **five** collections within a four-week period. [Learn more](./project-registration.md#project-limits).
 
-As of `1.0.0`, the `@imtbl/imx-sdk` supports transferring multiple tokens at once. To begin a new transfer flow, link should be called like so:
+:::info Increasing project collection limits Collection limits can be increased by [contacting support](https://support.immutable.com) about your project. Be sure to include your reason for an increase. Our team will respond to your request within 2 business days." :::
 
-```typescript
-// eg: here is a sample link.transfer call:
-const transferResponsePayload: TransferV2ResultsCodec = await link.transfer([
-  {
-    amount: '1.23',
-    symbol: 'GODS',
-    type: ERC20TokenType.ERC20,
-    tokenAddress: '0x4c04c39fb6d2b356ae8b06c47843576e32a1963e',
-    toAddress: 'replace-this-with-a-receiver-address',
-  },
-  {
-    amount: '0.23',
-    type: ETHTokenType.ETH,
-    toAddress: 'replace-this-with-a-receiver-address',
-  },
-])
-```
+## Create a collection
+A collection contains the following fields:
 
-To make this change possible, the `link.transfer` SDK method has had the following interface & type changes:
+<table>
+  <thead>
+  <tr>
+    <th>Field</th>
+    <th>Required (Default value)</th>
+    <th>Value Type / Notes</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>
+      <code>name</code>
+    </td>
+    <td>yes</td>
+    <td>text</td>
+  </tr>
+  <tr>
+    <td>
+      <code>description</code>
+    </td>
+    <td>no</td>
+    <td>text</td>
+  </tr>
+  <tr>
+    <td>
+      <code>owner_public_key</code>
+    </td>
+    <td>yes</td>
+    <td>Make sure this matches the owner of the smart contract specified in <code>contract_address</code>. Updating the <code>owner_public_key</code> is not possible.</td>
+  </tr>
+  <tr>
+    <td>
+      <code>contract_address</code>
+    </td>
+    <td>yes</td>
+    <td>The <code>contract_address</code> field must contain a valid smart contract. We validate this by ensuring bytecode exists at the given address.</td>
+  </tr>
+  <tr>
+    <td><code>metadata_api_url</code></td>
+    <td>yes</td>
+    <td><a href="minting-on-immutable-x#metadata-api">See notes here</a></td>
+  </tr>
+  <tr>
+    <td><code>icon_url</code></td>
+    <td>no</td>
+    <td>Do not put an empty text or a non-url for this as it will result to a broken icon link in Marketplace.</td>
+  </tr>
+  <tr>
+    <td><code>collection_image_url</code></td>
+    <td>no</td>
+    <td>Used for display purposes.</td>
+  </tr>
+  </tbody>
+</table>
 
-```typescript
-// The below interfaces have not changed, they're just supplied here for context ...
-const EthAddress = t.brand(
-  t.string,
-  (s: any): s is t.Branded<string, EthAddressBrand> => isAddress(s),
-  'EthAddress'
-)
-export type EthAddress = t.TypeOf<typeof EthAddress>
-const FlatETHTokenCodec = t.interface({
-  type: ETHTokenTypeT,
-})
-const FlatETHTokenWithAmountCodec = t.intersection([
-  FlatETHTokenCodec,
-  t.interface({ amount: PositiveNumberStringC }),
-])
-const FlatERC20TokenCodec = t.interface({
-  type: ERC20TokenTypeT,
-  tokenAddress: EthAddress,
-  symbol: t.string,
-})
-const FlatERC721TokenCodec = t.interface({
-  type: ERC721TokenTypeT,
-  tokenId: NonEmptyString,
-  tokenAddress: EthAddress,
-})
-export const FlatTokenWithAmountCodec = t.union([
-  FlatETHTokenWithAmountCodec,
-  FlatERC721TokenCodec,
-  FlatERC20TokenWithAmountCodec,
-])
+:::info View example code Our repository [imx-examples](https://github.com/immutable/imx-examples) provides easy to use open source examples. Follow the instructions in the README to get started. :::
 
-// The old interface:
-const TransferParamsCodec = t.intersection([
-  FlatTokenWithAmountCodec,
-  t.interface({
-    to: EthAddress,
-  }),
-])
+## Update an existing collection
+<table>
+  <thead>
+  <tr>
+    <th>Field</th>
+    <th>Value Type / Notes</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>
+      <code>name</code>
+    </td>
+    <td>text</td>
+  </tr>
+  <tr>
+    <td>
+      <code>description</code>
+    </td>
+    <td>text</td>
+  </tr>
+  <tr>
+    <td><code>icon_url</code></td>
+    <td>Do not put an empty text or a non-url for this as it will result to a broken icon link in Marketplace.</td>
+  </tr>
+  <tr>
+    <td><code>collection_image_url</code></td>
+    <td>Used for display purposes.</td>
+  </tr>
+  </tbody>
+</table>
 
-// The new interfaces:
-export const FlatTokenWithAmountAndToAddressCodec = t.intersection([
-  FlatTokenWithAmountCodec,
-  t.type({
-    toAddress: EthAddress,
-  }),
-])
-
-const TransferV2ParamsCodec = t.array(FlatTokenWithAmountAndToAddressCodec)
-```
-
-The promise response signature from the old `link.transfer` method is `void`
-
-To better allow transparency and show which transfers failed and which transfers passed, the new `link.transfer` method resolves with a transaction status report:
-
-```typescript
-// the old interface:
-void
-
-// The new interfaces:
-const SuccessCodec = t.literal('success');
-const ErrorCodec = t.literal('error');
-
-const TransferV2TokenWithResult = t.intersection([
-  FlatTokenWithAmountAndToAddressCodec,
-  t.union([
-    t.type({ status: SuccessCodec, txId: t.Int }),
-    t.type({ status: ErrorCodec, message: t.string }),
-  ]),
-]);
-
-const TransferV2ResultsCodec = t.interface({
-  result: t.array(TransferV2TokenWithResult),
-});
-
-// eg: a sample results block:
-{
-  result: [
-    {
-      type: 'ERC20',
-      amount: '1.5',
-      symbol: 'GODS',
-      status: 'success',
-      toAddress: '0x12345...',
-      txId: 1
-    }, {
-      type: 'ETH',
-      amount: '0.5',
-      status: 'success',
-      toAddress: '0x12345...',
-      txId: 12
-    }, {
-      type: 'ERC721',
-      tokenId: '654987',
-      tokenAddress: '0x123456...',
-      status: 'success',
-      toAddress: '0x12345...',
-      txId: 123
-    }, {
-      type: 'ERC721',
-      tokenId: '1234',
-      tokenAddress: '0x123456...',
-      status: 'error',
-      message: 'Cannot transfer to your own wallet',
-      toAddress: '0x12345...',
-    },
-  ]
-}
-```
-
-## Errors
-
-See error responses [here](./link-errors.md#transfer).
+:::caution Modifications not allowed for these fields `contract_address` is a field that should not be changed. If `metadata_api_url` is modified AFTER minting, the existing assets that used the previous `metadata_api_url` will not be modified.  The new `metadata_api_url` will be used for new mints. :::
