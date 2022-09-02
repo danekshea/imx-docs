@@ -1,45 +1,146 @@
 ---
-id: "account-management"
-title: "Account management"
-slug: "/account-management"
-excerpt: "User wallet registration"
-sidebar_position: 2
+id: "collection-sample"
+title: "Collection sample"
+slug: "/collection-sample"
+excerpt: "Code example of a sample collection"
+sidebar_position: 5
 keywords:
+  - imx-games
   - imx-wallets
 ---
 
-Your web3 wallet (e.g. Metamask) is used to create, connect, and sign transactions on Immutable X. Using Link SDK calls, we can handle account management activities.
-
-## Security for your users
-If you're integrating your application with Immutable X, you must use the [Link SDK](../link-sdk/index.md) for registering new users. This ensures that the L2 key that is generated for the user’s wallet is created correctly, and will work across the ecosystem. Failing to create the key correctly may result in a key that cannot be used to deposit or withdraw tokens.
-
-Link SDK must also be used when requesting a user’s signature for an action. Not generating the key with Link may result in security issues for your users.
-
-## Set up wallet for user
-Setting up a user’s account is a single call with the Link SDK. The function returns the user’s account information if setup / signed in was completed correctly.
+## Code samples to work with a sample Collection
 ```javascript
-async function setupAccount(){
-    const {address, starkPublicKey } = await link.setup({});
-    //… save user session data
+//ImmutableXConnection.js
+//Sample Immutable X functions for collection interaction
+
+import { ImmutableXClient, Link, ERC721TokenType, ETHTokenType } from '@imtbl/imx-sdk';
+
+const linkAddress = 'https://link.x.immutable.com';
+const apiAddress = 'https://api.x.immutable.com/v1';
+// Ropsten Testnet
+//const linkAddress = 'https://link.ropsten.x.immutable.com';
+//const apiAddress = 'https://api.ropsten.x.immutable.com/v1';
+
+//The token address for the collection to be monitored. Currently set to Gods Unchained
+const COLLECTION_ADDRESS = '0x0e3a2a1f2146d86a604adc220b4967a898d7fe07';
+
+const link = new Link(linkAddress);
+const client = await ImmutableXClient.build({ publicApiUrl: apiAddress });
+
+const WALLET_ADDRESS = 'WALLET_ADDRESS';
+const STARK_PUBLIC_KEY = 'STARK_PUBLIC_KEY';
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////// User Account Management /////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+//Creates or logs a user into their Immutable X account via web3 wallet
+export async function setupAndLogin() {
+   const { address, starkPublicKey } = await link.setup({});
+   localStorage.setItem(WALLET_ADDRESS, address);
+   localStorage.setItem(STARK_PUBLIC_KEY, starkPublicKey);
 }
-```
-When called, the Link SDK popup will appear, guiding the user to setup/connect the currently active wallet address.
 
-## Saving user session
-Keeping track of the currently logged in user can be done in a variety of ways. One simple approach is to store the information in local storage.
-```javascript
-async function setupAccount(){
-    const {address, starkPublicKey } = await link.setup({});
-    localStorage.setItem('WALLET_ADDRESS', address);
-    localStorage.setItem('STARK_PUBLIC_KEY', starkPublicKey);
+//Remove the local storage wallet address
+export function logout() {
+   localStorage.removeItem('WALLET_ADDRESS');
 }
-```
-Once stored, your application can access the user’s information to make other requests such as getting the user’s assets or viewing orders they purchased. Local storage is a good option if looking to persist the users data between web sessions. Retrieving the already setup user’s address on future requests is as simple as the following:
-```javascript
-const address = localStorage.getItem('WALLET_ADDRESS');
-```
-## Disconnect wallet
-Tracking the user’s connection to Immutable X should be performed by checking the user’s session. If the user’s session no longer contains the connection data, the setup function should be called again. With this pattern, disconnecting the wallet is done by removing the user’s address from the session. If using the local storage technique, use the following:
-```javascript
-localStorage.removeItem('WALLET_ADDRESS');
+
+//Get the user balances
+export async function getUserBalances() {
+   const address = localStorage.getItem('WALLET_ADDRESS');
+   return await client.getBalances({ user: address });
+}
+
+//Deposits ETH into Immutable X
+export async function depositEth(amountInEth) {
+   await link.deposit({
+      type: ETHTokenType.ETH,
+      amount: amountInEth
+   });
+}
+
+//Starts the withdrawal process from Immutable X
+export async function prepareWithdrawal(amountInEth) {
+   await link.prepareWithdrawal({
+      type: ETHTokenType.ETH,
+      amount: amountInEth
+   });
+}
+
+//Finishes the withdrawal process from Immutable X
+//Must wait for user balance to have ETH in the withdrawable state 
+export async function completeWithdrawal() {
+   await link.prepareWithdrawal({
+      type: ETHTokenType.ETH
+   });
+}
+
+//Show user history
+export async function showUserHistory() {
+   link.history({});
+}
+
+//////////////////////////////////////////////////////////////////////////////
+/////////////////////////////// Asset Management /////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Get the user's assets
+ * @param {string} assetCursor - optional cursor parameter 
+ * @returns Object containing the assets and a cursor if more assets remain to be retrieved
+ */
+export async function getUserAssets(assetCursor) {
+   const address = localStorage.getItem('WALLET_ADDRESS');
+   const assetsRequest = await client.getAssets({ user: address, cursor: assetCursor, status: 'imx', collection: COLLECTION_ADDRESS });
+   return { assets: assetsRequest.result, cursor: assetsRequest.cursor };
+}
+
+//Opens the Link SDK popup to sell an asset as the specified price
+export async function sellAsset(asset, priceInEth) {
+   let sellParams = { amount: priceInEth, tokenId: asset.id, tokenAddress: asset.token_address };
+   //Throws an error if not successful
+   await link.sell(sellParams);
+}
+
+//Transfers an asset to another address
+export async function transferERC721(asset, addressToSendTo) {
+   await link.transfer({
+      type: ERC721TokenType.ERC721,
+      tokenId: asset.id,
+      tokenAddress: asset.token_address,
+      to: addressToSendTo
+   });
+}
+
+//////////////////////////////////////////////////////////////////////////////
+///////////////////////// Marketplace Management /////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Get the cheapest active orders for the collection
+ * @param {*} ordersCursor - optional cursor parameter 
+ * @param {*} metadata - optional JSON string metadata to filter on 
+ * @returns Object containing the cheapest orders and a cursor if more orders remain
+ */
+export async function getCheapestSellOrders(ordersCursor, metadata) {
+   const ordersRequest = await client.getOrders({
+      cursor: ordersCursor,
+      status: 'active',
+      sell_token_address: COLLECTION_ADDRESS,
+      sell_metadata: metadata,
+      order_by: 'buy_quantity',
+      direction: 'asc'
+   });
+   return { orders: ordersRequest.result, cursor: ordersRequest.cursor };
+}
+
+//Opens the Link SDK popup to complete an order
+export async function fillOrder(order) {
+   await link.buy({ orderId: order.order_id });
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 ```
