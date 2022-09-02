@@ -1,19 +1,71 @@
 ---
-id: "partner-with-a-marketplace"
-title: "Partner with a marketplace"
-slug: "/partner-with-a-marketplace"
-sidebar_position: 3
+id: "marketing-support"
+title: "Marketing support"
+slug: "/marketing-support"
+sidebar_position: 2
 keywords:
-  - imx-partners
+  - imx-marketing
 ---
 
 import Button from "@site/src/components/Button";
 
-We have a number of new and existing marketplaces that are interested in providing launch support, launch exclusivity, and joint marketing efforts for projects building on Immutable X.
+As the Immutable X community has grown, we've received an increasing number of requests for marketing support to help with the growth of projects. We want to support as many projects as possible, and reward those that are building their communities and, once launched, are achieving a high volume of transactions.
 
-More marketplace partners will be announced very soon, so watch this space!
+Therefore we have created a tiered marketing support approach. The more you build your community, the more support we can give you! Check out the criteria below to see which tier you qualify for.
 
-If you're interested, please fill out the form below with as much information as possible to apply.
-<a href="https://forms.gle/1JLetz21mCQDuFPh7"><Button>Apply Now</Button></a><br /><br />
+## Tiered marketing support
 
-Note: unfortunately, we can't support all projects in this way. A representative of the marketplace will be in touch with you if your project matches their criteria.
+After you have determined what tier your project is in, please carefully read the [terms and conditions](#terms-and-conditions) before submitting your application for marketing support.
+
+<table>
+  <thead>
+    <tr><th>Project Phase</th><th>Support Tier</th><th>Support Level</th><th>Requirements</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Pre-launch</td><td>Tier 1 🎉</td><td>Re-tweet</td><td>1k-5k followers on Twitter<br /><br />
+OR<br /><br />
+5k-10k Discord members</td></tr><tr><td></td><td>Tier 2 🎉🎉</td><td>Tier 1 + Discord AMA + Giveaway (if desired)</td><td>5k-10k followers on Twitter<br /><br />
+OR<br /><br />
+10k - 25k Discord members</td></tr><tr><td></td><td>Tier 3 🎉🎉🎉</td><td>Tier 2 + dedicated Tweet</td><td>&gt; 10k followers on Twitter<br /><br />
+OR<br /><br />
+&gt; 25k Discord members</td></tr><tr><td>Post-launch</td><td>Tier 1 🎉</td><td>Re-tweet</td><td>50-100 Eth traded on L2<br /><br />
+OR<br /><br />
+5k-10k followers on Twitter<br /><br />
+OR<br /><br />
+10k - 25k Discord members</td></tr><tr><td></td><td>Tier 2 🎉🎉</td><td>Tier 1 + Discord AMA + Giveaway (if desired)</td><td>100-500 Eth traded on L2<br /><br />
+OR<br /><br />
+10k-25k followers on Twitter<br /><br />
+OR<br /><br />
+25k-35k Discord members</td></tr><tr><td></td><td>Tier 3 🎉🎉🎉</td><td>Tier 2 + Dedicated Tweet</td><td>100-1,000 Eth traded on L2<br /><br />
+OR<br /><br />
+&gt; 25k followers on Twitter<br /><br />
+OR<br /><br />
+&gt; 35k Discord members</td></tr><tr><td></td><td>Tier 4 🎉🎉🎉🎉</td><td>Tier 3 + Blog post</td><td>&gt; 1k Eth traded on L2<br /><br />
+And at least one of:<br /><br />
+&gt; 25k followers on Twitter<br /><br />
+OR<br /><br />
+&gt; 35k Discord members</td></tr></tbody></table>
+
+Don't qualify for a support tier, but have a unique, exciting or innovative project that you'd like to shout about? Complete the form regardless and we will be in touch if we are able to offer you marketing support.
+
+### Terms and conditions
+
+Please read the following terms and conditions carefully, _before_ submitting your application for marketing support.
+
+- Immutable reserves the right to not fulfill requests for any reason.
+- We aim to support as many projects as possible through joint marketing. However, we are currently experiencing a high volume of demand for marketing support.
+- If we reach capacity, requests may not be fulfilled on a first-come, first-serve basis. We will assess each project on its merits and prioritize those that are at the highest support tier and that will bring the most liquidity to the protocol.
+- The Support Tier that you select in the marketing support request form will be verified.
+- If you submit the marketing support request form, but aren't eligible for the Support Tier that you have selected, we will not fulfill the request and we may not contact you to follow up.
+- Support Tiers and Support Levels are subject to change at any time, without notice.
+- Requests that are made less than 5 business days in advance may not be actioned.
+- We may request verification of your identity before we action your request.
+
+## Apply for support
+
+Ready to go? Click below to submit your application for marketing support.
+<a href="https://godsunchained2.typeform.com/to/pOZSdsQW"><Button>Apply Now</Button></a>
+<br /><br />
+
+
+**Note:** We will only contact you if we require additional information regarding your application.
