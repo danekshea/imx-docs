@@ -1,42 +1,69 @@
 ---
-id: "link-easy-login"
-title: "Link Easy Login"
-slug: "/link-easy-login"
-excerpt: "IMX SDK supports easy login through Magic.link"
-sidebar_position: 13
+title: "Onboarding"
+slug: "/onboarding"
 keywords:
-  - imx-wallets
+  - imx-dx
 ---
 
-IMX SDK supports easy login and wallet management functionality through [Magic.link](https://magic.link/). This allows users to easily generate wallets and login through email without manual wallet generation and additional password management.
+Below is a high-level overview of the steps required to onboard with Immutable X.
 
-:::caution This functionality is **only** supported for partners who are using Link UI.\nThis functionality is available in **SDK v1.3.8+** :::
+# Before you start
+The Immutable X test environment uses Ropsten. If you haven’t already, get [prepared to test](../getting-started-guide.md#prepare-to-test) with an Ethereum wallet and some test ETH. You also need to [register as a user](../getting-started-guide.md#register-a-user-account) before you can register a project. :::info Common Terms The following explains a couple of Immutable X terms used throughout our guides:
 
+When you register a **collection** with Immutable X it creates a **project**. A project is an administrative-level entity that is associated with a [crypto-wallet address](../getting-started-guide.md#wallet), also referred to as an **owner address**. One project can have many associated **collections**. :::
+## 1. Deploy a smart contract
+All smart contracts on L2 currently require a corresponding contract on L1 Ethereum, to ensure their tokens can be deposited and withdrawn correctly.
 
-## Easy Login Sign In
+To test your assets, minting, and trading flows, you need to deploy an ERC-721 contract on the Ropsten test network, then register it with Immutable X. Similarly, to mint on mainnet Ethereum, you need to deploy an ERC-721 contract on mainnet, then follow the same steps.
 
-With Link easy login, all users need to do to create their wallets is to provide an e-mail address. Once the e-mail is provided, the user will be prompted to check their e-mail.
+Example smart contracts are available in our [imx-contracts](https://github.com/immutable/imx-contracts) repo.
 
-![magic_link](/img/link-setup/magic_link.png "magic_link")
+To ensure that you can withdraw assets from L2 to L1 Ethereum, follow the testing guidelines in [asset minting](../asset-management/asset-minting.md).
 
-They will receive an e-mail similar to this:
+## 2. Register a project
+In order to create a collection of NFTs, you must first register a project as the creator of the collection.
 
-![Easy Login Sign In](/img/link-easy-login/easy-login-signin.png "Easy Login Sign In")
+A project is an administrative level entity that is associated with an owner address, i.e. the address of the Ethereum wallet used to [register a user account](../getting-started-guide.md#register-a-user-account). Only the project owner will be authorized to perform administrative tasks such as creating and updating collections and metadata schema.
 
-Upon confirmation, a new wallet will be setup for the user if that was the first time the user is login in with that e-mail or the user will just be authenticated with their already created wallet.
+- One user account (defined by a wallet address) can own many projects.
+- One project can have multiple collections.
+- All projects are limited to **five** collections and **50,000** mint requests in each four-week rolling period.
 
-:::note
+View the guide: [Project registration](./project-registration.md))
 
-Once authenticated, a user's session will last for 7 days. During this period, the users will not be prompted to check their e-mail address again unless the cache is cleared or accessing through a different device.
+## 3. Register a collection
+A collection refers to a series of NFTs, minted under a project, and corresponds to a specific deployed smart contract.
 
-:::
+All minted assets belong to a collection, and in order to mint assets on L2 you must first register your collection (smart contract) with Immutable X.
 
-:::tip
+- Each collection belongs to a project.
+- Each collection may contain many similar or different NFTs.
 
-Each e-mail address will generate a different wallet address. To prevent any issues, please make sure you're using always the the same e-mail address to log in.
+View the guide: [Collection registration](./collection-registration.mdx)
 
-:::
+## 4. Register the metadata schema
+A collection's metadata schema describes the properties of the NFTs it can mint, as well as the potential values and types of those properties.
 
-## Configurations and setup
+For example, "image background may be a random hue value between 0-255" vs "a specific hue value from this list"; or "marketplace traders can filter this collection by this property" vs "they cannot".
 
-Please refer to the [Link Setup](./link-setup.md) for more details on the different options to display the Magic Easy Login prompt and provider configuration.
+- Each collection has a metadata schema.
+- Each NFT is defined by the properties in the metadata schema.
+
+View the guide: [Metadata schema registration](./metadata-schema-registration.mdx)
+
+**[Learn more about asset metadata](../asset-management/asset-metadata.mdx)**
+
+:::caution Metadata refreshing requires support While you can register your own collections and metadata on Ropsten, you **cannot** execute a metadata refresh yourself.
+
+To refresh metadata changes, you need to [contact support](https://support.immutable.com) and identify the tokens that need to be re-crawled, and the updates that have been made to them.
+
+Requests may take up to 2 business days (AEST). :::
+## 5. Mint assets
+Once your contract has been registered, you can mint gas-free on Immutable X.
+
+See the following guides to learn more:
+- [Minting on Immutable X](../minting-on-immutable-x.md)
+- [Asset minting](../asset-management/asset-minting.md)
+
+## 6. Integrate your application
+To start building an application on Immutable X, see our [integrate your application](../integrate-your-application/index.md) guides.
