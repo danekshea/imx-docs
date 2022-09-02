@@ -1,71 +1,47 @@
 ---
-id: "marketing-support"
-title: "Marketing support"
-slug: "/marketing-support"
-sidebar_position: 2
+id: "contact"
+title: "Contact"
+slug: "/contact"
+sidebar_position: 1
 keywords:
-  - imx-marketing
+  - imx-support
 ---
 
 import Button from "@site/src/components/Button";
 
-As the Immutable X community has grown, we've received an increasing number of requests for marketing support to help with the growth of projects. We want to support as many projects as possible, and reward those that are building their communities and, once launched, are achieving a high volume of transactions.
+## Building on Immutable X
 
-Therefore we have created a tiered marketing support approach. The more you build your community, the more support we can give you! Check out the criteria below to see which tier you qualify for.
+Immutable X is open to all to build on, with no approvals required. If you want to talk to us to learn more, or apply for developer grants, click below:
 
-## Tiered marketing support
+<a href="https://www.immutable.com/contact"><Button>Contact Us</Button></a>
 
-After you have determined what tier your project is in, please carefully read the [terms and conditions](#terms-and-conditions) before submitting your application for marketing support.
+## Project support
 
-<table>
-  <thead>
-    <tr><th>Project Phase</th><th>Support Tier</th><th>Support Level</th><th>Requirements</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Pre-launch</td><td>Tier 1 🎉</td><td>Re-tweet</td><td>1k-5k followers on Twitter<br /><br />
-OR<br /><br />
-5k-10k Discord members</td></tr><tr><td></td><td>Tier 2 🎉🎉</td><td>Tier 1 + Discord AMA + Giveaway (if desired)</td><td>5k-10k followers on Twitter<br /><br />
-OR<br /><br />
-10k - 25k Discord members</td></tr><tr><td></td><td>Tier 3 🎉🎉🎉</td><td>Tier 2 + dedicated Tweet</td><td>&gt; 10k followers on Twitter<br /><br />
-OR<br /><br />
-&gt; 25k Discord members</td></tr><tr><td>Post-launch</td><td>Tier 1 🎉</td><td>Re-tweet</td><td>50-100 Eth traded on L2<br /><br />
-OR<br /><br />
-5k-10k followers on Twitter<br /><br />
-OR<br /><br />
-10k - 25k Discord members</td></tr><tr><td></td><td>Tier 2 🎉🎉</td><td>Tier 1 + Discord AMA + Giveaway (if desired)</td><td>100-500 Eth traded on L2<br /><br />
-OR<br /><br />
-10k-25k followers on Twitter<br /><br />
-OR<br /><br />
-25k-35k Discord members</td></tr><tr><td></td><td>Tier 3 🎉🎉🎉</td><td>Tier 2 + Dedicated Tweet</td><td>100-1,000 Eth traded on L2<br /><br />
-OR<br /><br />
-&gt; 25k followers on Twitter<br /><br />
-OR<br /><br />
-&gt; 35k Discord members</td></tr><tr><td></td><td>Tier 4 🎉🎉🎉🎉</td><td>Tier 3 + Blog post</td><td>&gt; 1k Eth traded on L2<br /><br />
-And at least one of:<br /><br />
-&gt; 25k followers on Twitter<br /><br />
-OR<br /><br />
-&gt; 35k Discord members</td></tr></tbody></table>
+### Discord
+To get help from other developers, discuss ideas, and stay up-to-date on what's happening, become a part of our community on Discord.
 
-Don't qualify for a support tier, but have a unique, exciting or innovative project that you'd like to shout about? Complete the form regardless and we will be in touch if we are able to offer you marketing support.
+<a href="https://discord.gg/TkVumkJ9D6"><Button>Join us on Discord</Button></a><br />
 
-### Terms and conditions
+### Forum
 
-Please read the following terms and conditions carefully, _before_ submitting your application for marketing support.
+You can also join the conversation, connect with other projects, and ask questions in our Immutable X Discourse forum.
 
-- Immutable reserves the right to not fulfill requests for any reason.
-- We aim to support as many projects as possible through joint marketing. However, we are currently experiencing a high volume of demand for marketing support.
-- If we reach capacity, requests may not be fulfilled on a first-come, first-serve basis. We will assess each project on its merits and prioritize those that are at the highest support tier and that will bring the most liquidity to the protocol.
-- The Support Tier that you select in the marketing support request form will be verified.
-- If you submit the marketing support request form, but aren't eligible for the Support Tier that you have selected, we will not fulfill the request and we may not contact you to follow up.
-- Support Tiers and Support Levels are subject to change at any time, without notice.
-- Requests that are made less than 5 business days in advance may not be actioned.
-- We may request verification of your identity before we action your request.
+<a href="https://forum.immutable.com"><Button>Join us on Discord</Button></a>
 
-## Apply for support
+## Apply for marketing support
 
-Ready to go? Click below to submit your application for marketing support.
-<a href="https://godsunchained2.typeform.com/to/pOZSdsQW"><Button>Apply Now</Button></a>
-<br /><br />
+You can also [apply for marketing support](./marketing-support.mdx) for your project. Or, if you need help with an issue related to what you're building with Immutable X, click below to submit an issue. Select *I have a question or issue related to building on Immutable X* as your issue type.
 
+<a href="https://support.immutable.com"><Button>Contact Support</Button></a>
 
-**Note:** We will only contact you if we require additional information regarding your application.
+## System status
+
+For information about any planned maintenance, active incidents, and historical uptime information for our systems:
+
+<a href="https://status.immutable.com/"><Button>View Status Page</Button></a>
+
+## Provide feedback
+
+Got a spare 3 minutes? Take the *Dev Docs Experience Survey* to provide feedback on what it's been like using this site. Your input will help us fix what matters most first.
+
+<a href="https://forms.gle/zYbUhjNWsVvt6G4v7/"><Button>Take the Survey</Button></a>
