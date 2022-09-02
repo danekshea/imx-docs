@@ -1,199 +1,94 @@
 ---
-id: "fees"
-title: 'Fees'
-slug: '/fees'
-excerpt: 'Marketplace trading fees'
+id: "minting-with-royalties"
+title: "Minting with royalties"
+slug: "/minting-with-royalties"
+sidebar_position: 1
 keywords:
-  - imx-tokens
+  - imx-traders
 ---
 
-To start, here are some explanations of common terms:
+Royalties for a given asset are defined at the point of minting a new asset to the Immutable X protocol. Please ensure your [recipients are registered](../user-registration.md) before minting.
 
-- **Maker marketplace:** The marketplace that lists the asset for sale.
-- **Taker marketplace:** The marketplace that completes the purchase for an asset. It is possible for a marketplace to be both the maker and the taker marketplace.
-- **Asset originator:** The entity who will receive royalty fees. The asset originator does not necessarily have to be the minter themselves.
-- **Royalties:** A royalty fee represents a percentage of secondary sales that will go to the original asset creator.
-- **Secondary sale fees:** Refers to fees collected when assets are traded on the Immutable X protocol.
+## Royalty fees for newly minted assets
+Minting with royalties requires `@imtbl/imx-sdk` version that is `>= 1.1.3`.
 
-## Trading fees
+To set up your `minter`, refer to this [minting example](../asset-management/asset-minting.md#minting-example).
 
-Here's a breakdown of current and future trading fees:
-
-| Fee          | Description                                                                                                                                                         | Current Value                                                                           |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Protocol fee | Exchange fee on transactions, to support maker marketplace for providing liquidity. <br /><br /> See this <a href="https://immutablex.medium.com/fees-on-immutable-x-79d3e7207b12">blog post</a> for more information. | 2% of an item's traded price, in the currency of the trade                              |
-| Maker fee    | Fee to support maker marketplace for providing liquidity. Requires `>=v1.3.49` of the SDK to set maker fees.                                                     | x% <br /><br /> Set by the maker marketplace when listing an asset for sale |
-| Taker fee    | Fee to support taker marketplace for providing liquidity. Requires `>=v1.3.49` of the SDK to set maker fees.                                                     | x% <br /><br /> Set by the taker marketplace when purchasing an asset       |
-| Royalty fee  | Fee distributed to the asset originator when the asset is sold.                                                                                                     | x% <br /><br /> Set at the time of minting by the asset originator.         |
-
-Here's an example breakdown of a transaction to understand how trading fees work:
-
-Base price: 100 ETH
-
-Sale / listing price: 100 + 0.5 + 2 + 2 = 104.5 ETH (what’s shown on the marketplace)
-
-- Royalty: .5% = 0.5 ETH
-- Marketplace: 2% = 2 ETH on Immutable X’s marketplace
-  - Maker MP: 1
-  - Taker MP: 1
-- Protocol: 2% = 2 ETH
-  - Immutable/Protocol Development: 1.6
-  - IMX token reward pool: 0.4
-
-## Distributions
-
-Immutable X will pay out these fees immediately after each transaction is confirmed. Each party wanting to collect fees must have [registered an Immutable X account](../getting-started-guide.md#register-a-user-account) to allow the settlement of gas-less fees.
-
-## Royalties
-
-Royalty percentages for one or more recipients can be set at the time an asset is minted. Royalties will be distributed to [the recipients' Immutable X wallet](../getting-started-guide.md#wallet).
-
-At this stage, royalties for assets minted on Immutable X are only enforced on layer 2. If withdrawn assets are re-deposited onto Immutable X at a later date, royalties will continue to work alongside gas-free trading. Read more about [minting with royalties](./minting-with-royalties.md).
-
-## Maker fees
-
-Marketplaces can create orders through [Link](../link-sdk/index.md) using `Link.sell` which supports specifying an arbitrary list of fees that are added to the order at the time of creation.
-```javascript
-const makerFees = [{
-    percentage: 0.5 // 0.5%
-    recipient: ‘0x987…’ // Beneficiary eth address
-}];
-
-link.sell({
-    tokenId: ‘123’,
-    tokenAddress: ‘0x2ca…’,
-    fees: makerFees,
-});
+The main difference between the example above and the one below is the object structure of the `mints`. The previous example does not support fees and will be deprecated and replaced with the example below.
+```typescript
+const result = await minter.mintV2([
+  {
+      "contractAddress": "0xc6185055ea9891d5d9020c927ff65229baebdef2",
+      "royalties": [ // global fees
+          {
+              "recipient": "0xA91E927148548992f13163B98be47Cf4c8Cb3B16",
+              "percentage": 2.5
+          }
+      ],
+      "users": [
+          {
+              "etherKey": "0xc3ec7590d5970867ebd17bbe8397500b6ae5f690",
+              "tokens": [
+                  {
+                      // ERC-721
+                      "id": "1",
+                      "blueprint": "my-on-chain-metadata",
+                      "royalties": [ // override global fees on a per-token basis
+                          {
+                              "recipient": "0xc3ec7590d5970867ebd17bbe8397500b6ae5f690",
+                              "percentage": 2.5
+                          }
+                      ],
+                  }
+              ]
+          },
+          {
+              "etherKey": "0xA91E927148548992f13163B98be47Cf4c8Cb3B16",
+              "tokens": [
+                  {
+                      // ERC-721
+                      "id": "",
+                      "blueprint": ""
+                  }
+              ]
+          },
+          ...
+      ]
+  }
+]);
 ```
-Maker fee example flow:
-
-1. A user browsing their inventory on marketplace A clicks to list their NFT for sale.
-2. Marketplace A makes a call to `Link.sell(...)` with a 1% maker fee.
-3. Link pops up and the user enters sale amount of 1 ETH and confirms listing.
-4. Marketplace page updates to show listed asset for 1.01ETH (1ETH base price + 1% maker fee).
-
-Maker fees can alternatively be added to SDK’s `createOrder()` directly although this is discouraged since it’s best practice that all order creation is done through Link.
-```javascript
-sdkClient.createOrder({
-    …,
-    fees: makerFees,
-});
-```
-Once an order has been created with maker fees the fees are added to orders in the same way as royalties. Orders show a fee breakdown with royalties and maker fees, and order amounts are inclusive of royalty and maker fee amounts.
-
-Example return value of `getOrder()` where the order has a 1% maker fee and 10% royalty fee. Maker/taker fees show up in the order with type “ecosystem”. The base price of this order was 10000.
-```javascript
+Response:
+```json
+// Returns
 {
-    order_id: 9,
-    buy: {
-        data: {
-            quantity: “11100”
-        },
-        …
+  [
+    {
+      "contract_address": string;
+      "token_id": string;
+      "tx_id": number;
     },
-    fees: [
-        {
-            type: “ecosystem”,
-            address: “0x987…”
-            amount: “100”
-            …
-        },
-        {
-            type: “royalty”,
-            address: “0x456…”
-            amount: “1000”
-            …
-        }
-    ],
-    …
+    {
+      "contract_address": string;
+      "token_id": string;
+      "tx_id": number;
+    },
+    ....
+   ]
 }
 ```
-Maker fee validation is as follows:
+*Note: Values are only used for indicating format*
 
-- You can’t specify more than 3 recipients.
-- You can’t specify the same recipient more than once.
-- The combined fee percentage can’t exceed 100%.
-- Individual percentage fees can’t be <= 0%.
+## Important notes
+`users.etherKey` represents a valid ethereum wallet address that the token will be minted to.
 
-## Taker fees
+`id` The id for the asset on your system. This id is used in conjunction with the metadata endpoint provided during contract registration to fetch metadata associated with that asset.
 
-Marketplaces can use Link.buy to fill open orders. Link.buy supports specifying an arbitrary list of fees that are added to the order before purchase.
-```javascript
-const takerFees = [{
-    percentage: 1 // 1%
-    recipient: ‘0x123…’ // Beneficiary eth address
-}];
+`blueprint` is on chain metadata that will be included as part of the Layer 1 mint if the minted ERC-721 token is withdrawn from Immutable X onto Layer 1 Ethereum. Right now this can be any string as long as it is not empty.
 
-link.buy({
-    orderIds: [‘1’],
-    fees: takerFees,
-});
-```
-Taker fee example flow:
+You can specify the percentage up to 2 decimal places. Anything beyond that will be truncated to 2 d.p. This is to ensure that rounding up doesn't cause the sum of all constituent percentages to exceed 100%.
 
-1. A user browsing orders on marketplace B clicks to fill an order at a price of 1ETH.
-2. Marketplace B makes a call to `Link.buy(...)` with a 1% taker fee.
-3. Link window pops up and the user sees a price of 1.01 ETH (1 ETH base price + 1% taker fee) and confirms purchase.
+## Viewing the asset royalty fees
 
-One of the issues of this flow is that there is a discrepancy of price between the orders listed on marketplace B and the price that Link shows in the popup due to the addition of the 1% taker fee. To resolve this issue the SDK’s `getOrders()` allows specifying a list of auxiliary fees that are included in order amounts and their fee breakdowns so there is no discrepancy between prices in the marketplace and Link.
+You can view the royalty information for a given asset via the [assets API](/reference#/operations/getAsset). This will return the royalty recipient and fee percentage for each royalty associated with an asset.
 
-For example:
-```javascript
-sdkClient.getOrders()
-```
-Response:
-```javascript
-{
-    result: [
-        {
-            order_id: 1,
-            buy: {
-                data: {
-                    quantity: “10000”,
-                },
-                …
-            },
-            …
-        },
-    ],
-}
-```
-Or:
-```javascript
-sdkClient.getOrders({
-    auxiliaryFees: takerFees,
-})
-```
-Response:
-```javascript
-{
-    result: [
-        {
-            order_id: 1,
-            buy: {
-                data: {
-                    quantity: “10100”
-                },
-                …
-            },
-            fees: [
-                {
-                    type: “ecosystem”,
-                    address: “0x123…”
-                    amount: “100”
-                    …
-                }
-            ]
-            …
-        },
-    ],
-}
-```
-Auxiliary fees appear in the return value with type “ecosystem” since it’s assumed this feature will be used by marketplaces to pre-calculate order amounts inclusive of their taker fees.
-
-Taker fee validation works as follows:
-
-- You cannot specify more than 3 recipients.
-- You cannot specify the same recipient more than once.
-- The combined fee percentage cannot exceed 100%.
-- Individual percentage fees can’t be <= 0%.
+If you require the fee breakdown, please upgrade to version `1.1.0` or higher. This also applies for the API which will omit the `fees` array in the result unless it exists for that order and the `include_fees` flag is appended as a query param. See the [API docs](/reference#/operations/listAssets) for more info.
