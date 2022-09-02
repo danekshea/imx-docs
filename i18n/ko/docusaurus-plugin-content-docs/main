@@ -1,94 +1,49 @@
 ---
-id: "minting-with-royalties"
-title: "Minting with royalties"
-slug: "/minting-with-royalties"
-sidebar_position: 1
+id: "withdrawing-payouts"
+title: "Withdrawing payouts"
+slug: "/withdrawing-payouts"
+sidebar_position: 3
 keywords:
   - imx-traders
 ---
 
-Royalties for a given asset are defined at the point of minting a new asset to the Immutable X protocol. Please ensure your [recipients are registered](../user-registration.md) before minting.
+To withdraw your funds from Immutable X (Layer 2), you can do so via the API or Immutable X Marketplace.
 
-## Royalty fees for newly minted assets
-Minting with royalties requires `@imtbl/imx-sdk` version that is `>= 1.1.3`.
+## Steps to Withdraw via Immutable X Marketplace
+1. Go to the [Immutable X Marketplace](https://market.x.immutable.com).
+2. Connect wallet on Ethereum mainnet.
 
-To set up your `minter`, refer to this [minting example](../asset-management/asset-minting.md#minting-example).
+![Connect to Ethereum Mainnet](/img/withdrawing-payouts/connect-to-ethereum.png)
 
-The main difference between the example above and the one below is the object structure of the `mints`. The previous example does not support fees and will be deprecated and replaced with the example below.
-```typescript
-const result = await minter.mintV2([
-  {
-      "contractAddress": "0xc6185055ea9891d5d9020c927ff65229baebdef2",
-      "royalties": [ // global fees
-          {
-              "recipient": "0xA91E927148548992f13163B98be47Cf4c8Cb3B16",
-              "percentage": 2.5
-          }
-      ],
-      "users": [
-          {
-              "etherKey": "0xc3ec7590d5970867ebd17bbe8397500b6ae5f690",
-              "tokens": [
-                  {
-                      // ERC-721
-                      "id": "1",
-                      "blueprint": "my-on-chain-metadata",
-                      "royalties": [ // override global fees on a per-token basis
-                          {
-                              "recipient": "0xc3ec7590d5970867ebd17bbe8397500b6ae5f690",
-                              "percentage": 2.5
-                          }
-                      ],
-                  }
-              ]
-          },
-          {
-              "etherKey": "0xA91E927148548992f13163B98be47Cf4c8Cb3B16",
-              "tokens": [
-                  {
-                      // ERC-721
-                      "id": "",
-                      "blueprint": ""
-                  }
-              ]
-          },
-          ...
-      ]
-  }
-]);
-```
-Response:
-```json
-// Returns
-{
-  [
-    {
-      "contract_address": string;
-      "token_id": string;
-      "tx_id": number;
-    },
-    {
-      "contract_address": string;
-      "token_id": string;
-      "tx_id": number;
-    },
-    ....
-   ]
-}
-```
-*Note: Values are only used for indicating format*
+![Connect Wallet](/img/withdrawing-payouts/connect-wallet.png)
 
-## Important notes
-`users.etherKey` represents a valid ethereum wallet address that the token will be minted to.
+3. Go to your inventory page.
 
-`id` The id for the asset on your system. This id is used in conjunction with the metadata endpoint provided during contract registration to fetch metadata associated with that asset.
+![Inventory](/img/withdrawing-payouts/inventory.jpg)
 
-`blueprint` is on chain metadata that will be included as part of the Layer 1 mint if the minted ERC-721 token is withdrawn from Immutable X onto Layer 1 Ethereum. Right now this can be any string as long as it is not empty.
+4. Click on "Immutable X" balance next to the deposit button on the far right.
 
-You can specify the percentage up to 2 decimal places. Anything beyond that will be truncated to 2 d.p. This is to ensure that rounding up doesn't cause the sum of all constituent percentages to exceed 100%.
+![Click on Immutable X](/img/withdrawing-payouts/click-on-immutable-x.jpg)
 
-## Viewing the asset royalty fees
+5. Select either ETH or the ERC-20 token you would like to withdraw.
+6. Specify the amount and hit continue to follow the link process to sign the transaction. This will prepare your withdrawal from Layer 2 to Layer 1.
 
-You can view the royalty information for a given asset via the [assets API](/reference#/operations/getAsset). This will return the royalty recipient and fee percentage for each royalty associated with an asset.
+![Specify Amount](/img/withdrawing-payouts/specify-amount.jpg)
 
-If you require the fee breakdown, please upgrade to version `1.1.0` or higher. This also applies for the API which will omit the `fees` array in the result unless it exists for that order and the `include_fees` flag is appended as a query param. See the [API docs](/reference#/operations/listAssets) for more info.
+![Confirm Prepare Withdrawal](/img/withdrawing-payouts/confirm-prepare-withdrawal.jpg)
+
+![Preparing Withdrawal](/img/withdrawing-payouts/preparing-withdrawal.jpg)
+
+7. After some time (currently around 12 hours), your withdrawal should be ready to be taken onto Layer 1. At this point if you go back into the Immutable X Marketplace, you should see "preparing withdrawal" change to "withdrawal ready".
+
+![Withdrawal Ready](/img/withdrawing-payouts/withdrawal-ready.jpg)
+
+8. Click on "withdrawal ready" and select ETH or the ERC-20 token you would like to withdraw to Layer 1.
+
+![Withdraw Ready](/img/withdrawing-payouts/withdraw-ready.jpg)
+
+9. Follow the confirmation process in Link.
+
+![Confirmation](/img/withdrawing-payouts/confirmation.jpg)
+
+10. Your balance should show in your Layer 1 wallet soon (currently around 12 hours). There is a delay because we  batch transactions and send a single proof on-chain to reduce gas costs.
