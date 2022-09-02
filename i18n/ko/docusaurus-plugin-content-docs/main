@@ -1,55 +1,19 @@
 ---
-id: "immutable-x-sdk"
-title: "Immutable X SDK"
-slug: "/immutable-x-sdk"
-excerpt: "Install and configure the SDK"
-sidebar_position: 1
+id: "integrate-your-application"
+title: "Integrate your application"
+slug: "/integrate-your-application"
 keywords:
-  - imx-games
+  - imx-dx
 ---
 
-The Immutable X SDK is a Javascript package created by Immutable to allow simple interfacing with Immutable X’s API. The primarily used packages are Link SDK and the Immutable X Client.
+This section goes through the steps of connecting and using Immutable X within your application.
 
-The Immutable X Client is used for most backend operations, and the [Link SDK](../link-sdk/index.md) is used for frontend, user-facing interactions.
+- [Immutable X SDK](./immutable-x-sdk.md) - *Install and configure the SDK*
 
-The IMX Client ('ImmutableXClient') is a module wrapping the REST requests in a method call. Using this package, developers can make sure their calls are up to date with the latest API standards.
+- [Account management](./account-management.md) - *Create and connect to Immutable X using your wallet*
 
-The Link SDK provides a clean popup and UI to help users navigate through the final signing process with their wallets. While information about current market state and assets can be derived with web requests, the Link SDK handles the more complicated stark signature signing most developers should not need to code. Using the Link SDK also maintains a unified view for users, allowing them to be more comfortable during signing when using marketplaces powered by Immutable X.
+- [Personal Inventory](./personal-inventory.md) - *View account balances and manage assets*
 
-Applications monitoring the status of the assets will use the IMX Client to retrieve data. Marketplace and applications relying on user interaction will use both packages.
+- [Marketplace](./marketplaces.md) - *Manage buy and sell orders*
 
-## Setting up the SDK
-:::caution Note: If you are using the latest version of 'create-react-app'... You will encounter a bunch of webpack errors when you try use the [@imbt/imx-sdk](https://www.npmjs.com/package/@imtbl/imx-sdk) SDK with your app.
-
-Follow this guide: [How to resolve webpack errors](https://docs.x.immutable.com/docs/create-react-app-webpack-5-errors) :::
-
-For this tutorial we will assume Yarn is being used as the package manager. The following node modules need to be added to the project:
-```bash
-yarn add @imtbl/imx-sdk
-```
-## Importing the packages
-The following imports are needed for the Link SDK and IMX Client packages:
-```javascript
-import { ImmutableXClient, Link } from '@imtbl/imx-sdk';
-```
-
-## Setting the connection urls
-Immutable X provides connection addresses for both the mainnet and testnet. Here we will default to the mainnet for the examples, but show the testnet connection strings as well.
-```javascript
-const linkAddress = 'https://link.x.immutable.com';
-const apiAddress = 'https://api.x.immutable.com/v1';
-
-// Ropsten Testnet
-//const linkAddress = 'https://link.ropsten.x.immutable.com';
-//const apiAddress = 'https://api.ropsten.x.immutable.com/v1';
-```
-## Creating the link objects
-Once the Link SDK and IMX Client are imported, they can be initialized. Note that the client library initialization is asynchronous.
-```javascript
-// Link SDK
-const link = new Link(linkAddress);
-
-// IMX Client
-const client = await ImmutableXClient.build({ publicApiUrl: apiAddress });
-```
-For more details, see the [Link SDK](../link-sdk/index.md) docs and the [package on NPM](https://www.npmjs.com/package/@imtbl/imx-sdk).
+- [Collection sample](./collection-sample.md) - *Code example of a sample collection*
