@@ -1,88 +1,64 @@
 ---
-id: "sdk-api"
-title: "Link SDK"
-slug: "/sdk-api"
+id: "link-buy2"
+title: "Link.buy"
+slug: "/link-buy2"
+excerpt: "Link can now be used to kick off buy flows containing multiple order ID's"
+sidebar_position: 4
 keywords:
   - imx-wallets
 ---
 
 :::note Link reference tool Check out our **[Link reference tool](https://tools.immutable.com/link-reference/)** to understand how `Link` methods work without having to write any code. :::
 
-For context, read our [overview of the Immutable X SDK](../integrate-your-application/immutable-x-sdk.md).
-
-## Link usage
-
-The Link SDK is used for frontend, user-facing interactions.
+Here's how you can initiate a buy order:
 
 ```typescript
-import { Link, ETHTokenType } from '@imtbl/imx-sdk'
+import { Link, ImmutableXClient, ImmutableOrderStatus} from ‘@imtbl/imx-sdk’;
+const link = new Link("https://link.ropsten.x.immutable.com")
+buyResults: BuyResponse = await link.buy({ orderIds: ['1', '2', '3'] });
+```
 
-async function sdkExample() {
-  const link = new Link('https://link.ropsten.x.immutable.com')
 
-  // Register user, you can persist address to local storage etc.
-  const { address } = await link.setup({})
-  localStorage.setItem('address', address)
+Just like all other link SDK methods, **buy** returns a promise, which resolves once all operations are complete, or rejects once the link encounters a critical error.
 
-  // Deposit ETH into IMX
-  link.deposit({
-    type: ETHTokenType.ETH,
-    amount: '0.01',
-  })
+Once a multi-buy flow is confirmed by the user, **Buy** will asynchronously try to buy each order in the list and then display the results.
 
-  // View transaction history
-  link.history({})
+In order to handle the various new kinds of error states that this functionality allows, `link.buy` will now resolve with a response report payload which matches the following types:
 
-  // Create a sell order for token id 123 for 0.01 ETH
-  link.sell({
-    amount: '0.01',
-    tokenId: '123',
-    tokenAddress: '0x2ca7e3fa937cae708c32bc2713c20740f3c4fc3b',
-  })
+```typescript
+type SuccessOrError = 'success' | 'error'
 
-  // Cancel a sell order
-  link.cancel({
-    orderId: '1',
-  })
+type OrderStatus = {
+  status: SuccessOrError
+  message?: string
+}
 
-  // Create a buy flow:
-  link.buy({
-    orderIds: ['1', '2', '3'],
-  })
+type BuyResults = {
+  [orderId: string]: OrderStatus
+}
 
-  // Prepare withdrawal, you will need to wait some time before completing the withdrawal
-  link.prepareWithdrawal({
-    type: ETHTokenType.ETH,
-    amount: '0.01',
-  })
-
-  // Complete withdrawal
-  link.completeWithdrawal({
-    type: ETHTokenType.ETH,
-  })
+type BuyResponse = {
+  result: BuyResults
 }
 ```
 
-## API client usage
-
-The API client is a direct mapping to the REST methods documented here: https://docs.x.immutable.com/reference
+An example resolve payload from a semi-successful `buy()` flow:
 
 ```typescript
-import { ImmutableXClient } from '@imtbl/imx-sdk'
-
-async function libExample() {
-  const client = await ImmutableXClient.build({
-    publicApiUrl: 'https://api.ropsten.x.immutable.com/v1',
-  })
-  const address = localStorage.getItem('address')
-
-  if (address) {
-    const balances = await client.getBalances({ user: address })
-    const orders = await client.getOrders()
-    const order = await client.getOrder({ orderId: 1 })
-    const assets = await client.getAssets({
-      user: address,
-    })
+{
+  result: {
+     '1': { status: 'success' },
+     '2': {
+        status: 'error',
+        message: 'Cannot purchase own order',
+     },
+     '3': { status: 'success' },
   }
 }
 ```
+
+If the multi-buy flow is found to contain 0 valid orders after minimal client-side validation, then link will error out (and reject the promise it returned from the buy() method) and no orders will be purchased.
+
+## Errors
+
+See error responses [here](./link-errors.md#buy).
