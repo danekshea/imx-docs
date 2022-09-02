@@ -1,90 +1,92 @@
 ---
-id: "link-deposit-options"
-title: "Link.deposit"
-slug: "/link-deposit-options"
-sidebar_position: 8
+id: "asset-burning"
+title: "Asset Burning"
+slug: "/asset-burning"
+excerpt: "Immutable X now supports asset burning :fire:"
+sidebar_position: 7
 keywords:
-  - imx-wallets
+  - imx-games
 ---
 
-:::note Link reference tool Check out our **[Link reference tool](https://tools.immutable.com/link-reference/)** to understand how `Link` methods work without having to write any code. :::
+Burning describes the process of permanently removing tokens from circulation, and on mainnet Ethereum this is often achieved by transferring the asset to a designated burn address (e.g. the [zero account](https://etherscan.io/address/0x0000000000000000000000000000000000000000)). A burn address is not owned by any user and no one can feasibly guess its private key, so any assets owned by a burn address are considered lost forever.
 
-**SDK v1.3.30+** used with Link UI supports different ways to deposit ETH and whitelisted ERC20 tokens, for example, USDC, GODS or IMX tokens. :::info Currency support Right now, Immutable X _only_ supports ETH and whitelisted ERC20 tokens." :::
+On L2, we have a burn address (zero address - 0x00...0) paired with a non-zero stark key (0x00...01) as the designated burn address for Immutable X. The stark key must be non-zero because a zero stark key does not lie on the Stark elliptic curve and would therefore be invalid, so we chose the next closest key possible. As with the L1 burn account, finding the stark private key for this specific public key is practically impossible, so assets owned by this stark key will remain locked in the Stark smart contract forever and cannot be transferred or withdrawn.
 
-Immutable X is not prescriptive in how marketplaces handle the deposit process. There are several optional parameters you can use for your marketplace, to influence the user journey for the deposit.
+To burn an asset, you need to **transfer the asset to the burn address**. We have added burn functions in the SDK for clarity, and these are just wrappers for standard transfer functions to this burn address. Using the transfer functions with the burn address as a recipient will also work just the same.
 
-Available parameters:
+```solidity
+BurnEthAddress = 0x0000000000000000000000000000000000000000
+BurnStarkKey   = 0x0000000000000000000000000000000000000000000000000000000000000001
+```
+## ImmutableXClient
+Explicit burn functions in the SDK (wrappers for transfer functions):
 
-```typescript
-{
-  type: ETH,
-  amount?: PositiveNumberStringC
-}
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-{
-  amount: PositiveNumberStringC
-}
+<Tabs>
+<TabItem value="burn" label="Burn an Asset" default>  
 
-{
-  type: ERC20,
-  tokenAddress: EthAddress,
-  symbol: string,
-  amount?: PositiveNumberStringC
-}
+</TabItem>
+<TabItem value="list" label="Get list of Burns">
+
+
+
+</TabItem>
+<TabItem value="burn-by-id" label="Get burn by ID">
+
+
+
+</TabItem>
+</Tabs>
+
+Or using standard transfer function:
+
+```typescript title="Burn using client.transfer"
+// import { ImmutableXClient } from '@imtbl/imx-sdk';
+// client = ImmutableXClient.build({...})
+
+await client.transfer({
+    sender: "<wallet-address>",
+    token: {
+        type: ERC721TokenType.ERC721,
+        data:{
+            tokenId: "123",
+            tokenAddress: "0xacb3c6a43d15b907e8433077b6d38ae40936fe2c"
+        }
+    },
+    receiver: "0x0000000000000000000000000000000000000000",
+    quantity: 1,
+});
 ```
 
-## Usage
+Burned assets will still show up in the response of getAssets (`/assets` API) with their status as 'burned'. This is a filterable field, so you can find all burned assets by querying the assets API:
+```typescript title="Get burned assets"
+// import { ImmutableXClient, ImmutableAssetStatus } from '@imtbl/imx-sdk';
+// client = ImmutableXClient.build({...})
 
-If a marketplace provides only amount, or ETH type with amount, the system will deposit in ETH. This can be used when a marketplace only wants to allow deposits in ETH and / or wants to style the deposit form with their own branding.
-
-```typescript
-link.deposit({
-  amount: '0.1',
-})
-
-// or
-
-link.deposit({
-  type: 'ETH',
-  amount: '0.1',
-})
+const burnedAssets = await client.getAssets({
+    status: ImmutableAssetStatus.burned, // 'burned'
+});
 ```
 
-![Deposit ETH Amount](/img/link-deposit/deposit-eth-amount.png "Deposit ETH Amount")
+## Link
+To implement a burn feature for users on your frontend, you should use the `link.transfer` function with the recipient set as the burn address. [Learn more.](../link-sdk/linktransfer.md)
+```typescript title="Burn with Link"
+// import { Link } from '@imtbl/imx-sdk';
+// link = new Link(<link-url>)
 
-If a marketplace provides token information and amount, users will be asked to confirm the deposit. This can be used when users are provided with a shortcut like "deposit 1 GODS token", or if the marketplace wants to style the deposit form for branding purposes.
-
-```typescript
-link.deposit({
-  amount: '10',
-  type: 'ERC20',
-  symbol: 'USDC',
-  tokenAddress: '0x07865c6e87b9f70255377e024ace6630c1eaa37f',
-})
+const transferResponsePayload:TransferV2ResultsCodec = await link.transfer([
+  {
+    type: ERC721TokenType.ERC721,
+    tokenId: "123",
+    tokenAddress: "0xacb3c6a43d15b907e8433077b6d38ae40936fe2c",
+    toAddress: '0x0000000000000000000000000000000000000000',
+  },
+]);
 ```
 
-![Deposit USDC Amount](/img/link-deposit/deposit-usdc-amount.png "Deposit USDC Amount")
+## Multi-burns
+When burning multiple assets in one go, you will be using the multi-transfer functionality in link.transfer. Keep in mind that this submits separate transfer transactions to the API. Although rare, it is possible to have some transfers fail while others succeed, so multi-burns (just like multi-transfers) are not an entirely atomic operation. We will be looking into adding support for atomic 'multi' transactions across all features in the future.
 
-If a marketplace provides only token information, users will be asked to provide an amount and confirm the deposit. This can be used when users are provided with a shortcut like "deposit GODS" or, again, to add brand-specific styling to the form.
-
-```typescript
-link.deposit({
-  type: 'ERC20',
-  symbol: 'GODS',
-  tokenAddress: '0x4c04c39fb6d2b356ae8b06c47843576e32a1963e',
-})
-```
-
-![Deposit Token Provided](/img/link-deposit/deposit-token-provided.png "Deposit Token Provided")
-
-If a marketplace provides no parameters, users will be asked to select a currency and the amount before confirming the deposit. This can be used if marketplaces prefer to rely on currencies and forms with Immutable branding.
-
-```typescript
-link.deposit()
-```
-
-![Deposit Without Params](/img/link-deposit/deposit-without-params.png "Deposit Without Params")
-
-## Errors
-
-See error responses [here](./link-errors.md#deposits).
+For use cases such as 'burn x NFTs to receive a new NFT', it is currently recommended to keep track of all successful and failed burns (provided in the `link.transfer` response), and implement a retry mechanism for users to complete their full burn before triggering the next step in the process.
