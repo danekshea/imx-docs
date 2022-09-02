@@ -1,95 +1,184 @@
 ---
-id: "marketplaces"
-title: 'Marketplaces'
-slug: '/marketplaces'
-excerpt: 'Manage buy and sell orders'
-sidebar_position: 4
+id: "personal-inventory"
+title: 'Personal inventory'
+slug: '/personal-inventory'
+excerpt: 'View account balances and manage assets'
+sidebar_position: 3
 keywords:
-  - imx-traders
+  - imx-wallets
 ---
 
-As an exchange platform, Immutable X provides all the features needed to create a marketplace for the assets created and stored on the platform. Once listings are created from user accounts, it is often common to have a separate marketplace section to show all the current orders.
+Monitoring and interacting with a user’s account will require both the IMX client and the Link SDK. Additional imports of type constants may also be needed for inventory requests.
 
-## Orders
-
-Orders on Immutable X all include a buy and sell side. To fill or partially fill an order, an order with the opposite buy and sell tokens is created and sent to Immutable X. It is important to note there are different _statuses_ an Immutable X order can have:
-
-- **Active** - Order is valid and can be filled or partial filled.
-- **Filled** - Order is completed and the asset(s) have been transferred.
-- **Cancelled** - Order has been cancelled and no longer available to fill.
-- **Inactive** - Order is rejected, and is in that state while the system waits to receive a corrective transaction(s) to the original one. This can occur if either side no longer has the tokens available to trade.
-
-## Listing orders
-
-Showing orders, like assets, is best accessed by IMX Client. Usually when making a request for orders you filter on status. The following call will retrieve all the active orders for assets from a specific collection (paged):
-
-```javascript
-const ordersRequest = await client.getOrders({
-  status: 'active',
-  sell_token_address: collectionAddress,
-})
+```javascript title="Constants required for inventory requests"
+import { ERC721TokenType, ETHTokenType } from '@imtbl/imx-sdk'
 ```
 
-:::info Order sides
-Orders have a buy and a sell side. When sorting and filtering, remember that each side has its own filtering parameters.
+## ERC20 and IMX balances
+
+Immutable X’s base token is Ethereum. Once deposited onto the platform it exists in three different states:
+
+- **imx** - ETH deposited on Immutable X and is ready to be used to fill orders, trade, etc.
+- **Preparing withdrawal** - ETH that has started the withdrawal process from Immutable X. It must wait until the next published signature to the main chain before moving to the withdrawable state.
+- **Withdrawable** - ETH that is now withdrawable to another address on the main chain.
+
+To retrieve a user’s balances use the following IMX client function:
+
+```javascript
+const balances = await client.getBalances({ user: address })
+```
+
+The _balances_ object will contain the amounts of all three states: imx, preparing_withdrawal, and withdrawable. Each value is returned as a BigNumber, a structure used to hold the many decimal places an ETH amount needs for display. The value is denominated in Wei, so a conversion may be necessary if trying to display the value as ETH. 1 ETH = 10^18 Wei.
+
+:::info Ether to Wei
+1 Ether = 1,000,000,000,000,000,000 Wei
 :::
 
-## Sort orders
+If using the ethers package, you can format the Wei value into ETH through a utilities call:
 
-Most likely the orders retrieved should be shown in a specific order. Either by token name, price, date created, etc. Adding a sort and direction to the orders request is simple:
+```javascript title="Wei to ETH"
+import { ethers } from 'ethers'
+
+// ...
+
+let amountInEth = ethers.utils.formatEther(amountInWei)
+```
+
+## Deposits
+
+In order to deposit into Immutable X, a user sends ETH from their wallet to the Immutable X contract. This ETH is now on the Layer 2 (L2) solution built by Immutable and stays in the contract until later withdrawn by the user. A Link SDK call provides an easy interface for the deposit process:
 
 ```javascript
-//Sort by price, lowest to highest
-const ordersRequest = await client.getOrders({
-  status: 'active',
-  sell_token_address: collectionAddress,
-  order_by: 'buy_quantity',
-  direction: 'asc',
+// Deposit ETH into IMX
+link.deposit({
+  type: ETHTokenType.ETH,
+  amount: '0.01',
 })
 ```
 
-## Filter orders
+## Withdrawals
 
-Orders can be filtered on multiple properties, but the most common use cases are filtering on asset name and asset metadata. The following shows asset name filtering for orders, often used by a search bar component:
+Withdrawing ETH from Immutable X is a two step process. As noted before, the ETH on the mainchain technically resides in the Immutable X contract.
+
+A signed transaction needs to be sent on the L2 (Immutable X), preparing the ETH to be withdrawn from the contract. To prepare the withdraw, use the following Link SDK function:
 
 ```javascript
-const ordersRequest = await client.getOrders({
-  status: 'active',
-  sell_token_address: collectionAddress,
-  sell_token_name: tokenName,
+link.prepareWithdrawal({
+  type: ETHTokenType.ETH,
+  amount: '0.01', //The amount of the token to withdraw
 })
 ```
 
-Filtering by metadata is more complicated. The metadata filter accepts a JSON string defining an object containing the property filters. Each filter property is an array containing the value of the property to filter on. Each property name must match exactly.
-
-The following example shows how to filter Gods Unchained Card orders for a Boost Walker card (proto 55) with a quality of Shadow or Gold:
-
-```javascript
-const ordersRequest = await client.getOrders({
-  status: 'active',
-  sell_token_address: '0xacb3c6a43d15b907e8433077b6d38ae40936fe2c',
-  sell_metadata: '{"proto":["55"],"quality":["Shadow","Gold"]}',
-})
-```
-
-**Note:** For calls to the API, metadata filters need to be encoded:
-
-```bash
-GET https://api.x.immutable.com/v1/assets?collection='0xacb3c6a43d15b907e8433077b6d38ae40936fe2c'&metadata=%7B%22proto%22%3A%5B%2255%22%5D%2C%22quality%22%3A%5B%22Shadow%22%2C%22Gold%22%5D%7D
-```
-
-:::info Metadata Notes
-Depending on how the asset metadata is configured, it may include the name as well. However, by default, every asset has a name property outside of the metadata and is the safer choice for filtering. Combining both the name and metadata filters together works as well
+:::caution Avoiding gas price complaints
+Withdrawing from Immutable X will cost the user a gas fee, so encouraging users to wait and group their withdrawals with larger amounts is recommended to avoid gas price complaints.
 :::
 
-## Pagination
+There will be a time period between preparing the withdrawal, and the user being able to complete the withdrawal into their mainchain (L1) account. A simple way to monitor the withdrawal process is monitoring the user’s different account balances as shown in [Balances](#erc20imx-balances).
 
-Orders requests also return a cursor, the same as assets. Look at the assets cursor example in [User NFT Assets](./personal-inventory.md#user-nft-assets) for an example of pagination with a cursor.
-
-## Fill an order
-
-To fill an existing order, use the Link SDK to guide the user through the signing process. Just call buy with the order's ID:
+Once the ETH has moved into the _withdrawable_ state, the user can create the mainchain transaction to withdraw the ETH into their wallet. This is the part of the process requiring a gas fee, as the transaction is being published to the mainchain. To complete the withdrawal use the following Link SDK function to guide the user through the process:
 
 ```javascript
-await link.buy({ orderIds: [order.order_id] })
+link.completeWithdrawal({
+  type: ETHTokenType.ETH,
+})
+```
+
+## Transaction history
+
+The Link SDK provides a very simple way of showing a user’s history. Use the following call to display their history in the popup:
+
+```javascript
+// View transaction history
+link.history({})
+```
+
+## User NFT assets
+
+Displaying user assets is a common requirement for games and marketplaces using Immutable X. The IMX Client provides a quick way to get all the user’s assets: [block:code]
+
+```javascript
+const assetsRequest = await client.getAssets({ user: address })
+```
+
+This request will retrieve all the user’s assets tracked by Immutable X limited only by the result set page size. If a user has more assets then the current request’s page size limit (currently 100), additional requests can be made with the cursor property to navigate through all the user’s assets.
+
+```javascript
+let assetCursor
+let assets = []
+do {
+  let assetRequest = await client.getAssets({ user: address, cursor: assetCursor })
+  assets = assets.concat(assetRequest.result)
+  assetCursor = assetRequest.cursor
+} while (assetCursor)
+```
+
+This technique will get you all the user’s assets at one time, but could be slow depending on the amount of assets the user owns. It is best to dynamically load the other results using a paging or unlimited scrolling technique to maximize performance.
+
+## Filter owned assets
+
+Most applications will want to filter the user’s assets in some way. Oftentimes only one collection’s assets are needed, or maybe only the assets on Immutable X (L2) are required to be shown. There are many ways the assets request can be filtered to minimize the data returned. Here is an example filtering on collection and layer 2 assets only:
+
+```javascript
+let assetsRequest = await client.getAssets({
+  user: address,
+  cursor: assetCursor,
+  status: 'imx',
+  collection: collectionAddress,
+})
+```
+
+When displaying user assets, it is often necessary to show which ones are already listed. In order to return the sell orders along with the assets, set the _sell_orders_ flag in the request. Each asset will contain an orders object containing any orders explicitly for that asset. The example below shows how to add a property _isListed_ to the assets retrieved.
+
+```javascript
+let assetCursor
+let assets = []
+do {
+  let assetRequest = await client.getAssets({
+    user: address,
+    cursor: assetCursor,
+    status: 'imx',
+    collection: collectionAddress,
+    sell_orders: true,
+  })
+  assets = assets.concat(assetRequest.result)
+  assetCursor = assetRequest.cursor
+} while (assetCursor)
+
+for (let asset of assets) {
+  asset.isListed = false
+  if (asset.orders?.sell_orders?.length > 0) {
+    asset.isListed = true
+  }
+}
+```
+
+## Create a sell order
+
+Once you have a user’s assets, use the Link SDK to guide the user through selling an asset:
+
+```javascript
+async function sellAsset(asset, priceInEth) {
+  let sellParams = {
+    amount: priceInEth,
+    tokenId: asset.id,
+    tokenAddress: asset.token_address,
+  }
+  //Throws an error if not successful
+  await link.sell(sellParams)
+}
+```
+
+## Transfer assets
+
+Another common use case, user transfers, is available through the Link SDK. If a user wants to send a token to another Immutable X address, an order is not required. Instead, use the following code:
+
+```javascript
+async function transferERC721(asset) {
+  await link.transfer({
+    type: ERC721TokenType.ERC721,
+    tokenId: asset.id,
+    tokenAddress: asset.token_address,
+    to: addressToSendTo,
+  })
+}
 ```
