@@ -1,146 +1,55 @@
 ---
-id: "collection-sample"
-title: "Collection sample"
-slug: "/collection-sample"
-excerpt: "Code example of a sample collection"
-sidebar_position: 5
+id: "immutable-x-sdk"
+title: "Immutable X SDK"
+slug: "/immutable-x-sdk"
+excerpt: "Install and configure the SDK"
+sidebar_position: 1
 keywords:
   - imx-games
-  - imx-wallets
 ---
 
-## Code samples to work with a sample Collection
+The Immutable X SDK is a Javascript package created by Immutable to allow simple interfacing with Immutable X’s API. The primarily used packages are Link SDK and the Immutable X Client.
+
+The Immutable X Client is used for most backend operations, and the [Link SDK](../link-sdk/index.md) is used for frontend, user-facing interactions.
+
+The IMX Client ('ImmutableXClient') is a module wrapping the REST requests in a method call. Using this package, developers can make sure their calls are up to date with the latest API standards.
+
+The Link SDK provides a clean popup and UI to help users navigate through the final signing process with their wallets. While information about current market state and assets can be derived with web requests, the Link SDK handles the more complicated stark signature signing most developers should not need to code. Using the Link SDK also maintains a unified view for users, allowing them to be more comfortable during signing when using marketplaces powered by Immutable X.
+
+Applications monitoring the status of the assets will use the IMX Client to retrieve data. Marketplace and applications relying on user interaction will use both packages.
+
+## Setting up the SDK
+:::caution Note: If you are using the latest version of 'create-react-app'... You will encounter a bunch of webpack errors when you try use the [@imbt/imx-sdk](https://www.npmjs.com/package/@imtbl/imx-sdk) SDK with your app.
+
+Follow this guide: [How to resolve webpack errors](https://docs.x.immutable.com/docs/create-react-app-webpack-5-errors) :::
+
+For this tutorial we will assume Yarn is being used as the package manager. The following node modules need to be added to the project:
+```bash
+yarn add @imtbl/imx-sdk
+```
+## Importing the packages
+The following imports are needed for the Link SDK and IMX Client packages:
 ```javascript
-//ImmutableXConnection.js
-//Sample Immutable X functions for collection interaction
+import { ImmutableXClient, Link } from '@imtbl/imx-sdk';
+```
 
-import { ImmutableXClient, Link, ERC721TokenType, ETHTokenType } from '@imtbl/imx-sdk';
-
+## Setting the connection urls
+Immutable X provides connection addresses for both the mainnet and testnet. Here we will default to the mainnet for the examples, but show the testnet connection strings as well.
+```javascript
 const linkAddress = 'https://link.x.immutable.com';
 const apiAddress = 'https://api.x.immutable.com/v1';
+
 // Ropsten Testnet
 //const linkAddress = 'https://link.ropsten.x.immutable.com';
 //const apiAddress = 'https://api.ropsten.x.immutable.com/v1';
-
-//The token address for the collection to be monitored. Currently set to Gods Unchained
-const COLLECTION_ADDRESS = '0x0e3a2a1f2146d86a604adc220b4967a898d7fe07';
-
-const link = new Link(linkAddress);
-const client = await ImmutableXClient.build({ publicApiUrl: apiAddress });
-
-const WALLET_ADDRESS = 'WALLET_ADDRESS';
-const STARK_PUBLIC_KEY = 'STARK_PUBLIC_KEY';
-
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////// User Account Management /////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-
-//Creates or logs a user into their Immutable X account via web3 wallet
-export async function setupAndLogin() {
-   const { address, starkPublicKey } = await link.setup({});
-   localStorage.setItem(WALLET_ADDRESS, address);
-   localStorage.setItem(STARK_PUBLIC_KEY, starkPublicKey);
-}
-
-//Remove the local storage wallet address
-export function logout() {
-   localStorage.removeItem('WALLET_ADDRESS');
-}
-
-//Get the user balances
-export async function getUserBalances() {
-   const address = localStorage.getItem('WALLET_ADDRESS');
-   return await client.getBalances({ user: address });
-}
-
-//Deposits ETH into Immutable X
-export async function depositEth(amountInEth) {
-   await link.deposit({
-      type: ETHTokenType.ETH,
-      amount: amountInEth
-   });
-}
-
-//Starts the withdrawal process from Immutable X
-export async function prepareWithdrawal(amountInEth) {
-   await link.prepareWithdrawal({
-      type: ETHTokenType.ETH,
-      amount: amountInEth
-   });
-}
-
-//Finishes the withdrawal process from Immutable X
-//Must wait for user balance to have ETH in the withdrawable state 
-export async function completeWithdrawal() {
-   await link.prepareWithdrawal({
-      type: ETHTokenType.ETH
-   });
-}
-
-//Show user history
-export async function showUserHistory() {
-   link.history({});
-}
-
-//////////////////////////////////////////////////////////////////////////////
-/////////////////////////////// Asset Management /////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-
-/**
- * Get the user's assets
- * @param {string} assetCursor - optional cursor parameter 
- * @returns Object containing the assets and a cursor if more assets remain to be retrieved
- */
-export async function getUserAssets(assetCursor) {
-   const address = localStorage.getItem('WALLET_ADDRESS');
-   const assetsRequest = await client.getAssets({ user: address, cursor: assetCursor, status: 'imx', collection: COLLECTION_ADDRESS });
-   return { assets: assetsRequest.result, cursor: assetsRequest.cursor };
-}
-
-//Opens the Link SDK popup to sell an asset as the specified price
-export async function sellAsset(asset, priceInEth) {
-   let sellParams = { amount: priceInEth, tokenId: asset.id, tokenAddress: asset.token_address };
-   //Throws an error if not successful
-   await link.sell(sellParams);
-}
-
-//Transfers an asset to another address
-export async function transferERC721(asset, addressToSendTo) {
-   await link.transfer({
-      type: ERC721TokenType.ERC721,
-      tokenId: asset.id,
-      tokenAddress: asset.token_address,
-      to: addressToSendTo
-   });
-}
-
-//////////////////////////////////////////////////////////////////////////////
-///////////////////////// Marketplace Management /////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-
-/**
- * Get the cheapest active orders for the collection
- * @param {*} ordersCursor - optional cursor parameter 
- * @param {*} metadata - optional JSON string metadata to filter on 
- * @returns Object containing the cheapest orders and a cursor if more orders remain
- */
-export async function getCheapestSellOrders(ordersCursor, metadata) {
-   const ordersRequest = await client.getOrders({
-      cursor: ordersCursor,
-      status: 'active',
-      sell_token_address: COLLECTION_ADDRESS,
-      sell_metadata: metadata,
-      order_by: 'buy_quantity',
-      direction: 'asc'
-   });
-   return { orders: ordersRequest.result, cursor: ordersRequest.cursor };
-}
-
-//Opens the Link SDK popup to complete an order
-export async function fillOrder(order) {
-   await link.buy({ orderId: order.order_id });
-}
-
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
 ```
+## Creating the link objects
+Once the Link SDK and IMX Client are imported, they can be initialized. Note that the client library initialization is asynchronous.
+```javascript
+// Link SDK
+const link = new Link(linkAddress);
+
+// IMX Client
+const client = await ImmutableXClient.build({ publicApiUrl: apiAddress });
+```
+For more details, see the [Link SDK](../link-sdk/index.md) docs and the [package on NPM](https://www.npmjs.com/package/@imtbl/imx-sdk).
