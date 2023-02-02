@@ -15,10 +15,10 @@ Typically, getting crypto onto ImmutableX Layer 2 wallets is a multi-step proces
 
 However, there are crypto on-ramp and off-ramp providers that enable users to get crypto in and out of L2 wallets in a ***single step***. ImmutableX make it easy for you to integrate with the following providers via our SDKs and API:
 
-| Provider | How does it work? | Fees | Min. purchase / deposit | Restrictions |
-| --- | --- | --- | --- | --- |
-| [MoonPay](https://www.moonpay.com/) | Users can buy crypto with a card payment and it is immediately transferred to their L2 wallet | See [MoonPay's transaction fee](https://support.moonpay.com/hc/en-gb/articles/360011930117-What-fees-do-you-charge-) | $20USD | See these lists of ***non-supported*** countries:<br/>- [On-ramp](https://support.moonpay.com/hc/en-gb/articles/6557330712721-What-are-our-non-supported-countries-states-and-territories-for-on-ramp-product-)<br/>- [Off-ramp](https://support.moonpay.com/hc/en-gb/articles/360009279877-What-are-our-non-supported-countries-states-and-territories-for-off-ramp-) |
-| [Layerswap](https://www.layerswap.io/) | Users can transfer crypto they own in a centralised exchange account (ie. Coinbase) directly to their L2 wallet | See [Layerswap's transfer fees](https://docs.layerswap.io/user-docs/using-layerswap/fees) | 0.025ETH | |
+| Provider | How does it work? | Fees | Min. purchase / deposit   | Restrictions |
+| --- | --- | --- |---------------------------| --- |
+| [MoonPay](https://www.moonpay.com/) | Users can buy crypto with a card payment and it is immediately transferred to their L2 wallet | See [MoonPay's transaction fee](https://support.moonpay.com/hc/en-gb/articles/360011930117-What-fees-do-you-charge-) | $20USD                    | See these lists of ***non-supported*** countries:<br/>- [On-ramp](https://support.moonpay.com/hc/en-gb/articles/6557330712721-What-are-our-non-supported-countries-states-and-territories-for-on-ramp-product-)<br/>- [Off-ramp](https://support.moonpay.com/hc/en-gb/articles/360009279877-What-are-our-non-supported-countries-states-and-territories-for-off-ramp-) |
+| [Layerswap](https://www.layerswap.io/) | Users can transfer crypto they own in a centralised exchange account (ie. Coinbase) directly to their L2 wallet | See [Layerswap's transfer fees](https://docs.layerswap.io/user-docs/using-layerswap/fees) | 0.009ETH / 15IMX / 12USDC | |
 
 
 <ListAdmonition label="Guides">
