@@ -30,7 +30,7 @@ In order for a refresh to be successful, first:
   - Mint an asset
   - Once ready to reveal, update the Metadata API with the properties to be revealed
   - Refresh metadata for the assets to be revealed
-- Ensure your Metadata API availability is aligned with the requirements. The metadata refresh service will concurrently request metadata for each asset from your Metadata API and requires a response time of less than 3 seconds per request in order to successfully update the metadata for that asset. If the request to the Metadata API fails it will be retried once more before that particular asset is [marked as failed.](#viewing-metadata-refresh-errors)
+- Ensure your Metadata API availability is aligned with the requirements. The metadata refresh service will concurrently request metadata for each asset from your Metadata API and requires a response time of less than 3 seconds per request in order to successfully update the metadata for that asset. If the request to the Metadata API fails it will be retried several times within the next hour before that particular asset is [marked as failed.](#viewing-metadata-refresh-errors)
 
 ## API
 
