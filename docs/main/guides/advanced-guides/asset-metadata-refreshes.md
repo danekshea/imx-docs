@@ -254,7 +254,7 @@ The response returns a paginated list of refreshes:
 
 There are limits on the number of the number of metadata refresh requests made per project, per hour.
 
-- For a particular project, **10** metadata refresh requests can be made per hour
+- For a particular project, **20** metadata refresh requests can be made per hour
 - Up to **1000** tokens can be requested per refresh
 
 Whenever a [refresh is requested](#requesting-a-metadata-refresh) or when a refresh limit has been reached, the following headers will be returned:
