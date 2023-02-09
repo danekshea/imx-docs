@@ -448,10 +448,6 @@ button.DocSearch.DocSearch-Button:focus {
   display: block !important;
 }
 
-.navbar__items.navbar__items--right.language-selector {
-  width: 50px;
-}
-
 .navbar__items.navbar__items--right>div:first-child>button.clean-btn svg {
   display: none;
 }
