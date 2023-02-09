@@ -187,11 +187,11 @@ const configuration = {
           srcDark: 'img/logo-dark.svg',
         },
         items: [
-          // to be added once we support Korean
-          // {
-          //   type: 'localeDropdown',
-          //   position: 'right',
-          // },
+          //Added for language support, initially Korean. https://docusaurus.io/docs/i18n/tutorial
+          {
+            type: 'localeDropdown',
+            position: 'right',
+          },
           {
             to: '/',
             position: 'left',
