@@ -13,12 +13,12 @@ module.exports = {
         {
           type: 'link',
           label: 'Examples',
-          href: `https://github.com/immutable/imx-core-sdk-csharp/tree/v0.1.0/Src/Examples`,
+          href: `https://github.com/immutable/imx-core-sdk-csharp/tree/v0.1.1/Src/Examples`,
         },
         {
           type: 'link',
           label: 'API client Reference',
-          href: `${url}/sdk-references/core-sdk-csharp/0-1-0/apiclient`,
+          href: `${url}/sdk-references/core-sdk-csharp/0-1-1/apiclient`,
         },
         {
           type: 'link',
@@ -28,7 +28,7 @@ module.exports = {
         {
           type: 'link',
           label: 'Github',
-          href: `https://github.com/immutable/imx-core-sdk-csharp/tree/v0.1.0`,
+          href: `https://github.com/immutable/imx-core-sdk-csharp/tree/v0.1.1`,
         },
       ],
     },

@@ -314,7 +314,7 @@ let collections = try await CollectionsAPI.listCollections(
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/collectionsapi#listcollections">ListCollections</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/collectionsapi#listcollections">ListCollections</a></li>
       </ul>
   </ListAdmonition>
 
@@ -399,7 +399,7 @@ See [GetCollection example](https://github.com/immutable/imx-core-sdk-golang/blo
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/collectionsapi#getcollection">GetCollection</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/collectionsapi#getcollection">GetCollection</a></li>
       </ul>
   </ListAdmonition>
   </TabItem>
@@ -520,7 +520,7 @@ getListAssets('0x23db0e72bd7738da0d0afe7bccb4109f5f05edcf', 'name')
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/assetsapi#listassets">ListAssets</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/assetsapi#listassets">ListAssets</a></li>
       </ul>
   </ListAdmonition>
 
@@ -630,7 +630,7 @@ getAsset('0x23db0e72bd7738da0d0afe7bccb4109f5f05edcf', '1', true)
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/assetsapi#getasset">GetAsset</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/assetsapi#getasset">GetAsset</a></li>
       </ul>
   </ListAdmonition>
 
@@ -765,7 +765,7 @@ getListOrders(
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/ordersapi#listorders">ListOrders</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/ordersapi#listorders">ListOrders</a></li>
       </ul>
   </ListAdmonition>
 
@@ -891,7 +891,7 @@ getOrder('1506', true)
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/ordersapi#getorder">GetOrder</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/ordersapi#getorder">GetOrder</a></li>
       </ul>
   </ListAdmonition>
 
@@ -1002,7 +1002,7 @@ getListTransfers('updated_at', 5)
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/transfersapi#listtransfers">ListTransfers</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/transfersapi#listtransfers">ListTransfers</a></li>
       </ul>
   </ListAdmonition>
 
@@ -1093,7 +1093,7 @@ getTransfer('56775')
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/transfersapi#gettransfer">GetTransfer</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/transfersapi#gettransfer">GetTransfer</a></li>
       </ul>
   </ListAdmonition>
 
@@ -1185,7 +1185,7 @@ getListTokens('contract_address')
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/TokensApi.html#listtokens">ListTokens</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/TokensApi.html#listtokens">ListTokens</a></li>
       </ul>
   </ListAdmonition>
 
@@ -1266,7 +1266,7 @@ getToken('0x1facdd0165489f373255a90304650e15481b2c85')
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/TokensApi.html#gettoken">GetToken</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/TokensApi.html#gettoken">GetToken</a></li>
       </ul>
   </ListAdmonition>
 
@@ -1368,7 +1368,7 @@ getListTrades('ETH', 5)
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/tradesapi#listtrades">ListTrades</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/tradesapi#listtrades">ListTrades</a></li>
       </ul>
   </ListAdmonition>
 
@@ -1458,7 +1458,7 @@ getTrade('56715')
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/tradesapi#gettrade">GetTrade</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/tradesapi#gettrade">GetTrade</a></li>
       </ul>
   </ListAdmonition>
 
@@ -1537,7 +1537,7 @@ getUserStarkKeys('0x5D680Fbb3e60deCAbF62DfcACc56DB7d5964736a')
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/usersapi#getusers">GetUsers</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/usersapi#getusers">GetUsers</a></li>
       </ul>
   </ListAdmonition>
 
@@ -1622,7 +1622,7 @@ getListBalances('0x5D680Fbb3e60deCAbF62DfcACc56DB7d5964736a')
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/balancesapi#listbalances">ListBalances</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/balancesapi#listbalances">ListBalances</a></li>
       </ul>
   </ListAdmonition>
 
@@ -1706,7 +1706,7 @@ getBalanceToken(
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-0/apiclient/docs/balancesapi#getbalance">GetBalance</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/balancesapi#getbalance">GetBalance</a></li>
       </ul>
   </ListAdmonition>
 
