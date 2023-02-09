@@ -24,7 +24,7 @@ try
 {
     Client client = new Client(new Config()
     {
-        Environment = EnvironmentSelector.Sandbox
+        Environment = EnvironmentSelector.Sandbox // Or EnvironmentSelector.Mainnet
     });
 }
 catch (Exception e)
