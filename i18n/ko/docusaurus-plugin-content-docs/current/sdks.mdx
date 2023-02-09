@@ -1,0 +1,128 @@
+---
+title: 'ImmutableX SDKs'
+slug: '/sdks'
+keywords:
+  - imx-dx
+---
+
+import SdkButtonList from '@site/src/components/SdkButtonList';
+import articleStyles from '@site/src/components/Article/styles.module.css';
+import { coreSDKs, walletSDKs, jsSDK, linkSDK } from '@site/src/constants';
+
+# SDK 개요
+
+이뮤터블은 애플리케이션 개발자들이 기본적인 기능뿐만 아니라 더욱 발전된 기능을 실행하는 것을 쉽게 만들어 줄 다양한 언어와 프레임워크에 SDK를 제공합니다.
+
+#### We have two types of SDK:
+
+|       | Functionality                | Description                                                                                                                                                                                                                                                                                                                   | SDKs available            |
+| ----- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| **1** | **Core**                     | Facilitates key functionality of the ImmutableX platform. Provides a wrapper for the API endpoints as well as workflow functions that make common actions easier to implement.                                                                                                                                                | <ul><li>[Core SDK (recommended)](#core--wallet-sdk)</li><li>[JS SDK](#link--js-sdk)</li></ul> |
+| **2** | **User wallet interactions** | Enables applications to facilitate [user transactions](#what-are-user-transactions) by connecting with user wallets on various platforms and enabling user authorization (signing) of state-updating transactions (ie. creating sell orders, transferring ownership of assets). Often used in conjunction with the core SDKs. | <ul><li>[Wallet SDK](#core--wallet-sdk)</li><li>[Link SDK](#link--js-sdk)</li></ul> |
+
+#### ***사용자 트랜잭션이란?***
+사용자 트랜잭션은 자산 소유자의 승인(서명)이 필요한 자산 소유권의 변경을 다루는 거래입니다. 이러한 트랜잭션은 단순히 데이터를 읽는 것과는 대조적으로, 블록체인에 있는 자산의 상태를 업데이트합니다.
+
+## SDK들은 어떻게 함께 작동하나요?
+
+### Core + Wallet SDK
+The **[Core SDK](#core-sdks)** is responsible for the bulk of functionality that is available on the ImmutableX platform. It can be used with the **[Wallet SDK](#wallet-sdks)** in order to establish a connection with users' wallets to sign certain transactions that require users' approval.
+
+### Link + JS SDK
+The **[Link SDK](#link-sdk)** provides end-to-end functionality for the bulk of user transactions, including a user interface for users to see, sign and approve these transactions. It uses the **[JS SDK](#js-sdk)** for its backend operations, like creating orders or trades.
+
+**See [Guides](/docs/basic-guides) on how to use our SDKs.**
+
+### 기능 매트릭스 예시
+<table>
+    <tbody>
+        <tr>
+            <th></th>
+            <th colspan="1">사용자 지갑에 연결</th>
+            <th colspan="4">사용자 서명이 필요한 동작</th>
+            <th colspan="4">사용자 서명이 필요하지 않은 동작</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th>트랙잭션 서명</th>
+            <th>사용자 등록</th>
+            <th>오더 및 거래 생성</th>
+            <th>L1-L2 전송(입금 및 인출)</th>
+            <th>L2 토큰 민팅</th>
+            <th>자산 목록 가져오기</th>
+            <th>오더 가져오기</th>
+            <th>거래 가져오기</th>
+            <th>사용자 잔고 가져오기</th>
+        </tr>
+        <tr>
+            <th>Core SDK</th>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+        </tr>
+        <tr>
+            <th>Wallet SDK</th>
+            <td>✅</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+        </tr>
+<tr>
+            <th>JS SDK</th>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>        
+        </tr>
+        <tr>
+            <th>Link SDK</th>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>        
+        </tr>
+    </tbody>
+</table>
+
+## Core SDK
+<SdkButtonList sdks={coreSDKs} />
+
+## Wallet SDK
+<SdkButtonList sdks={walletSDKs} />
+
+## JS SDK
+<SdkButtonList sdks={jsSDK} />
+
+## Link SDK
+<SdkButtonList sdks={linkSDK} />
+
+## 오픈 API 사양
+
+이뮤터블의 오픈 API 사양은 다양한 언어에서 자동 클라이언트 생성을 지원함으로써 개발자들이 API와 효율적으로 상호 작용할 수 있는 자율권을 부여합니다.
+
+<a href="https://github.com/immutable/imx-core-sdk/blob/main/openapi.json">
+  <Button>
+    이뮤터블 오픈 API 사양 <RightArrowIcon className={articleStyles.ctaIcon} />
+  </Button>
+</a>

@@ -1,0 +1,38 @@
+---
+title: "3. Register a collection"
+slug: "/launch-collection/register-collection"
+keywords:
+  - imx-dx
+---
+
+import ListAdmonition from '@site/src/components/ListAdmonition';
+
+A collection refers to a deployed [token smart contract](https://docs.openzeppelin.com/contracts/4.x/tokens), the tokens of which can be freely transacted (ie. minted, traded, bought and sold) on ImmutableX's layer 2.
+
+Each collection belongs to a [project](../register-project/index.mdx).
+
+The best way to create a project is to use the [imx-examples](https://github.com/immutable/imx-examples/blob/main/docs/onboarding.md#2-create-collection) repository.
+
+<ListAdmonition title="Pre-requisites" icon="🤚" type="tip">    
+    <ul>
+        <li><a href="./register-as-user">Registering as a user</a></li>
+        <li><a href="./register-project">Registering a project</a></li>
+    </ul>
+</ListAdmonition>
+
+### Steps:
+1. [Register a collection](#1-register-a-collection)
+2. [Update a collection](#2-update-a-collection)
+
+## 1. Register a collection
+Follow the [3. Add a collection](https://github.com/immutable/imx-examples/blob/main/docs/onboarding.md#3-add-a-collection) steps in the imx-examples repository.
+
+## 2. Update a collection
+Follow the [Update collection](https://github.com/immutable/imx-examples/blob/main/docs/administration.md#update-collection) steps in the imx-examples repository.
+
+#### Fields that cannot be updated:
+* `contract_address`
+* `metadata_api_url` - if this field is modified AFTER minting, existing assets using the previous URL will not be modified, however, the new URL will be used for new mints.
+
+### Increase project collection limits
+Collection limits can be increased by contacting [support](https://support.immutable.com/) about your project. Be sure to include your reason for an increase. Our team will respond to your request within 2 business days.
