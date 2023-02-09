@@ -110,7 +110,7 @@ const configuration = {
         routeBasePath: '/sdk-docs/core-sdk-csharp',
         id: 'sdks-core-sdk-csharp',
         sidebarPath: require.resolve('./sidebars/sidebars-core-sdk-csharp.js'),
-        // includeCurrentVersion: false, // uncomment when csharp docs are versioned
+        includeCurrentVersion: false,
         ...pageOptions,
       },
     ],

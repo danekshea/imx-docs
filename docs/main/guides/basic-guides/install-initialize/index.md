@@ -124,4 +124,43 @@ func initializeSDK() {
 }
 ```
   </TabItem>
+
+  <TabItem value="csharp" label="C# Core SDK">
+
+1. Add the following nuget packages:
+* https://www.nuget.org/packages/Imx.Sdk
+* https://www.nuget.org/packages/Imx.Sdk.Gen
+
+```sh
+dotnet add package Imx.Sdk --version 0.1.1
+dotnet add package Imx.Sdk.Gen --version 0.1.1
+```
+
+2. Initialize the Core SDK client with the network on which you want your application to run (see [all networks available](https://github.com/immutable/imx-core-sdk-csharp/blob/main/Src/IMX/Imx.Sdk/Client.cs#L17)):
+
+Select one of the following Ethereum networks ImmutableX platform currently supports.
+
+| Environment | Description   |  
+|-------------|---------------|
+| Sandbox     | The default test network (currently, it is Goërli)  |
+| Mainnet     | Ethereum network    | 
+
+```csharp
+using Imx.Sdk;
+
+try
+{
+    Client client = new Client(new Config()
+    {
+        Environment = EnvironmentSelector.Sandbox // Or EnvironmentSelector.Sandbox
+    });
+}
+catch (Exception e)
+{
+    Console.WriteLine("Error message: " + e.Message);
+    Console.WriteLine(e.StackTrace);
+}
+```
+  </TabItem>
+
 </Tabs>

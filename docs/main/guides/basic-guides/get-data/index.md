@@ -310,6 +310,15 @@ let collections = try await CollectionsAPI.listCollections(
   </ListAdmonition>
 
   </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/collectionsapi#listcollections">ListCollections</a></li>
+      </ul>
+  </ListAdmonition>
+
+  </TabItem>
 </Tabs>
 
 ### Get details about a collection
@@ -385,6 +394,14 @@ getCollection('0x61e506cec264d5b2705f10e5a934dc5313a56a6e')
   </ListAdmonition>
 
 See [GetCollection example](https://github.com/immutable/imx-core-sdk-golang/blob/main/imx/examples/collection/main.go) in our SDK repo.
+  </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/collectionsapi#getcollection">GetCollection</a></li>
+      </ul>
+  </ListAdmonition>
   </TabItem>
 </Tabs>
 
@@ -499,6 +516,16 @@ getListAssets('0x23db0e72bd7738da0d0afe7bccb4109f5f05edcf', 'name')
   </ListAdmonition>
 
   </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/assetsapi#listassets">ListAssets</a></li>
+      </ul>
+  </ListAdmonition>
+
+  See also [listAssets example](https://github.com/immutable/imx-core-sdk-csharp/blob/main/Src/Examples/ListAssets/Program.cs) in the Core SDK.
+  </TabItem>
 </Tabs>
 
 ### Get details about an asset
@@ -576,7 +603,7 @@ getAsset('0x23db0e72bd7738da0d0afe7bccb4109f5f05edcf', '1', true)
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-kotlin/0-6-0/imx-core-sdk-kotlin-jvm/com.immutable.sdk.api/-assets-api/get-asset.html">listAssets</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-kotlin/0-6-0/imx-core-sdk-kotlin-jvm/com.immutable.sdk.api/-assets-api/get-asset.html">get-asset</a></li>
       </ul>
   </ListAdmonition>
 
@@ -585,7 +612,7 @@ getAsset('0x23db0e72bd7738da0d0afe7bccb4109f5f05edcf', '1', true)
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-swift/0-4-0/documentation/immutablexcore/assetsapi/getasset(tokenaddress:tokenid:includefees:)">listAssets</a></li>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-swift/0-4-0/documentation/immutablexcore/assetsapi/getasset(tokenaddress:tokenid:includefees:)">getasset</a></li>
       </ul>
   </ListAdmonition>
 
@@ -594,10 +621,20 @@ getAsset('0x23db0e72bd7738da0d0afe7bccb4109f5f05edcf', '1', true)
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://pkg.go.dev/github.com/immutable/imx-core-sdk-golang@v0.2.1/imx#Client.GetAsset">ListAssets</a></li>
+        <li><a href="https://pkg.go.dev/github.com/immutable/imx-core-sdk-golang@v0.2.1/imx#Client.GetAsset">GetAsset</a></li>
       </ul>
   </ListAdmonition>
 
+  </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/assetsapi#getasset">GetAsset</a></li>
+      </ul>
+  </ListAdmonition>
+
+  See also [listAssets example](https://github.com/immutable/imx-core-sdk-csharp/blob/main/Src/Examples/ListAssets/Program.cs) in the Core SDK.
   </TabItem>
 </Tabs>
 
@@ -724,6 +761,15 @@ getListOrders(
   </ListAdmonition>
 
   </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/ordersapi#listorders">ListOrders</a></li>
+      </ul>
+  </ListAdmonition>
+
+  </TabItem>
 </Tabs>
 
 ### Get details about an order
@@ -841,6 +887,15 @@ getOrder('1506', true)
   </ListAdmonition>
 
   </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/ordersapi#getorder">GetOrder</a></li>
+      </ul>
+  </ListAdmonition>
+
+  </TabItem>
 </Tabs>
 
 ## Transfers
@@ -943,6 +998,15 @@ getListTransfers('updated_at', 5)
   </ListAdmonition>
 
   </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/transfersapi#listtransfers">ListTransfers</a></li>
+      </ul>
+  </ListAdmonition>
+
+  </TabItem>
 </Tabs>
 
 ### Get details about a transfer
@@ -1021,6 +1085,15 @@ getTransfer('56775')
   <ListAdmonition label="SDK reference">
       <ul>
         <li><a href="https://pkg.go.dev/github.com/immutable/imx-core-sdk-golang@v0.2.1/imx#Client.GetTransfer">GetTransfer</a></li>
+      </ul>
+  </ListAdmonition>
+
+  </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/transfersapi#gettransfer">GetTransfer</a></li>
       </ul>
   </ListAdmonition>
 
@@ -1108,6 +1181,15 @@ getListTokens('contract_address')
   </ListAdmonition>
 
   </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/TokensApi.html#listtokens">ListTokens</a></li>
+      </ul>
+  </ListAdmonition>
+
+  </TabItem>
 </Tabs>
 
 ### Get details about a token
@@ -1176,6 +1258,15 @@ getToken('0x1facdd0165489f373255a90304650e15481b2c85')
   <ListAdmonition label="SDK reference">
       <ul>
         <li><a href="https://pkg.go.dev/github.com/immutable/imx-core-sdk-golang@v0.2.1/imx#Client.GetToken">GetToken</a></li>
+      </ul>
+  </ListAdmonition>
+
+  </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/TokensApi.html#gettoken">GetToken</a></li>
       </ul>
   </ListAdmonition>
 
@@ -1268,7 +1359,16 @@ getListTrades('ETH', 5)
 
   <ListAdmonition label="SDK reference">
       <ul>
-        <li><a href="https://pkg.go.dev/github.com/immutable/imx-core-sdk-golang@v0.2.1/imx#Client.ListTrades">listTrades</a></li>
+        <li><a href="https://pkg.go.dev/github.com/immutable/imx-core-sdk-golang@v0.2.1/imx#Client.ListTrades">ListTrades</a></li>
+      </ul>
+  </ListAdmonition>
+
+  </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/tradesapi#listtrades">ListTrades</a></li>
       </ul>
   </ListAdmonition>
 
@@ -1354,6 +1454,15 @@ getTrade('56715')
   </ListAdmonition>
 
   </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/tradesapi#gettrade">GetTrade</a></li>
+      </ul>
+  </ListAdmonition>
+
+  </TabItem>
 </Tabs>
 
 ## Users
@@ -1420,6 +1529,15 @@ getUserStarkKeys('0x5D680Fbb3e60deCAbF62DfcACc56DB7d5964736a')
   <ListAdmonition label="SDK reference">
       <ul>
         <li><a href="https://pkg.go.dev/github.com/immutable/imx-core-sdk-golang@v0.2.1/imx#Client.GetUsers">GetUsers</a></li>
+      </ul>
+  </ListAdmonition>
+
+  </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/usersapi#getusers">GetUsers</a></li>
       </ul>
   </ListAdmonition>
 
@@ -1500,6 +1618,15 @@ getListBalances('0x5D680Fbb3e60deCAbF62DfcACc56DB7d5964736a')
   </ListAdmonition>
 
   </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/balancesapi#listbalances">ListBalances</a></li>
+      </ul>
+  </ListAdmonition>
+
+  </TabItem>
 </Tabs>
 
 ### Get specific balance for user
@@ -1571,6 +1698,15 @@ getBalanceToken(
   <ListAdmonition label="SDK reference">
       <ul>
         <li><a href="https://pkg.go.dev/github.com/immutable/imx-core-sdk-golang@v0.2.1/imx#Client.GetBalance">GetBalance</a></li>
+      </ul>
+  </ListAdmonition>
+
+  </TabItem>
+  <TabItem value="csharp" label="C# Core SDK">
+
+  <ListAdmonition label="SDK reference">
+      <ul>
+        <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-csharp/0-1-1/apiclient/docs/balancesapi#getbalance">GetBalance</a></li>
       </ul>
   </ListAdmonition>
 
