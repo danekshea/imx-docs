@@ -3,12 +3,11 @@ id: "link-nft-checkout-primary"
 title: "Link.nftCheckoutPrimary"
 slug: "/link-nft-checkout-primary"
 sidebar_position: 13
-keywords:
-  - imx-payments
+keywords: [imx-payments]
 ---
 
 :::caution Feature for managed partners only
-This is a feature intended for managed partners. If you are not a managed partner and would like to become one, please reach out to us on our [#dev-discussion channel](https://discord.gg/7URHuYFCN4) on Discord.
+This is a feature intended for managed partners. If you are not a managed partner and would like to become one, please reach out to us on our [#dev-discussion channel](https://discord.gg/7URHuYFCN4) on Discord. 
 
 If you are a managed partner, your partner success manager needs to set up a commercial partnership with MoonPay for you. Please reach out to them to facilitate this.
 :::
@@ -31,7 +30,7 @@ Where:
 - `sellerWalletAddress` - L2 wallet address of the seller, funds will be send to this address
 - `contractAddress` - NFT contract address
 - `offerId` - An identifier that represents what will be minted.
-
+  
 In the cases where purchasers know what they're purchasing (such as a specific pfp) `offerId` could be the token ID (i.e. `420`) and in other cases where they dont know what they're purchasing (such as a loot box) it could be something like `silver-chest`. This is simply a way to render an item in the cart, and doesnt need to tie to the actual NFT asset directly.
 
 :::info Handling the offerID
@@ -40,7 +39,7 @@ Note that primary sales involve taking a payment before the mint occurs. Because
 
 This displays the Link UI with loaded MoonPay widget:
 
-![Mint By Fiat](/img/link-sdk-nft-checkout-primary/nft-checkout-primary.png "NFT Checkout primary")
+![Mint By Fiat](/img/link-sdk-nft-checkout-primary/nft-checkout-primary.png 'NFT Checkout primary')
 
 ## Errors
 

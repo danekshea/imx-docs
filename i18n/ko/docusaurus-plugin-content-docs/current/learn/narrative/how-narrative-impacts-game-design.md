@@ -2,8 +2,7 @@
 sidebar_position: 4
 title: "How narrative impacts game design"
 slug: "/learn/narrative-game-design"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';

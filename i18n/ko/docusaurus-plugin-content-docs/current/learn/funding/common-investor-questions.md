@@ -2,8 +2,7 @@
 sidebar_position: 5
 title: "Common investor questions"
 slug: "/learn/common-investor-questions"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';

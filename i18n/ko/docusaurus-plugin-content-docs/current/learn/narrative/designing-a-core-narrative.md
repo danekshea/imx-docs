@@ -2,8 +2,7 @@
 sidebar_position: 2
 title: Designing a core narrative
 slug: "/learn/designing-a-core-narrative"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';

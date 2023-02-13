@@ -1,10 +1,8 @@
 ---
 title: "Overview"
 slug: "/tutorials"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
-
 import DocCardList from '@theme/DocCardList';
 import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 

@@ -1,8 +1,7 @@
 ---
 title: "4. Register collection metadata schema"
 slug: "/launch-collection/register-metadata-schema"
-keywords:
-  - imx-dx
+keywords: [imx-dx]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -47,27 +46,27 @@ One of the most common uses of metadata is for NFT marketplaces to display chara
 
 The [Immutable Marketplace](https://market.immutable.com/) uses the following core properties:
 
-| Property                  | Description                                                                                                                                                                                                                                                                               | Mandatory                                |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| `name`                    | The display name for this asset.                                                                                                                                                                                                                                                          | No                                       |
-| `description`             | The description of this asset.                                                                                                                                                                                                                                                            | No                                       |
-| `image_url`               | The URL of the display image for this asset. This will be used as a video thumbnail in the Immutable Marketplace.                                                                                                                                                                         | No                                       |
-| `image`                   | Alternative field of `image_url`.                                                                                                                                                                                                                                                         | No                                       |
-| `animation_url`           | A URL to a multi-media attachment for the item. We highly recommend the use of the HLS format for streaming video over HTTP. This is generally used for video NFTs.<br/><br/>Applications are required to host their own video assets and expose their location via this URL. | No                                       |
-| `animation_url_mime_type` | Mime type of the file that `animation_url` points to. Immutable currently only supports these 3 mime types: `application/vnd.apple.mpegurl`, `video/mp4` and `video/webm`.                                                                                                                | No, unless `animation_url` is specified. |
-| `youtube_url`             | A URL to a YouTube video. This playback method is currently not supported in the Immutable Marketplace, but third party support could be built.                                                                                                                                           | No                                       |
+| Property | Description | Mandatory |
+| --- | --- | --- |
+| `name`	| The display name for this asset. | No |
+| `description`	| The description of this asset. | No |
+| `image_url` |	The URL of the display image for this asset. This will be used as a video thumbnail in the Immutable Marketplace. | No |
+| `image`	| Alternative field of `image_url`. | No |
+| `animation_url` |	A URL to a multi-media attachment for the item. We highly recommend the use of the HLS format for streaming video over HTTP. This is generally used for video NFTs.<br/><br/>Applications are required to host their own video assets and expose their location via this URL. | No |
+| `animation_url_mime_type` | Mime type of the file that `animation_url` points to. Immutable currently only supports these 3 mime types: `application/vnd.apple.mpegurl`, `video/mp4` and `video/webm`. | No, unless `animation_url` is specified. |
+| `youtube_url` | A URL to a YouTube video. This playback method is currently not supported in the Immutable Marketplace, but third party support could be built. | No |
 
 ## Metadata schema
 The metadata schema outlines the names of the metadata object properties and the values that are acceptable for each property.
 
 When registering the metadata schema for an Immutable collection, you can assign the following value types for each property:
 
-| Type       | Description                                                                              | Filterable? |
-| ---------- | ---------------------------------------------------------------------------------------- | ----------- |
-| `enum`     | Property with a defined enumeration of possible values (e.g. god = "nature" or "death"). | Yes         |
-| `text`     | Property which contains arbitrary text. Should be searchable.                            | No          |
-| `boolean`  | Property which can be either true or false.                                              | Yes         |
-| `discrete` | Property which will usually be handled as a multi-select, e.g. values from 1-10          | Yes         |
+| Type | Description | Filterable? |
+| --- | --- | --- |
+| `enum` | Property with a defined enumeration of possible values (e.g. god = "nature" or "death"). | Yes |
+| `text` | Property which contains arbitrary text. Should be searchable. | No |
+| `boolean` | Property which can be either true or false. | Yes |
+| `discrete` | Property which will usually be handled as a multi-select, e.g. values from 1-10 | Yes |
 
 Additionally, a **filterable** attribute can be specified for each property in the metadata schema, which allows API consumers to filter assets that are returned by these values. Filterable cannot be true for `text` parameter types.
 
@@ -131,10 +130,10 @@ Only the project owner can add the metadata schema to a collection.
 
 Each property of the metadata schema contains the following fields:
 
-| Field        | Required?               | Type                                                                                                                                                              |
-| ------------ | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`       | Yes                     | Text                                                                                                                                                              |
-| `type`       | No (default is `text`)  | See values types in [this table](#metadata-schema)                                                                                                                |
+| Field | Required? | Type |
+| --- | --- | --- |
+| `name` | Yes | Text |
+| `type` | No (default is `text`) | See values types in [this table](#metadata-schema) |
 | `filterable` | No (default is `false`) | Boolean<br/><br/>If set to true, then the particular metadata's name will show up in the filters that are used by marketplaces and other applications |
 
 See [example metadata schema](#example-metadata-schema-for-the-metadata-example-above).

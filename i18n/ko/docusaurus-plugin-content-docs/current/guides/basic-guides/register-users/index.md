@@ -1,9 +1,7 @@
 ---
 title: "Register users"
 slug: "/how-to-register-users"
-keywords:
-  - imx-wallets
-  - imx-dx
+keywords: [imx-wallets, imx-dx]
 ---
 
 import Tabs from '@theme/Tabs';
@@ -30,7 +28,8 @@ Then, when the users performs a transaction that requires an update of the state
 * This signature is used as a cryptographic seed with generic path parameters defined by the proposal's derivation path for hierarchical keys: `m / purpose' / layer' / application' / eth_address_1' / eth_address_2' / index` (This is the step that binds the L2 key with the L1 key)
 * The generated private key is then passed through an efficient grinding method to enforce distribution within STARK's elliptic curve domain. The generated key pair is what you'll be using on a day-to-day basis to interact with any ImmutableX functionality.
 
-This is a high-level overview of the user registration process: ![User Registration](/img/user-registration.png "User Registration")
+This is a high-level overview of the user registration process:
+![User Registration](/img/user-registration.png 'User Registration')
 
 <ListAdmonition label="Guides">
     <ul>

@@ -4,11 +4,7 @@ title: "Link.makeOffer"
 slug: "/link-make-offer"
 excerpt: "Link can now be used to make an offer on an asset"
 sidebar_position: 1
-keywords:
-  - trading
-  - orderbook
-  - offers
-  - buy-order
+keywords: [trading, orderbook, offers, buy-order]
 ---
 
 :::danger OFFERS IS IN BETA
@@ -71,9 +67,9 @@ Make offer response:
 */
 
 ```
-![Make an offer](/img/link-offers/make-offer-prompt.png "Make an offer")
+![Make an offer](/img/link-offers/make-offer-prompt.png 'Make an offer')
 
-![Make an offer confirmation](/img/link-offers/make-offer-success.png "Make an offer confirmation")
+![Make an offer confirmation](/img/link-offers/make-offer-success.png 'Make an offer confirmation')
 
 ## Errors
 

@@ -3,8 +3,7 @@ id: "immutable-x-sdk"
 title: "Install and configure"
 slug: "/immutable-x-sdk"
 sidebar_position: 1
-keywords:
-  - imx-games
+keywords: [imx-games]
 ---
 
 The ImmutableX JS SDK is a Javascript package created by Immutable to allow simple interfacing with ImmutableX’s API. The primarily used packages are Link SDK and the ImmutableX Client.
@@ -35,7 +34,8 @@ import { ImmutableXClient, Link } from '@imtbl/imx-sdk';
 ```
 
 ## Setting the connection urls
-ImmutableX provides connection addresses for both the mainnet and testnet. Here we will default to the mainnet for the examples, but show the testnet connection strings as well.
+ImmutableX provides connection addresses for both the mainnet and testnet.
+Here we will default to the mainnet for the examples, but show the testnet connection strings as well.
 ```javascript
 const linkAddress = 'https://link.x.immutable.com';
 const apiAddress = 'https://api.x.immutable.com/v1';

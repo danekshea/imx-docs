@@ -2,8 +2,7 @@
 sidebar_position: 3
 title: "How to prepare your pitch"
 slug: "/learn/how-to-prepare-your-pitch"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -15,6 +14,7 @@ import ListAdmonition from '@site/src/components/ListAdmonition';
         <li> General tips for pitching </li>
      </ul>
 </ListAdmonition>
+
 
 ## Introduction
 
@@ -91,9 +91,9 @@ Finally, pitching is a performance, especially when you do it in person, in comp
 
 Some ways to think about this are as follows:
 
-- [Dialogue](https://www.youtube.com/watch?v=oFfHXJ8fAwg) - what makes the best Youtube ads great that makes you don't want to skip them?
-- [Performance](https://www.youtube.com/watch?v=XGirACdmiLM) - what makes stage presence matter that makes you glued to the person on stage?
-- [Put it all together](https://www.youtube.com/watch?v=-FOCpMAww28) - what makes the best TED talks great?
+- [Dialogue](https://www.youtube.com/watch?v=oFfHXJ8fAwg) - what makes the best Youtube ads great that makes you don't want to skip them? 
+- [Performance](https://www.youtube.com/watch?v=XGirACdmiLM) - what makes stage presence matter that makes you glued to the person on stage? 
+- [Put it all together](https://www.youtube.com/watch?v=-FOCpMAww28) - what makes the best TED talks great? 
 
 Other simple tips include:
 

@@ -4,8 +4,7 @@ title: 'Marketplaces'
 slug: '/marketplaces'
 excerpt: 'Manage buy and sell orders'
 sidebar_position: 4
-keywords:
-  - imx-traders
+keywords: [imx-traders]
 ---
 
 As an exchange platform, ImmutableX provides all the features needed to create a marketplace for the assets created and stored on the platform. Once listings are created from user accounts, it is often common to have a separate marketplace section to show all the current orders.

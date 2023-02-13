@@ -1,9 +1,7 @@
 ---
 title: "Mint assets"
 slug: "/how-to-mint-assets"
-keywords:
-  - imx-wallets
-  - imx-dx
+keywords: [imx-wallets, imx-dx]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -181,7 +179,7 @@ const createCollectionResponse = await client.createCollection(ethSigner, create
 
 ```ts
 const mintResponse = await client.mint({
-  "contract_address": "0xc6185055ea9891d5d9020c927ff65229baebdef2",
+  "contractAddress": "0xc6185055ea9891d5d9020c927ff65229baebdef2",
   // Specifying contract-wide royalty information
   "royalties": [
     {
@@ -193,7 +191,7 @@ const mintResponse = await client.mint({
   ],
   "users": [
     {
-      "user": "0xc3ec7590d5970867ebd17bbe8397500b6ae5f690",
+      "etherKey": "0xc3ec7590d5970867ebd17bbe8397500b6ae5f690",
       "tokens": [
         {
           // Specific NFT token
@@ -212,7 +210,7 @@ const mintResponse = await client.mint({
       ]
     },
     {
-      "user": "0xA91E927148548992f13163B98be47Cf4c8Cb3B16",
+      "etherKey": "0xA91E927148548992f13163B98be47Cf4c8Cb3B16",
       "tokens": [
         {
           // Specific NFT token

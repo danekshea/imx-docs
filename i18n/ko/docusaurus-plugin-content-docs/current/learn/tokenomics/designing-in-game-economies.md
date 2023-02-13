@@ -2,8 +2,7 @@
 sidebar_position: 3
 title: "Designing an in game economy"
 slug: "/learn//designing-in-game-economies"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -14,6 +13,7 @@ import ListAdmonition from '@site/src/components/ListAdmonition';
         <li>How design decisions can impact the economy</li>
     </ul>
 </ListAdmonition>
+
 
 ## **Economic openness**
 

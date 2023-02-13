@@ -3,8 +3,7 @@ id: "link-events"
 title: "Link Events"
 slug: "/link-events"
 sidebar_position: 14
-keywords:
-  - imx-wallets
+keywords: [imx-wallets]
 ---
 
 :::info
@@ -27,7 +26,7 @@ If this happens a Custom Event will be dispatched which will have the following 
 }
 ```
 
-The event detail types are defined in the `ImxLinkInfoEventType` enum.
+The event detail types are defined in the `ImxLinkInfoEventType` enum. 
 > Note that more of these event types may be added in future.
 
 ``` typescript

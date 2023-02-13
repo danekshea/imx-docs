@@ -1,8 +1,7 @@
 ---
 title: "Rate limits"
 slug: "/api-rate-limiting"
-keywords:
-  - imx-core
+keywords: [imx-core]
 sidebar_position: 3
 ---
 
@@ -29,7 +28,7 @@ curl -is 'https://api.x.immutable.com/v1/orders/1337' --header 'x-api-key: xxx'
 ```
 
 ## Best practices
-Here are some best practices to follow for a successful integration:
+Here are some best practices to follow for a successful integration: 
 - **Limit your clients** - Proactively limiting your outgoing call rate will prevent you from being externally rate-limited and overall encourage you to handle those cases in which you are limited more gracefully. Additionally, if you build your clients with this logic then you can also sub-divide your aggregate limit more granularly (as appropriate for your project) so that none of them consume too much quota. For example, you might choose to subdivide your total limit by country, region or other.
 - **Retry and back-off** - When you are rate-limited, retry your requests after waiting some time. Use an [exponential backoff](https://en.wikipedia.org/wiki/Exponential_backoff) to progressively increase this wait time.
 - **Avoid polling** - Polling our API (especially "short polling", in which you do not wait for a response) is an anti-pattern and will quickly consume your quota.

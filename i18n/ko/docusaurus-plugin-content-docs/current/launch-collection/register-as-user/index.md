@@ -1,11 +1,10 @@
 ---
 title: "1. Register as a user"
 slug: "/launch-collection/register-as-user"
-keywords:
-  - imx-dx
+keywords: [imx-dx]
 ---
 
-Registering as a user on ImmutableX means to generate an ImmutableX L2 wallet for an Ethereum L1 wallet so that you can transact on L2.
+Registering as a user on ImmutableX means to generate an ImmutableX L2 wallet for an Ethereum L1 wallet so that you can transact on L2. 
 
 Please read [here](../../guides/basic-guides/register-users/index.md) for more information on this process.
 

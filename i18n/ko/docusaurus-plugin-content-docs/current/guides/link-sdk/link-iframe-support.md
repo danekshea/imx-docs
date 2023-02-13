@@ -3,15 +3,14 @@ id: "link-iframe-support"
 title: "Link iFrame Support"
 slug: "/link-iframe-support"
 sidebar_position: 3
-keywords:
-  - imx-wallets
+keywords: [imx-wallets]
 ---
 
-## iframe 내부에서 링크 트리거하는 법
+## How to trigger link inside an iframe
 
-링크는 iframe 임베딩을 지원합니다.
+The link supports iframe embedding.
 
-링크를 구축할 때 간단히 추가적인 옵션 객체를 지원하십시오.
+Simply supply an additional options object when you construct Link:
 
 ```typescript
 import { Link } from '@imtbl/imx-sdk';
@@ -40,7 +39,8 @@ Link use browser's localStorage, which is unavailable when running inside an iFr
 
 ### Mobile experience
 
-As it currently stands, web3 support in mobile devices is hit-and-miss and the experience differs a lot among platforms. With that in mind and based on our tests, even if you decided to use Link as iFrame, we recommend keeping using Link as a pop-up at least when the end-user is navigating through a responsive/mobile device. You can do that simply by using the util `isMobile` shown in the code snippet below:
+As it currently stands, web3 support in mobile devices is hit-and-miss and the experience differs a lot among platforms.
+With that in mind and based on our tests, even if you decided to use Link as iFrame, we recommend keeping using Link as a pop-up at least when the end-user is navigating through a responsive/mobile device. You can do that simply by using the util `isMobile` shown in the code snippet below:
 
 ```typescript
 import { isMobile, Link } from '@imtbl/imx-sdk';

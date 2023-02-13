@@ -2,8 +2,7 @@
 sidebar_position: 2
 title: "Why do an NFT drop"
 slug: "/learn/why-do-an-nft-drop"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -43,7 +42,7 @@ NFT releases are a powerful user acquisition opportunity, especially in the earl
 
 ## Technical integration
 
-Minting and releasing NFTs are the simplest activities to execute on ImmutableX for new developers. By releasing NFTs, you are able to get familiar with ImmutableX technical interactions which de-risks future timelines and opens up opportunities to continue to develop the game and the blockchain elements in parallel.
+Minting and releasing NFTs are the simplest activities to execute on ImmutableX for new developers. By releasing NFTs, you are able to get familiar with ImmutableX technical interactions which de-risks future timelines and opens up opportunities to continue to develop the game and the blockchain elements in parallel. 
 
 ## Game loops
 

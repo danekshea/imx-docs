@@ -1,8 +1,7 @@
 ---
 title: "Deep dive into deposits and withdrawals"
 slug: "/deep-dive-deposits-withdrawals"
-keywords:
-  - imx-dx
+keywords: [imx-dx]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -28,10 +27,10 @@ Users may want to transfer assets between L1 and L2, depending on the layer on w
 Only ERC-721 assets **minted on ImmutableX L2** can be deposited and withdrawn on ImmutableX.
 :::
 
-| Token type                                            | Deposit | Withdrawal |
-| ----------------------------------------------------- | ------- | ---------- |
-| ERC-20 (fungible tokens, including ETH and IMX)       | ✅       | ✅          |
-| ERC-721 (non-fungible tokens) minted on ImmutableX L2 | ✅       | ✅          |
+| Token type | Deposit | Withdrawal |
+| --- | --- | --- |
+| ERC-20 (fungible tokens, including ETH and IMX) | ✅ | ✅ |
+| ERC-721 (non-fungible tokens) minted on ImmutableX L2 | ✅ | ✅ |
 
 ### Example use cases
 

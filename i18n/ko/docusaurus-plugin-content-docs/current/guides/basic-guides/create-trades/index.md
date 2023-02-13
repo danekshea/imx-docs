@@ -1,9 +1,7 @@
 ---
 title: "Creating trades"
 slug: "/how-to-create-trades"
-keywords:
-  - imx-traders
-  - imx-dx
+keywords: [imx-traders, imx-dx]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';

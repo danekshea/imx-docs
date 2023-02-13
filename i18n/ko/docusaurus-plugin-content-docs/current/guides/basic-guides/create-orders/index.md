@@ -1,9 +1,7 @@
 ---
 title: "Creating orders"
 slug: "/how-to-create-orders"
-keywords:
-  - imx-wallets
-  - imx-dx
+keywords: [imx-wallets, imx-dx]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';

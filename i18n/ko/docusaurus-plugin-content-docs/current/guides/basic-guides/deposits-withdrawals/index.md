@@ -1,9 +1,7 @@
 ---
 title: "Asset deposits and withdrawals"
 slug: "/how-to-enable-deposits-withdrawals"
-keywords:
-  - imx-wallets
-  - imx-dx
+keywords: [imx-wallets, imx-dx]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -340,15 +338,15 @@ fetch("https://api.sandbox.x.immutable.com/v1/signable-withdrawal-details", {
 
 Explanation:
 
-| Response param     | Description                                                                               | How is it used in the [createWithdrawal](https://docs.x.immutable.com/reference/#/operations/createWithdrawal) request?<br/>(See [Step 3](#3-withdraw-token)) |
-| ------------------ | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `amount`           | Amount of token to be withdrawn to L1                                                     | As `amount` in the request body                                                                                                                                     |
-| `asset_id`         | ID of the asset this user is withdrawing (applicable only to `ERC721` asset type)         | As `asset_id` in the request body                                                                                                                                   |
-| `nonce`            | Random number generated of this transaction to verify that specific values are not reused | As `nonce` in the request body                                                                                                                                      |
-| `payload_hash`     | Encoded payload hash                                                                      | Used to generate the `stark_signature` in the request body by using the Stark (L2) signer to sign the `payload_hash`.                                               |
-| `signable_message` | Message to sign with L1 wallet to verity withdrawal request                               | Used to generate the `x-imx-eth-signature` header by using the Ethereum (L1) signer to sign the `signable_message`                                                  |
-| `stark_key`        | Public stark key of the withdrawing user                                                  | As `stark_key` in the request body                                                                                                                                  |
-| `vault_id`         | The ID of the vault the asset belong to                                                   | As `vault_id` in the request body                                                                                                                                   |
+| Response param | Description | How is it used in the [createWithdrawal](https://docs.x.immutable.com/reference/#/operations/createWithdrawal) request?<br/>(See [Step 3](#3-withdraw-token)) |
+| --- | --- | --- |
+| `amount` | Amount of token to be withdrawn to L1 | As `amount` in the request body |
+| `asset_id` | ID of the asset this user is withdrawing (applicable only to `ERC721` asset type) | As `asset_id` in the request body |
+| `nonce` | Random number generated of this transaction to verify that specific values are not reused |  As `nonce` in the request body |
+| `payload_hash` | Encoded payload hash | Used to generate the `stark_signature` in the request body by using the Stark (L2) signer to sign the `payload_hash`. |
+| `signable_message` | Message to sign with L1 wallet to verity withdrawal request | Used to generate the `x-imx-eth-signature` header by using the Ethereum (L1) signer to sign the `signable_message` |
+| `stark_key` | Public stark key of the withdrawing user | As `stark_key` in the request body |
+| `vault_id` | The ID of the vault the asset belong to | As `vault_id` in the request body |
 
 #### 2. Generate signers
 Enabling users to withdraw assets requires a user's signature, so your application will need to create signers. See the guide on [how to generate signers](../generate-signers/index.md).

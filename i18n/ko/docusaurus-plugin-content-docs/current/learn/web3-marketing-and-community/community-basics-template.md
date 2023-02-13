@@ -2,8 +2,7 @@
 sidebar_position: 7
 title: "Community basics template"
 slug: "/learn/community-basics-template"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -13,6 +12,7 @@ import ListAdmonition from '@site/src/components/ListAdmonition';
         <li> A basic template that can be used to introduce high level community management principles to your project.</li>
     </ul>
 </ListAdmonition>
+
 
 ## **Template**
 
@@ -47,9 +47,9 @@ Example
 
 Here's an example template - feel free to adjust it to fit your project. For example, you may wish to have project updates on a weekly basis, or you may commit to updating about a specific item on the roadmap.
 
-| **Timeframe** | **Update Type**                    |
-| ------------- | ---------------------------------- |
-| Daily         | Minor project update, Twitter post |
-| Weekly        | Major project updates, Blog post   |
-| Monthly       | AMA                                |
-| Ad hoc        | Discord, Twitter                   |
+| **Timeframe** | **Update Type** |
+| --- | --- |
+| Daily | Minor project update, Twitter post |
+| Weekly | Major project updates, Blog post |
+| Monthly | AMA |
+| Ad hoc | Discord, Twitter |

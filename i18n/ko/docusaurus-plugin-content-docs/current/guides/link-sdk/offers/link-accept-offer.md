@@ -4,11 +4,7 @@ title: "Link.acceptOffer"
 slug: "/link-accept-offer"
 excerpt: "Link can now be used to accept an offer made on your asset"
 sidebar_position: 3
-keywords:
-  - trading
-  - orderbook
-  - offers
-  - buy-order
+keywords: [trading, orderbook, offers, buy-order]
 ---
 
 :::danger OFFERS IS IN BETA
@@ -48,9 +44,9 @@ Input parameters:
   }[] // optionally specify seller marketplace fees in array
 }
 ```
-![Accept an offer](/img/link-offers/accept-offer-prompt.png "Accept an offer")
+![Accept an offer](/img/link-offers/accept-offer-prompt.png 'Accept an offer')
 
-![Accept an offer confirmation](/img/link-offers/accept-offer-success.png "Accept an offer confirmation")
+![Accept an offer confirmation](/img/link-offers/accept-offer-success.png 'Accept an offer confirmation')
 
 ## Errors
 

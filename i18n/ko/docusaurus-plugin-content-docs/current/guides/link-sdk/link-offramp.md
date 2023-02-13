@@ -3,8 +3,7 @@ id: "link-off-ramp"
 title: "Link.offramp"
 slug: "/link-off-ramp"
 sidebar_position: 12
-keywords:
-  - imx-wallets
+keywords: [imx-wallets]
 ---
 
 :::danger Off-ramp requires authenticated user
@@ -27,7 +26,7 @@ await link.offramp({})
 
 This displays the Link UI with a screen when a user need to choose currency and anter amount:
 
-![Off-ramp without parameters](/img/link-sdk-offramp/offramp-without-params.png "Off-ramp without parameters")
+![Off-ramp without parameters](/img/link-sdk-offramp/offramp-without-params.png 'Off-ramp without parameters')
 
 To initialize the off-ramp process for a specific currency:
 ```typescript
@@ -36,7 +35,7 @@ await link.offramp({ cryptoCurrencies: ['ETH'] })
 
 This displays the Link UI with a screen when a user can only enter amount with already populated currency:
 
-![Off-ramp with specific currency](/img/link-sdk-offramp/offramp-with-currency.png "Off-ramp with specific currency")
+![Off-ramp with specific currency](/img/link-sdk-offramp/offramp-with-currency.png 'Off-ramp with specific currency')
 
 To initialize the off-ramp process with defined currency and amount:
 
@@ -45,7 +44,7 @@ await link.offramp({ cryptoCurrencies: ['ETH'], amount: '0.01' })
 ```
 This displays the Link UI with loaded MoonPay widget:
 
-![Off-ramp with specific currency and amount](/img/link-sdk-offramp/offramp-with-currency-and-amount.png "Off-ramp with specific currency and amount")
+![Off-ramp with specific currency and amount](/img/link-sdk-offramp/offramp-with-currency-and-amount.png 'Off-ramp with specific currency and amount')
 
 ### Off-ramp with Layerswap provider
 
@@ -57,7 +56,7 @@ await link.offramp({ provider: 'layerswap' })
 
 This displays the Link UI with loaded Layerswap widget:
 
-![Off-ramp with specified provider](/img/link-sdk-offramp/offramp-layerswap.png "Off-ramp with specified provider")
+![Off-ramp with specified provider](/img/link-sdk-offramp/offramp-layerswap.png 'Off-ramp with specified provider')
 
 ## Errors
 

@@ -1,8 +1,7 @@
 ---
 title: "Asset transfers"
 slug: "/how-to-enable-asset-transfers"
-keywords:
-  - imx-wallets
+keywords: [imx-wallets]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -37,11 +36,11 @@ The transfer request requires:
 * ERC20 - `amount`, `tokenAddress`
 * ERC721 - `tokenAddress`, `tokenId`
 
-| Param          | Description                                                                         |
-| -------------- | ----------------------------------------------------------------------------------- |
-| `amount`       | The amount of the token required. If token is ETH, the amount is denominated in wei |
-| `tokenAddress` | The address of the smart contract from which the token originates                   |
-| `tokenId`      | The token ID of a non-fungible token (only for ERC721 token types)                  |
+| Param | Description |
+| --- | --- |
+| `amount` | The amount of the token required. If token is ETH, the amount is denominated in wei |
+| `tokenAddress` | The address of the smart contract from which the token originates |
+| `tokenId` | The token ID of a non-fungible token (only for ERC721 token types) |
 
 <Tabs>
   <TabItem value="typescript" label="Typescript Core SDK">

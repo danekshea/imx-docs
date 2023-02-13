@@ -1,8 +1,7 @@
 ---
 title: "Basic guides"
 slug: "/basic-guides"
-keywords:
-  - imx-dx
+keywords: [imx-dx]
 ---
 
 import Tabs from '@theme/Tabs';

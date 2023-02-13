@@ -2,8 +2,7 @@
 sidebar_position: 2
 title: "Understanding launch mechanics"
 slug: "/learn/understanding-launch-mechanics"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -73,11 +72,11 @@ When designing your launch, pricing is likely to be top of mind. These days, cry
 
 There are primarily three strategies we can compare when considering pricing: Fixed price, Auctions and Raffles.
 
-|             | Description                                                     | Pros                      | Cons                                    |
-| ----------- | --------------------------------------------------------------- | ------------------------- | --------------------------------------- |
-| Fixed price | Price is set by you ahead of time                               | <ul><li>Simplest execution</li><li>Can engineer a sellout and build buying habits by slightly lower prices</li><li>Transparency for buyers and predictability for the project</li></ul> | <ul><li>May leave money on the table. Vulnerable to botting</li></ul>               |
-| Auctions    | A Dutch or English auction where customers bid to set the price | <ul><li>Finds market price, no money on the table</li></ul> | <ul><li>Complex to execute</li><li>Unpredictable revenue</li><li>No money left on the table for buyers to benefit - stalls secondary trading</li></ul> |    | ---     |
-| Raffles     | A customer buys a chance to obtain an asset                     | <ul><li>Increased potential revenue by raffle either whitelist or the asset itself</li></ul> | <ul><li>Complex to execute</li><li>Unpredictable revenue, vulnerable to under pricing if few tickets sold</li><li>Risks negative sentiment for those missing out and can lead to distrust</li></ul> |        | --- |
+|  | Description    | Pros | Cons | 
+| ------| ----------- | ----------- | ---|
+| Fixed price | Price is set by you ahead of time    | <ul><li>Simplest execution</li><li>Can engineer a sellout and build buying habits by slightly lower prices</li><li>Transparency for buyers and predictability for the project</li></ul> | <ul><li>May leave money on the table. Vulnerable to botting</li></ul> | 
+| Auctions | A Dutch or English auction where customers bid to set the price  | <ul><li>Finds market price, no money on the table</li></ul>   | <ul><li>Complex to execute</li><li>Unpredictable revenue</li><li>No money left on the table for buyers to benefit - stalls secondary trading</li></ul> |    | --- |
+| Raffles | A customer buys a chance to obtain an asset  | <ul><li>Increased potential revenue by raffle either whitelist or the asset itself</li></ul> | <ul><li>Complex to execute</li><li>Unpredictable revenue, vulnerable to under pricing if few tickets sold</li><li>Risks negative sentiment for those missing out and can lead to distrust</li></ul> |        | --- |
 
 
 ## Price value

@@ -2,8 +2,7 @@
 sidebar_position: 2
 title: "Customer segmentation"
 slug: "/learn/customer-segmentation"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -15,6 +14,8 @@ import ListAdmonition from '@site/src/components/ListAdmonition';
         <li>A sample framework on segmentation</li>
     </ul>
 </ListAdmonition>
+
+
 
 ## Introduction
 
@@ -44,13 +45,12 @@ This template can be used as a preliminary exercise to segment your customers an
 2. Fill in the other questions for each of your segments
 3. The tactics you focus on will be the ones that best serve your target segments
 
-| **Segment**           | **Person**       | **Motivation**                          | **Priorities**            | **Tactics**               |
-| --------------------- | ---------------- | --------------------------------------- | ------------------------- | ------------------------- |
-| **Mainstream Player** | Mainstream Gamer | I am looking for a fun new game to play | <ul><li>Believe that the game will be fun to play with a strong concept and narrative</li><li>Feel comfortable making the transition to web3</li></ul> | <ul><li>Develop a playable demo with positive reviews</li><li>Target prominent Web2 twitch streamers</li><li>Reddit AMA </li></ul> |
-| **Degen Player**      |                  |                                         |                           |                           |
-
-
-**Mainstream Participant** | | | | **Degen Participant** | | | | 
+| **Segment** | **Person** | **Motivation** | **Priorities** | **Tactics** |
+| --- | --- | --- | --- | --- |
+| **Mainstream Player** | Mainstream Gamer | I am looking for a fun new game to play | <ul><li>Believe that the game will be fun to play with a strong concept and narrative</li><li>Feel comfortable making the transition to web3</li></ul> | <ul><li>Develop a playable demo with positive reviews</li><li>Target prominent Web2 twitch streamers</li><li>Reddit AMA </li></ul>
+  | **Degen Player** | | | | | 
+   **Mainstream Participant** | | | | 
+    **Degen Participant** | | | | 
 
 
  

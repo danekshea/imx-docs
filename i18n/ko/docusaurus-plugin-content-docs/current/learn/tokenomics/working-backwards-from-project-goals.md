@@ -2,8 +2,7 @@
 sidebar_position: 4
 title: "Working backwards from project goals"
 slug: "/learn/working-backwards-from-project-goals"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -13,6 +12,7 @@ import ListAdmonition from '@site/src/components/ListAdmonition';
         <li>A template that can be used as a rough guideline to determine your approach to tokenization</li>
     </ul>
 </ListAdmonition>
+
 
 **Prerequisites**
 

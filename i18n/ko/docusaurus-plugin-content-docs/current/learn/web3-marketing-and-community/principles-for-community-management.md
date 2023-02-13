@@ -2,8 +2,7 @@
 sidebar_position: 3
 title: "Principles for community management"
 slug: "/learn/principles-for-community-management"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';

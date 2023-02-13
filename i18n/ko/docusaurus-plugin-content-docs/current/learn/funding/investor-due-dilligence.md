@@ -2,10 +2,8 @@
 sidebar_position: 3
 title: "Investor due dilligence"
 slug: "/learn/investor-due-dilligence"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
-
 import ListAdmonition from '@site/src/components/ListAdmonition';
 
 <ListAdmonition>

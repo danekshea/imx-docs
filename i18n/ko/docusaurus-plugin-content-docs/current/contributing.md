@@ -1,8 +1,7 @@
 ---
 title: "Contributing to these docs"
 slug: "/contributing"
-keywords:
-  - imx-dx
+keywords: [imx-dx]
 ---
 
 # Contributing to ImmutableX Documentation 🙌
@@ -13,9 +12,9 @@ keywords:
 
 ## Why Contribute?
 
-Getting started with web3 can be daunting even for the most experienced developers. There are so many new paradigms and ways of working to learn. Great documentation makes the learning process a breeze and enables developers to achieve their goals efficiently.
+Getting started with web3 can be daunting even for the most experienced developers. There are so many new paradigms and ways of working to learn. Great documentation makes the learning process a breeze and enables developers to achieve their goals efficiently. 
 
-If you've been building on web3 for a while, you might have noticed that reading a project's documentation end to end might not make you productive on that platform immediately. You might run into an issue that for which a solution might not be immediately forthcoming. There may be others going through the same issue, but even the highest levels of google-fu might not get you a solution. [XKCD 979](https://xkcd.com/979/) represents this feeling accurately.  However, when you persevere and figure out the solution to your problem, the feeling of relief and pride is unmatched.
+If you've been building on web3 for a while, you might have noticed that reading a project's documentation end to end might not make you productive on that platform immediately. You might run into an issue that for which a solution might not be immediately forthcoming. There may be others going through the same issue, but even the highest levels of google-fu might not get you a solution. [XKCD 979](https://xkcd.com/979/) represents this feeling accurately.  However, when you persevere and figure out the solution to your problem, the feeling of relief and pride is unmatched. 
 
 We want to enable builders like you to contribute your knowledge to others who might be going through a similar learning journey and have a massive impact on the development experience of hundreds of others and get recognized for it. We'll also be opening up rewards for significant contributions in the future. Watch this space for more details!
 
@@ -38,7 +37,7 @@ We have a generic list of topics for you to get started with a contribution. Thi
 * **Fix existing issues**
   * Go to the [issues page on Github](https://github.com/immutable/imx-docs/issues) and pick up an issue to fix
 
-If your contribution is a massive effort or if you're doing a major restructure or revamp of the docs, please [open an issue on GitHub](https://github.com/immutable/imx-docs/issues/new) and discuss your idea with the maintainers *before* beginning your work. Doing so ensures that you will have all the context required and have maximum impact while reducing rework.
+If your contribution is a massive effort or if you're doing a major restructure or revamp of the docs, please [open an issue on GitHub](https://github.com/immutable/imx-docs/issues/new) and discuss your idea with the maintainers *before* beginning your work. Doing so ensures that you will have all the context required and have maximum impact while reducing rework. 
 
 ## Contribute ImmutableX Docs:
 
@@ -85,7 +84,7 @@ git remote add upstream git@github.com:immutable/imx-docs.git
 
 > For further help, see [GitHub Docs: Configuring a remote for a fork](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork).
 
-#### 5. If you have already cloned the imx-docs repository, ensure that your fork is up to date with with the latest upstream changes.
+#### 5. If you have already cloned the imx-docs repository, ensure that your fork is up to date with with the latest upstream changes. 
 
 > For further help, refer to [GitHub Docs: Syncing a fork](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork).
 

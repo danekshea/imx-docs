@@ -3,8 +3,7 @@ id: "setup-primary-sale-card-checkout"
 title: "Set up required endpoints"
 slug: "/setup-primary-sale-card-checkout"
 sidebar_position: 1
-keywords:
-  - imx-payments
+keywords: [imx-payments]
 ---
 
 import Tabs from '@theme/Tabs';
@@ -14,7 +13,7 @@ import ListAdmonition from '@site/src/components/ListAdmonition';
 # Set up required endpoints
 
 :::caution Feature for managed partners only
-This is a feature intended for managed partners. If you are not a managed partner and would like to become one, please reach out to us on our [#dev-discussion channel](https://discord.gg/7URHuYFCN4) on Discord.
+This is a feature intended for managed partners. If you are not a managed partner and would like to become one, please reach out to us on our [#dev-discussion channel](https://discord.gg/7URHuYFCN4) on Discord. 
 
 If you are a managed partner, your partner success manager needs to set up a commercial partnership with MoonPay for you. Please reach out to them to facilitate this.
 :::
@@ -33,7 +32,7 @@ In order to [implement](./implement.md) this NFT primary sale card checkout feat
    </ol>
 </ListAdmonition>
 
-### 1. Create endpoints
+### 1. Create endpoints 
 
 You are required to provide the following endpoints:
 
@@ -45,27 +44,27 @@ You are required to provide the following endpoints:
 #### Headers required:
 
 | Name                                                                                                           | Description                                                  |
-| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+|----------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | `IMX-Signature` - [How to validate this](#3-how-to-validate-the-imx-signature)                                 | Signature to confirm that the request was made by ImmutableX |
 | `IMX-Timestamp` - [How to generate this](../../../key-concepts/deep-dive-api-concepts.md#imx-timestamp-string) | Timestamp header to validate `IMX-Signature`                 |
 
 #### Request body:
 
-| Property                  | Type          | Description                                                                                |
-| ------------------------- | ------------- | ------------------------------------------------------------------------------------------ |
-| `offer_id`                | String        | The ID of the offer provided for the NFT to be minted                                      |
-| `contract_address`        | String        | Smart contract address of the NFT                                                          |
-| `user`                    | String        | User that the NFT will be minted for (will become the NFT's owner)                         |
-| `wallet_address`          | String        | Wallet address that will receive the payment, in crypto (from MoonPay), for the minted NFT |
+| Property | Type | Description |
+| --- | --- | --- |
+| `offer_id` | String | The ID of the offer provided for the NFT to be minted |
+| `contract_address` | String | Smart contract address of the NFT |
+| `user` | String | User that the NFT will be minted for (will become the NFT's owner) |
+| `wallet_address` | String | Wallet address that will receive the payment, in crypto (from MoonPay), for the minted NFT |
 | `external_transaction_id` | String (UUID) | Unique ImmutableX transaction ID that can be used to get information about the transaction |
 
 #### Response:
 
-| Property           | Type    | Descrtiption                                                                          |
-| ------------------ | ------- | ------------------------------------------------------------------------------------- |
-| `contract_address` | String  | Smart contract address of the NFT                                                     |
-| `token_id`         | String  | Token ID (as specified by the NFT smart contract) of the minted asset                 |
-| `tx_id`            | Integer | Minting transaction ID - see [mintTokens](/reference#/operations/mintTokens) response |
+| Property | Type | Descrtiption |
+| --- | --- | --- |
+| `contract_address` | String | Smart contract address of the NFT |
+| `token_id` | String | Token ID (as specified by the NFT smart contract) of the minted asset |
+| `tx_id` | Integer | Minting transaction ID - see [mintTokens](/reference#/operations/mintTokens) response |
 
 #### Example:
 
@@ -110,16 +109,16 @@ This endpoint will be used to get information about the asset to be minted using
 
 #### Response:
 
-| Property              | Type   | Description                                                                                |
-| --------------------- | ------ | ------------------------------------------------------------------------------------------ |
-| `offer_id`            | String | The ID of the offer provided for the NFT to be minted                                      |
-| `contract_address`    | String | Smart contract address of the NFT                                                          |
-| `name`                | String | Token name to be rendered at checkout                                                      |
-| `collection`          | String | Collection name to be rendered at checkout                                                 |
-| `image_url`           | String | URL where the image to be displayed for the minted asset is hosted                         |
-| `price_currency_code` | String | Currency of the amount to be paid. Choose from: `"ETH"` or `"USDC"`                        |
-| `price`               | String | Amount of the currency required to mint the token                                          |
-| `seller_address`      | String | Wallet address that will receive the payment, in crypto (from MoonPay), for the minted NFT |
+| Property | Type | Description |
+| --- | --- | --- |
+| `offer_id` | String | The ID of the offer provided for the NFT to be minted |
+| `contract_address` | String | Smart contract address of the NFT |
+| `name` | String | Token name to be rendered at checkout |
+| `collection` | String | Collection name to be rendered at checkout |
+| `image_url` | String | URL where the image to be displayed for the minted asset is hosted |
+| `price_currency_code` | String | Currency of the amount to be paid. Choose from: `"ETH"` or `"USDC"` |
+| `price` | String | Amount of the currency required to mint the token |
+| `seller_address` | String |  Wallet address that will receive the payment, in crypto (from MoonPay), for the minted NFT |
 
 #### Example:
 
@@ -173,7 +172,7 @@ const payload = JSON.stringify({
     "wallet_address": '0x11a...',
     "external_transaction_id": "00000000-0000-0000-aaaa-0000a000aa00",
     });
-
+    
 const signed_payload = imx_timestamp_header_value + "." + payload;
 
 ```
@@ -190,8 +189,8 @@ const generatedSignature = crypto.HmacSHA256(signed_payload, webhookKey).toStrin
 
 ### Main flow diagram:
 
-![NFT Checkout Primary Main flow](/img/tutorial/nft-checkout-primary-main-flow.png "NFT Checkout Primary by fiat main flow")
+![NFT Checkout Primary Main flow](/img/tutorial/nft-checkout-primary-main-flow.png 'NFT Checkout Primary by fiat main flow')
 
 ### Technical flow diagram:
 
-![NFT Checkout Primary By Fiat Technical flow](/img/tutorial/nft-checkout-primary-technical-flow.png "NFT Checkout Primary by fiat technical flow")
+![NFT Checkout Primary By Fiat Technical flow](/img/tutorial/nft-checkout-primary-technical-flow.png 'NFT Checkout Primary by fiat technical flow')

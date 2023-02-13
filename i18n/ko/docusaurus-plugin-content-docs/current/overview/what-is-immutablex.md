@@ -2,8 +2,7 @@
 title: "What is it?"
 slug: "/what-is-immutablex"
 sidebar_position: 1
-keywords:
-  - imx-dx
+keywords: [imx-dx]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -24,15 +23,15 @@ ImmutableX is a platform that provides:
 </ListAdmonition>
 
 ### What can you build on it?
-ImmutableX is aimed at enabling developers to build fast, scalable and secure applications for NFTs and blockchain games.
+ImmutableX is aimed at enabling developers to build fast, scalable and secure applications for NFTs and blockchain games. 
 
 **Examples:**
 
-| Application                                                                     | Functionality provided by ImmutableX |
-| ------------------------------------------------------------------------------- | ------------------------------------ |
-| Games offering sophisticated economies through true ownership of in-game assets | <ul><li>Free minting of game assets</li><li>Fast and cheap in-game transactions</li><li>Self-custodial wallets so that users truly own their in-game items</li><li>Global orderbook so in-game items can be exchanged on the open market</li></ul>            |
-| Token and asset trading platforms                                               | <ul><li>Fast, cheap and secure trades between users</li><li>Global orderbook enabling maximum liquidity</li></ul>            |
-| Blockchain transaction analysis tools                                           | <ul><li>Easily accessible data on past transactions, trades and other user behaviors via APIs</li></ul>            |
+| Application | Functionality provided by ImmutableX |
+| --- | --- |
+| Games offering sophisticated economies through true ownership of in-game assets | <ul><li>Free minting of game assets</li><li>Fast and cheap in-game transactions</li><li>Self-custodial wallets so that users truly own their in-game items</li><li>Global orderbook so in-game items can be exchanged on the open market</li></ul> |
+| Token and asset trading platforms | <ul><li>Fast, cheap and secure trades between users</li><li>Global orderbook enabling maximum liquidity</li></ul> |
+| Blockchain transaction analysis tools | <ul><li>Easily accessible data on past transactions, trades and other user behaviors via APIs</li></ul> |
 
 #### [Read more information about what you can build >](../overview/what-can-you-build.md)
 

@@ -1,8 +1,7 @@
 ---
 title: "Anatomy of a smart contract"
 slug: "/anatomy-smart-contract"
-keywords:
-  - imx-dx
+keywords: [imx-dx]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -221,9 +220,9 @@ Currently, L2 minting of fungible tokens are not supported by ImmutableX. To tra
 ## Non-fungible tokens
 ### Use cases
 * **Ownership:** Demonstrate authenticity and ownership of assets (artwork, fashion, licenses, certificates, collectibles).
-* **Gaming:** In game assets can be tokenised enabling players to own their assets and exchange them with others.
-* **Recurring revenue:** Capture royalties from every transaction after the initial sale. This benefits all creators including: artists, designers, musicians, developers.
-* **Customer insight:** Access to transaction data of NFT owners within apps and across platforms.
+* **Gaming:** In game assets can be tokenised enabling players to own their assets and exchange them with others. 
+* **Recurring revenue:** Capture royalties from every transaction after the initial sale. This benefits all creators including: artists, designers, musicians, developers. 
+* **Customer insight:** Access to transaction data of NFT owners within apps and across platforms. 
 * **Funding source:** Increase the scale of investments by enabling fans to coinvest in their favourite artists and projects. NFTs can also be leveraged to reward these users in the future.
 * **New product lines:** Create and sell merchandise which can give access to unique and personalised experiences eg tickets for events, backstage passes.
 ### Minting on ImmutableX

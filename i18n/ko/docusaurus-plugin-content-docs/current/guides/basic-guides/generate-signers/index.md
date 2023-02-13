@@ -1,9 +1,7 @@
 ---
 title: "Generate signers"
 slug: "/how-to-generate-signers"
-keywords:
-  - imx-wallets
-  - imx-dx
+keywords: [imx-wallets, imx-dx]
 ---
 
 import Tabs from '@theme/Tabs';
@@ -243,10 +241,10 @@ import {
       Will switch the chain based on this configured chainID when connecting to the wallet.(Optional)
       Following the table below to get the chainID and name mapping. 
       Consult https://chainlist.org/ for more.
-      ChainId   | Network
+      ChainId	| Network
       --- --- | --- --- 
-      1       | Ethereum Main Network (Mainnet)
-      5       | Goerli Test Network
+      1	      | Ethereum Main Network (Mainnet)
+      5	      | Goerli Test Network
     */
     chainID: 5,
   });
@@ -274,7 +272,7 @@ walletSdkEvents.on(
     { const walletConnection = updatedWalletConnection; },
 );
 ```
-:::  
+:::
   </TabItem>
   <TabItem value="android" label="Wallet SDK Android">
 

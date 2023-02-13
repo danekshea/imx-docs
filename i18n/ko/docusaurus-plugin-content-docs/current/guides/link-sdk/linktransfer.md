@@ -2,10 +2,9 @@
 id: "linktransfer"
 title: "Link.transfer"
 slug: "/linktransfer"
-excerpt: "이제 링크를 다중 토큰 전송을 포함하는 플로우 개시에 사용할 수 있습니다."
+excerpt: "Link can now be used to kick off flows containing multiple token transfers"
 sidebar_position: 1
-keywords:
-  - imx-wallets
+keywords: [imx-wallets]
 ---
 
 :::caution Registration is required for Receiver Wallet
@@ -14,11 +13,11 @@ keywords:
 To register the wallet, simply do `Connect Wallet` in the ImmutableX Marketplace and follow through all the steps until the wallet is fully connected to ImmutableX Marketplace
 :::
 
-:::note 링크 레퍼런스 도구
-**[링크 레퍼런스 도구](https://tools.immutable.com/link-reference/)**를 확인해 `Link` 메서드가 어떻게 어떤 코드도 작성하지 않고 작동하는지 알아보십시오.
+:::note Link reference tool
+Check out our **[Link reference tool](https://tools.immutable.com/link-reference/)** to understand how `Link` methods work without having to write any code.
 :::
 
-`1.0.0` 버전부터 `@imtbl/imx-sdk`는 한 번의 여러 토큰을 전송하는 것을 지원합니다. 새로운 전송 플로우를 개시하려면, 그렇게 링크를 호출해야 합니다.
+As of `1.0.0`, the `@imtbl/imx-sdk` supports transferring multiple tokens at once. To begin a new transfer flow, link should be called like so:
 
 ```typescript
 // eg: here is a sample link.transfer call:
@@ -38,7 +37,7 @@ const transferResponsePayload: TransferV2ResultsCodec = await link.transfer([
 ])
 ```
 
-이렇게 변경할 수 있도록 `link.transfer` SDK 메서드는 다음과 같은 인터페이스 & 유형 변경을 가지고 있습니다.
+To make this change possible, the `link.transfer` SDK method has had the following interface & type changes:
 
 ```typescript
 // The below interfaces have not changed, they're just supplied here for context ...
@@ -90,9 +89,9 @@ export const FlatTokenWithAmountAndToAddressCodec = t.intersection([
 const TransferV2ParamsCodec = t.array(FlatTokenWithAmountAndToAddressCodec)
 ```
 
-구 `link.transfer` 메서드의 프라미스 응답 서명은 `void`입니다
+The promise response signature from the old `link.transfer` method is `void`
 
-투명성을 제고하고 어떤 전송이 실패하고 어떤 전송이 성공했는지를 보여주기 위해, 새로운 `link.transfer` 메서드는 트랜잭션 상태 리포트와 함께 귀결됩니다.
+To better allow transparency and show which transfers failed and which transfers passed, the new `link.transfer` method resolves with a transaction status report:
 
 ```typescript
 // the old interface:
@@ -149,6 +148,6 @@ const TransferV2ResultsCodec = t.interface({
 }
 ```
 
-## 오류
+## Errors
 
-오류 응답은 [여기](./link-errors.md#transfer)를 확인하십시오.
+See error responses [here](./link-errors.md#transfer).

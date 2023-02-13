@@ -1,8 +1,7 @@
 ---
 title: "Deep dive into metadata"
 slug: "/deep-dive-metadata"
-keywords:
-  - imx-dx
+keywords: [imx-dx]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -76,9 +75,9 @@ Since an asset's traits can have a big impact on its utility or value, a major c
 
 There are two main ways that NFT collections reference metadata:
 
-| Reference method                            | Description                                                      | Immutable?                                                                                                                        | Example                                                                                                                                                                                                                                       |
-| ------------------------------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **URL**                                     | The metadata JSON is hosted at an endpoint                       | No - the data at the endpoint can be changed at anytime by the owner                                                              | Friendship Bracelets collection ([token ID 1](https://opensea.io/assets/ethereum/0x942bc2d3e7a589fe5bd4a5c6ef9727dfd82f5c8a/24234)) - [metadata URL](https://token.artblocks.io/0x942bc2d3e7a589fe5bd4a5c6ef9727dfd82f5c8a/1)                 |
+| Reference method | Description | Immutable? | Example |
+| --- | --- | --- | --- |
+| **URL** | The metadata JSON is hosted at an endpoint | No - the data at the endpoint can be changed at anytime by the owner | Friendship Bracelets collection ([token ID 1](https://opensea.io/assets/ethereum/0x942bc2d3e7a589fe5bd4a5c6ef9727dfd82f5c8a/24234)) - [metadata URL](https://token.artblocks.io/0x942bc2d3e7a589fe5bd4a5c6ef9727dfd82f5c8a/1) |
 | **Content identifier (CID) stored on IPFS** | See [below](#how-do-cids-on-ipfs-inteplanetary-file-system-work) | Yes - because the hash is directly generated from specific content. The content cannot be changed without the hash also changing. | Bored Ape Yacht Club collection ([token ID 1296](https://opensea.io/assets/ethereum/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/1296)) - [metadata URL](https://gateway.pinata.cloud/ipfs/QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/1296) |
 
 ### How do CIDs on [IPFS (inteplanetary file system)](#what-is-ipfs) work?
@@ -96,10 +95,10 @@ The most common way that NFT collection creators ensure the immutability of an a
 
 The [NFT metadata reference](#ways-that-nft-metadata-can-be-referenced) can be stored either **on-chain** or **off-chain**:
 
-| Storage method | Description                                                                                                                                                    | Immutable?                                                                          | Examples                                                                                                                                                                                                                                                                                               |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **On-chain**   | The metadata is stored on the blockchain, typically as a value in a smart contract                                                                             | Yes - in the sense that the value stored on the blockchain cannot be changed        | [The value stored in the `tokenURI()` of an L1 smart contract](#in-the-l1-smart-contract)<br/><br/>[The `blueprint` string that is assigned during the minting of an L1 token when its corresponding L2 token is withdrawn](#providing-a-blueprint-string-when-token-is-minted-on-l2)      |
-| **Off-chain**  | The metadata is stored in a database, typically by the application, game or marketplace that is using the metadata ([Why?](#why-is-metadata-stored-off-chain)) | No - the database owner has full control over what values are stored and referenced | [The `metadata_api_url` provided when a collection is created on ImmutableX](#providing-a-metadata_api_url)<br/><br/>[The `blueprint` string that is provided when a token is minted on L2 but has not yet been withdrawn to L1](#providing-a-blueprint-string-when-token-is-minted-on-l2) |
+| Storage method | Description | Immutable? | Examples |
+| --- | --- | --- | --- |
+| **On-chain** | The metadata is stored on the blockchain, typically as a value in a smart contract | Yes - in the sense that the value stored on the blockchain cannot be changed | [The value stored in the `tokenURI()` of an L1 smart contract](#in-the-l1-smart-contract)<br/><br/>[The `blueprint` string that is assigned during the minting of an L1 token when its corresponding L2 token is withdrawn](#providing-a-blueprint-string-when-token-is-minted-on-l2) |
+| **Off-chain** | The metadata is stored in a database, typically by the application, game or marketplace that is using the metadata ([Why?](#why-is-metadata-stored-off-chain)) | No - the database owner has full control over what values are stored and referenced | [The `metadata_api_url` provided when a collection is created on ImmutableX](#providing-a-metadata_api_url)<br/><br/>[The `blueprint` string that is provided when a token is minted on L2 but has not yet been withdrawn to L1](#providing-a-blueprint-string-when-token-is-minted-on-l2) |
 
 ### _On L1:_
 
@@ -124,22 +123,22 @@ There are two ways to store metadata about tokens on ImmutableX:
 
 ***Comparison:***
 
-| Storage method                                                                                                        | Stored on-chain or off-chain?                                                                                   | What happens when the token is withdrawn to L1 |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| [Providing a `metadata_api_url`](#providing-a-metadata_api_url)                                                       | Off-chain - stored on ImmutableX and accessible via API endpoints                                               | That URL is not specified on-chain (L1)        |
-| [Providing a `blueprint` string when token is minted on L2](#providing-a-blueprint-string-when-token-is-minted-on-l2) | Both - off-chain on ImmutableX until the token is withdrawn to L1, then that value is written to the blockchain | The value is written to the L1 blockchain      |
+| Storage method | Stored on-chain or off-chain? | What happens when the token is withdrawn to L1 |
+| --- | --- | --- |
+| [Providing a `metadata_api_url`](#providing-a-metadata_api_url) | Off-chain - stored on ImmutableX and accessible via API endpoints | That URL is not specified on-chain (L1) |
+| [Providing a `blueprint` string when token is minted on L2](#providing-a-blueprint-string-when-token-is-minted-on-l2) | Both - off-chain on ImmutableX until the token is withdrawn to L1, then that value is written to the blockchain | The value is written to the L1 blockchain | 
 
 #### Providing a `metadata_api_url`
 
-After a user has uploaded their off chain metadata to a provider, they will need to provide ImmutableX with an API endpoint for us to retrieve the metadata. This is the value for `metadata_api_url` when [registering a collection](../launch-collection/register-collection/index.mdx). This endpoint must be accessible via HTTPs and need to return JSON. The IPFS gateway in the previous section is an example of this:
+After a user has uploaded their off chain metadata to a provider, they will need to provide ImmutableX with an API endpoint for us to retrieve the metadata. This is the value for `metadata_api_url` when [registering a collection](../launch-collection/register-collection/index.mdx). This endpoint must be accessible via HTTPs and need to return JSON. The IPFS gateway in the previous section is an example of this: 
 
 ```json 
 https://bafybeiaujofuzawix6cgwawua6rkil2j4gurhp3jzwux7gdf5iwx4onmy4.ipfs.nftstorage.link
 ```
-Our metadata crawler will access `<metadata_api_url>/<token_id>` at the time of minting a new token. It appends `/<token_id>` to the `metadata_api_url`, for example: https://metadata_api_url.com/1
+Our metadata crawler will access ```<metadata_api_url>/<token_id>``` at the time of minting a new token. It appends ```/<token_id>``` to the ```metadata_api_url```, for example: https://metadata_api_url.com/1 
 
 Tips
-* Ensure your endpoint returns valid JSON for each tokenID
+* Ensure your endpoint returns valid JSON for each tokenID 
 * Use a dedicated gateway if using IPFS
 
 :::info How can I modify off chain data?
@@ -148,9 +147,9 @@ Users can modify off chain data via an [asset metadata refresh](../guides/advanc
 
 #### Providing a `blueprint` string when token is minted on L2
 
-The **blueprint** is a required field defined at the time of minting on ImmutableX for each NFT. This represents the on-chain immutable metadata of the NFT that will be written to the blockchain when it is withdrawn from ImmutableX L2 to L1.
+The **blueprint** is a required field defined at the time of minting on ImmutableX for each NFT. This represents the on-chain immutable metadata of the NFT that will be written to the blockchain when it is withdrawn from ImmutableX L2 to L1. 
 
-The blueprint can be a string of any format - examples include values like attack, an identifier, or an IPFS hash. This is passed to the `mintFor()` function in your smart contract where you could add some logic to decode it on-chain, or just save it unchanged. Check out our [minting assets guide](../guides/basic-guides/mint-assets/index.md) to see an example of this.
+The blueprint can be a string of any format - examples include values like attack, an identifier, or an IPFS hash. This is passed to the `mintFor()` function in your smart contract where you could add some logic to decode it on-chain, or just save it unchanged. Check out our [minting assets guide](../guides/basic-guides/mint-assets/index.md) to see an example of this. 
 
 ### Why is metadata stored off-chain?
 
@@ -187,7 +186,7 @@ This can be used by collections that want to provide token owners with certainty
 
 ### Store this CID in the token's contract on-chain where a record of it remains forever
 
-As [stated above](#on-l1), typically the link to a collection's metadata is stored in the `tokenURI()` of the L1 smart contract. For maximum immutability, it would be ideal for the contract to be constructed such that this value cannot be updated once set.
+As [stated above](#on-l1), typically the link to a collection's metadata is stored in the `tokenURI()` of the L1 smart contract. For maximum immutability, it would be ideal for the contract to be constructed such that this value cannot be updated once set. 
 
 However, sometimes developers want to ensure that they are able to make updates to the metadata, ie. fix errors, update stated features, etc. that are not detrimental to token owners.
 
@@ -207,30 +206,30 @@ There are a couple of pattern options (all require the `tokenURI()` to be update
 
 ## What is IPFS?
 
-InterPlanetary File System (IPFS) is a distributed system for storing and accessing files, websites, applications, and data. If that sounds like a mouthful, don't worry, you can think of IPFS as decentralized file storage. Here are some characteristics of IPFS:
+InterPlanetary File System (IPFS) is a distributed system for storing and accessing files, websites, applications, and data. If that sounds like a mouthful, don't worry, you can think of IPFS as decentralized file storage. Here are some characteristics of IPFS: 
 
 * Decentralized and not owned by a single party
-* Censorship resistant
-* Easier to backup files
+* Censorship resistant 
+* Easier to backup files 
 
-IPFS uses a method called content addressing to access files. This involves generating a hash every time a file is uploaded and instead of using a URL like www.test.com/file we use the hash to locate the file. This hash also enables us to verify where the content has come from and whether it has been modified. [NFTStorage](https://nft.storage/) and [Pinata](https://www.pinata.cloud/) are examples of IPFS providers.
+IPFS uses a method called content addressing to access files. This involves generating a hash every time a file is uploaded and instead of using a URL like www.test.com/file we use the hash to locate the file. This hash also enables us to verify where the content has come from and whether it has been modified. [NFTStorage](https://nft.storage/) and [Pinata](https://www.pinata.cloud/) are examples of IPFS providers. 
 
 
-When you upload a folder to an IPFS provider, you will often receive an IPFS Gateway which allows web browsers to access IPFS. There will also be an option to specify the type of [gateway]((https://www.pinata.cloud/blog/the-power-of-dedicated-gateways)) you use.
+When you upload a folder to an IPFS provider, you will often receive an IPFS Gateway which allows web browsers to access IPFS. There will also be an option to specify the type of [gateway]((https://www.pinata.cloud/blog/the-power-of-dedicated-gateways)) you use. 
 
-* **Public gateway** - Available for everyone, free, slower, subject to rate limiting - use for testing
-* **Private(dedicated) gateway** - Ability to control access, costs money, generallty more uptime - use in production and mainnet launches
+* **Public gateway** - Available for everyone, free, slower, subject to rate limiting - use for testing 
+* **Private(dedicated) gateway** - Ability to control access, costs money, generallty more uptime - use in production and mainnet launches 
 
-Here's an example of a gateway you can copy into your browser:
+Here's an example of a gateway you can copy into your browser: 
 
 ```json 
 https://bafybeiaujofuzawix6cgwawua6rkil2j4gurhp3jzwux7gdf5iwx4onmy4.ipfs.nftstorage.link
 ```
 
-* This is often referred to as a `baseURI` in smart contracts and on L1s.
+* This is often referred to as a `baseURI` in smart contracts and on L1s. 
 * On ImmutableX this is the `metadata_API_URL`
 
-Any files inside the folder will be accessible by appending the filename to the gateway. Example:
+Any files inside the folder will be accessible by appending the filename to the gateway. Example: 
 
 ```json
 https://bafybeiahnvizkbk5ni234sbqc572ejdpy5627d63jojr7lvygw4bcq6jny.ipfs.nftstorage.link/1
@@ -238,14 +237,14 @@ https://bafybeiahnvizkbk5ni234sbqc572ejdpy5627d63jojr7lvygw4bcq6jny.ipfs.nftstor
 In this example, the name of the file is `1`
 
 ### Alternative storage options
-While IPFS is the most popular method of storing NFT data, there are alternatives:
+While IPFS is the most popular method of storing NFT data, there are alternatives: 
 
 * Centralized - [AWS](https://aws.amazon.com/s3/)
 * Decentralized - [Arweave ](https://www.arweave.org/)
 
-## Metadata compatibility
+## Metadata compatibility 
 
-It's also worth mentioning that while most NFTs follow the ERC721 standard, marketplaces can have different standards for metadata. This means metadata needs to be structured in a certain way to be accessed. For example, in all ImmutableX marketplaces, metadata is not nested.
+It's also worth mentioning that while most NFTs follow the ERC721 standard, marketplaces can have different standards for metadata. This means metadata needs to be structured in a certain way to be accessed. For example, in all ImmutableX marketplaces, metadata is not nested. 
 
 ```json
 {
@@ -258,7 +257,7 @@ It's also worth mentioning that while most NFTs follow the ERC721 standard, mark
   "element": "Water",
 }
 ```
-whereas in a marketplace like OpenSea, fields like attack, collectable and element would be nested under the attributes field.
+whereas in a marketplace like OpenSea, fields like attack, collectable and element would be nested under the attributes field. 
 
 ```json
 {

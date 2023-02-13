@@ -2,8 +2,7 @@
 sidebar_position: 5
 title: "Marketing tactics to amplify community"
 slug: "/learn/marketing-tactics-to-amplify-community"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -13,6 +12,7 @@ import ListAdmonition from '@site/src/components/ListAdmonition';
         <li> An introduction to marketing tactics </li>
     </ul>
 </ListAdmonition>
+
 
 ## Introduction
 

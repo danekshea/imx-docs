@@ -1,8 +1,7 @@
 ---
 title: "Overview"
 slug: "/primary-sale-card-checkout"
-keywords:
-  - imx-payments
+keywords: [imx-payments]
 sidebar_position: 0
 ---
 

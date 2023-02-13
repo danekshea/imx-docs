@@ -1,11 +1,9 @@
 ---
 title: "Withdraw payouts"
 slug: "/withdrawing-payouts"
-keywords:
-  - imx-traders
+keywords: [imx-traders]
 sidebar_position: 3
 ---
-
 To withdraw your funds from ImmutableX (Layer 2), you can do so via the API or ImmutableX Marketplace.
 
 ## Steps to Withdraw via ImmutableX Marketplace

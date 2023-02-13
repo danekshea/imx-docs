@@ -2,8 +2,7 @@
 title: "Burn assets"
 slug: "/asset-burning"
 sidebar_position: 1
-keywords:
-  - imx-assets
+keywords: [imx-assets]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';

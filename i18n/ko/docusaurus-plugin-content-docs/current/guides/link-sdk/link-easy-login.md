@@ -2,43 +2,44 @@
 id: "link-easy-login"
 title: "Link Easy Login"
 slug: "/link-easy-login"
-excerpt: "IMX SDK가 Magic.link를 통해 간편한 로그인을 지원합니다"
+excerpt: "IMX SDK supports easy login through Magic.link"
 sidebar_position: 13
-keywords:
-  - imx-wallets
+keywords: [imx-wallets]
 ---
 
-IMX SDK는 [Magic.link](https://magic.link/)를 통해 간편한 로그인 및 지갑 관리 기능을 지원합니다. 이를 통해 사용자는 수동 지갑 생성 및 추가적인 비밀번호 관리 없이 이메일을 통해 손쉽게 지갑을 생성하고 로그인할 수 있습니다.
+IMX SDK supports easy login and wallet management functionality through [Magic.link](https://magic.link/). This allows users to easily generate wallets and login through email without manual wallet generation and additional password management.
 
 :::caution
-이 기능은 **오직** 링크 UI를 사용하는 파트너들을 위해서만 지원됩니다.\n이 기능은 **SDK v1.3.8 이상**에서 사용할 수 있습니다.
+This functionality is **only** supported for partners who are using Link UI.\nThis functionality is available in **SDK v1.3.8+**
 :::
 
 
-## 손쉬운 로그인 가입
+## Easy Login Sign In
 
-링크의 손쉬운 로그인 기능의 덕분에 사용자들이 지갑을 생성하기 위해 해야 할 일은 이메일 주소를 제공하는 것뿐입니다. 이메일 주소를 제공하면 사용자에게 이메일을 확인하라는 화면이 나타납니다.
+With Link easy login, all users need to do to create their wallets is to provide an e-mail address. Once the e-mail is provided, the user will be prompted to check their e-mail. 
 
-![magic_link](/img/link-setup/magic_link.png "magic_link")
+![magic_link](/img/link-setup/magic_link.png 'magic_link')
 
-사용자들은 다음과 유사한 이메일을 받게 됩니다.
+They will receive an e-mail similar to this:
 
-![손쉬운 로그인 가입](/img/link-easy-login/easy-login-signin.png "손쉬운 로그인 가입")
+![Easy Login Sign In](/img/link-easy-login/easy-login-signin.png 'Easy Login Sign In')
 
-확인 시 사용자가 해당 이메일로 로그인한 것이 처음이었다면 새 지갑이 즉시 만들어지거나, 사용자가 이미 생성된 지갑으로 인증받게 됩니다.
+Upon confirmation, a new wallet will be setup for the user if that was the first time the user is login in with that e-mail or the user will just be authenticated with their already created wallet.
 
-:::참고
+:::note
 
-인증이 완료되면 사용자의 세션은 7일간 유지됩니다. 이 기간 동안에는 캐시가 삭제되었거나 다른 장치로 액세스하는 것이 아닌 한 사용자에게 다시 이메일 주소를 확인하라는 창이 나타나지 않습니다.
-
-:::
-
-:::유용한 팁
-
-각각의 이메일 주소는 다른 지갑 주소를 생성합니다. 문제가 발생하지 않도록 항상 동일한 이메일 주소를 사용해 로그인해 주십시오.
+Once authenticated, a user's session will last for 7 days. During this period, the users will not be prompted to check their e-mail address again unless the cache is cleared or accessing through a different
+device.
 
 :::
 
-## 구성 및 설정
+:::tip
 
-Magic Easy Login 프롬프트와 공급자 구성을 표시하는 다른 옵션에 대한 자세한 정보를 알고 싶다면 [링크 설정](./link-setup.md)을 참조해 주십시오.
+Each e-mail address will generate a different wallet address. 
+To prevent any issues, please make sure you're using always the the same e-mail address to log in.
+
+:::
+
+## Configurations and setup
+
+Please refer to the [Link Setup](./link-setup.md) for more details on the different options to display the Magic Easy Login prompt and provider configuration.

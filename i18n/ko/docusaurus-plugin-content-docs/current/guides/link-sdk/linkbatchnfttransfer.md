@@ -3,17 +3,16 @@ id: "linkbatchnfttransfer"
 title: "Link.batchNftTransfer"
 slug: "/linkbatchnfttransfer"
 sidebar_position: 2
-keywords:
-  - imx-wallets
+keywords: [imx-wallets]
 ---
 
-`1.3.52`버전부터 `@imtbl/imx-sdk`는 배치에서 대량 NFT 전송을 지원합니다. 새 배치 전송 플로우를 시작하려면, 그렇게 링크를 호출해야 합니다.
+As of `1.3.52`, the `@imtbl/imx-sdk` supports transferring large amounts of NFT assets in batches. To begin a new batch transfer flow, link should be called like so:
 
 ```javascript
 const response = await link.batchNftTransfer(payload)
 ```
 
-페이로드가 `LinkParams.BatchNftTransfer` 유형인 경우:
+Where the payload is of type `LinkParams.BatchNftTransfer`:
 
 ```typescript
 const payload: LinkParams.BatchNftTransfer = [
@@ -27,35 +26,35 @@ const payload: LinkParams.BatchNftTransfer = [
 ]
 ```
 
-응답 유형은 [Link.transfer](./linktransfer.md)와 같습니다.
+The response type is the same as [Link.transfer](./linktransfer.md).
 
-## 참고
+## Notes
 
-- 요청은 **100개**의 그룹으로 일괄 처리됩니다(이것은 현재 배치 사이즈로, 변경될 수 있으나 이는 구현에 영향을 미치지 않습니다).
+- Requests will be batched in groups of **100** (This is the current batch size, it is subject to change, however this will not affect your implementation)
 
-- `ERC721TokenType.ERC721` 유형의 토큰만 `link.batchNftTransfer`에서 사용할 수 있습니다.
+- Only tokens of type `ERC721TokenType.ERC721` can be used in `link.batchNftTransfer`
 
-- 현재 배치에 인증 오류가 있는 경우, 전체 배치가 실행되지 않습니다
+- If any validation errors are present in the current batch, the entire batch will not be performed
 
-- 현재 배치 처리의 일부로 API 오류가 수령되는 경우, 전체 배치가 실패합니다
+- If any API errors are received as part of processing the current batch, the entire batch will fail
 
-- 특정 배치에 오류가 존재하는 경우(인증, API, 또는 기타 이유로), 다음 배치로 계속 진행할 수 있습니다.
+- If any errors are present (due to validation, API or otherwise) for a particular batch, you will still be able progress to the next batch
 
-- 각 확인에는 사용자 지갑에서의 서명 과정이 수반됩니다.
+- Each confirmation is accompanied by a signing process on the user wallet
 
-## 사용자 여정의 스크린샷
+## Screenshots from user journey
 
-'@docusaurus/useBaseUrl'에서 useBaseUrl를 임포트;
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 
-![일괄 전송 확인](/img/linkbatchnfttransfer/confirm-transfer-batch.png "일괄 전송 확인")
+![Confirm Transfer Batch](/img/linkbatchnfttransfer/confirm-transfer-batch.png "Confirm Transfer Batch")
 
-![첫 번째 배치 완료](/img/linkbatchnfttransfer/first-batch-complete.png "첫 번째 배치 완료")
+![First Batch Complete](/img/linkbatchnfttransfer/first-batch-complete.png "First Batch Complete")
 
-![모든 배치 완료](/img/linkbatchnfttransfer/batch-complete.png "모든 배치 완료")
+![All Batches Complete](/img/linkbatchnfttransfer/batch-complete.png "All Batches Complete")
 
-![인증 오류 예시](/img/linkbatchnfttransfer/example-validation-error.png "인증 오류 예시")
+![Example Validation Error](/img/linkbatchnfttransfer/example-validation-error.png "Example Validation Error")
 
-## 오류
+## Errors
 
-오류 응답은 [여기](./link-errors.md#transfer)를 확인하십시오.
+See error responses [here](./link-errors.md#transfer).

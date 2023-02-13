@@ -21,7 +21,7 @@ At least one *required* metadata key was not provided in the request. The `messa
   "code": "missing_metadata_key",
   "message": "Missing required metadata key: name"
 }
-```
+``` 
 
 ## metadata_key_already_exists
 
@@ -33,11 +33,12 @@ The mint request payload has failed validation. The `message` field has more det
 
 ## asset_invalid_id
 `/assets/{address}/{id}` - Contract address and token id is a unique composite key.  
-The contract address is not a hex (e.g.'0x02311ab2...') or the token id is not an integer. Both params stored in DB as a varchars.
+The contract address is not a hex (e.g.'0x02311ab2...') or the token id is not an integer. Both params stored in DB as a varchars. 
 
 ## asset_not_found
 
-`/assets/{address}/{id}` - Contract address and token id is a unique composite key. The assets with such ID was not found in database (join of imx_nft + imx_collection + imx_royalty)
+`/assets/{address}/{id}` - Contract address and token id is a unique composite key. 
+The assets with such ID was not found in database (join of imx_nft + imx_collection + imx_royalty)
 
 ## asset_invalid_format
 

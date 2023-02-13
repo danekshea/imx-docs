@@ -1,8 +1,7 @@
 ---
 title: "Disclaimer"
 slug: "/learn/disclaimer"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 a) Factual information: The information, educational material and other content provided on this website is factual and provided for your general information only. Any such information or content is not financial product advice and you should not rely on it as professional advice. It is not intended to be or imply a recommendation or opinion about a financial product or asset.

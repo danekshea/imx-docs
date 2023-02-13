@@ -2,8 +2,7 @@
 sidebar_position: 2
 title: "Understanding the investor"
 slug: "/learn/understanding-the-investor"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -15,6 +14,7 @@ import ListAdmonition from '@site/src/components/ListAdmonition';
         <li> How an investor thinks </li>
      </ul>
 </ListAdmonition>
+
 
 ## Introduction
 

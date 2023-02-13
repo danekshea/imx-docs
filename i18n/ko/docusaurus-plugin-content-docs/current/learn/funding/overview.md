@@ -2,8 +2,7 @@
 sidebar_position: 1
 title: "Overview"
 slug: "/learn/funding"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -14,6 +13,7 @@ import ListAdmonition from '@site/src/components/ListAdmonition';
         <li> Why fundraising is important</li>
      </ul>
 </ListAdmonition>
+
 
 ## Introduction
 

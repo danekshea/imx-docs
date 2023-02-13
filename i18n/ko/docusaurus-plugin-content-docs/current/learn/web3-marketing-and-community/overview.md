@@ -3,8 +3,7 @@ sidebar_position: 1
 title: "Overview"
 slug: "/learn/web3-marketing-and-community"
 pagination_next: "learn/web3-marketing-and-community/customer-segmentation-in-web3"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -15,6 +14,7 @@ import ListAdmonition from '@site/src/components/ListAdmonition';
         <li> Why marketing and community is important </li>
     </ul>
 </ListAdmonition>
+
 
 ## Introduction
 

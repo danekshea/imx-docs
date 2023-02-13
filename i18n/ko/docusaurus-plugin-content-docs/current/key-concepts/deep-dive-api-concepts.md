@@ -2,8 +2,7 @@
 title: "Deep dive into API concepts"
 slug: "/deep-dive-api-concepts"
 sidebar_position: 5
-keywords:
-  - imx-dx
+keywords: [imx-dx]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -141,15 +140,19 @@ Different messages are required by the different attributes:
       <td><code>x-imx-eth-signature</code></td>
       <td>The message to be signed depends on each transaction. Typically, it contains information about the transaction that requires the user signature.
         <br/><br/>
-        Our API contains endpoints allowing you to obtain signable messages:
+        The messages required for the following endpoints are:
         <ul>
-          <li><a href="/reference/#/operations/getSignableDeposit">getSignableDeposit</a></li>
-          <li><a href="/reference/#/operations/getSignableOrder">getSignableOrder</a></li>
-          <li><a href="/reference/#/operations/getSignableCancelOrder">getSignableCancelOrder</a></li>
-          <li><a href="/reference/#/operations/getSignableTransfer">getSignableTransfer</a></li>
-          <li><a href="/reference/#/operations/getSignableWithdrawal">getSignableWithdrawal</a></li>
-          <li><a href="/reference/#/operations/getSignableTrade">getSignableTrade</a></li>
-          <li><a href="/reference/#/operations/getExchangeSignableTransfer">getExchangeSignableTransfer</a></li>
+            <li><a href="https://docs.x.immutable.com/reference#/operations/Get%20a%20list%20of%20metadata%20refreshes">Get a list of metadata refreshes</a> - expects a message of <a href='#imx-timestamp-string'>IMX timestamp</a></li>
+            <li><a href="https://docs.x.immutable.com/reference#/operations/Request%20a%20metadata%20refresh">Requesting a metadata refresh</a> - expects a message of <a href='#imx-timestamp-string'>IMX timestamp</a></li>
+            <li><a href="https://docs.x.immutable.com/reference#/operations/Get%20metadata%20refresh%20results">Get metadata refresh results</a> - expects a message of <a href='#imx-timestamp-string'>IMX timestamp</a></li>
+            <li><a href="https://docs.x.immutable.com/reference#/operations/Get%20metadata%20refresh%20errors">Get metadata refresh errors</a> - expects a message of <a href='#imx-timestamp-string'>IMX timestamp</a></li>
+            <li><a href="https://docs.x.immutable.com/reference#/operations/createOrder">createOrder</a> - expects a message of <a href="/reference/#/operations/getSignableOrder">getSignableOrder</a></li>
+            <li><a href="https://docs.x.immutable.com/reference#/operations/cancelOrder">cancelOrder</a> - expects a message of <a href="/reference/#/operations/getSignableOrder">getSignableOrder</a></li>
+            <li><a href="https://docs.x.immutable.com/reference#/operations/createTransferV1">createTransferV1</a> - expects a message of <a href="/reference/#/operations/getSignableTransfer">getSignableTransfer</a></li>
+            <li><a href="https://docs.x.immutable.com/reference#/operations/createTransfer">createTransfer</a> - expects a message of <a href="/reference/#/operations/getSignableTransfer">getSignableTransfer</a></li>
+            <li><a href="https://docs.x.immutable.com/reference#/operations/createWithdrawal">createWithdrawal</a> - expects a message of <a href="/reference/#/operations/getSignableWithdrawal">getSignableWithdrawal</a></li>
+            <li><a href="https://docs.x.immutable.com/reference#/operations/createTrade">createTrade</a> - expects a message of <a href="/reference/#/operations/getSignableTrade">getSignableTrade</a></li>
+            <li><a href="https://docs.x.immutable.com/reference#/operations/createExchangeTransfer">createExchangeTransfer</a> - expects a message of <a href="/reference/#/operations/getExchangeSignableTransfer">getExchangeSignableTransfer</a></li>
         </ul>
       </td>
     </tr>
@@ -260,14 +263,14 @@ function serializeEthSignature(sig: SignatureOptions): string {
 
 The `stark_signature` is required in the request body params of certain endpoints. It is obtained by using a Stark signer to sign the `payload_hash` produced in the response of the following corresponding endpoints:
 
-| Action                    | Endpoint(s) requiring `stark_signature`                                                                                                                                               | Endpoint(s) providing `payload_hash` to be signed                                                                                                                                                          |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create orders             | [createOrder](https://docs.x.immutable.com/reference#/operations/createOrder)                                                                                                         | <a href="https://docs.x.immutable.com/reference#/operations/getSignableOrderV1">getSignableOrderV1</a><br/><a href="https://docs.x.immutable.com/reference#/operations/getSignableOrder">getSignableOrder</a>                                                                                                                                              |
-| Cancel orders             | [cancelOrder](https://docs.x.immutable.com/reference#/operations/cancelOrder)                                                                                                         | [getSignableCancelOrder](https://docs.x.immutable.com/reference#/operations/getSignableCancelOrder)                                                                                                        |
-| Create transfers          | [createTransfer](https://docs.x.immutable.com/reference#/operations/createTransfer)<br/>[createTransferV1](https://docs.x.immutable.com/reference#/operations/createTransferV1) | [getSignableTransfer](https://docs.x.immutable.com/reference#/operations/getSignableTransfer])<br/>[getSignableTransferV1](https://docs.x.immutable.com/reference#/operations/getSignableTransferV1) |
-| Create withdrawals        | [createWithdrawal](https://docs.x.immutable.com/reference#/operations/createWithdrawal)                                                                                               | [getSignableWithdrawal](https://docs.x.immutable.com/reference#/operations/getSignableWithdrawal)                                                                                                          |
-| Create trades             | [createTrade](https://docs.x.immutable.com/reference#/operations/createTrade)                                                                                                         | [getSignableTrade](https://docs.x.immutable.com/reference#/operations/getSignableTrade)                                                                                                                    |
-| Create exchange transfers | [createExchangeTransfer](https://docs.x.immutable.com/reference#/operations/createExchangeTransfer)                                                                                   | [getExchangeSignableTransfer](https://docs.x.immutable.com/reference#/operations/getExchangeSignableTransfer)                                                                                              |
+| Action | Endpoint(s) requiring `stark_signature` | Endpoint(s) providing `payload_hash` to be signed |
+| --- | --- | --- |
+| Create orders | [createOrder](https://docs.x.immutable.com/reference#/operations/createOrder)  | <a href="https://docs.x.immutable.com/reference#/operations/getSignableOrderV1">getSignableOrderV1</a><br/><a href="https://docs.x.immutable.com/reference#/operations/getSignableOrder">getSignableOrder</a> |
+| Cancel orders | [cancelOrder](https://docs.x.immutable.com/reference#/operations/cancelOrder) | [getSignableCancelOrder](https://docs.x.immutable.com/reference#/operations/getSignableCancelOrder) |
+| Create transfers | [createTransfer](https://docs.x.immutable.com/reference#/operations/createTransfer)<br/>[createTransferV1](https://docs.x.immutable.com/reference#/operations/createTransferV1) | [getSignableTransfer](https://docs.x.immutable.com/reference#/operations/getSignableTransfer])<br/>[getSignableTransferV1](https://docs.x.immutable.com/reference#/operations/getSignableTransferV1) |
+| Create withdrawals | [createWithdrawal](https://docs.x.immutable.com/reference#/operations/createWithdrawal) | [getSignableWithdrawal](https://docs.x.immutable.com/reference#/operations/getSignableWithdrawal) |
+| Create trades | [createTrade](https://docs.x.immutable.com/reference#/operations/createTrade) | [getSignableTrade](https://docs.x.immutable.com/reference#/operations/getSignableTrade) |
+| Create exchange transfers | [createExchangeTransfer](https://docs.x.immutable.com/reference#/operations/createExchangeTransfer) | [getExchangeSignableTransfer](https://docs.x.immutable.com/reference#/operations/getExchangeSignableTransfer) |
 
 <ListAdmonition title="Steps:">
   <ul>

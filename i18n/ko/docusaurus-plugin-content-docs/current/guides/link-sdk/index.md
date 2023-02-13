@@ -4,19 +4,18 @@ title: "Overview"
 slug: "/sdk-api"
 sidebar_position: 1
 pagination_next: "guides/link-sdk/link-setup"
-keywords:
-  - imx-wallets
+keywords: [imx-wallets]
 ---
 
-:::note 링크 레퍼런스 도구
-**[링크 레퍼런스 도구](https://tools.immutable.com/link-reference/)**를 확인해 `Link` 메서드가 어떻게 어떤 코드도 작성하지 않고 작동하는지 알아보십시오.
+:::note Link reference tool
+Check out our **[Link reference tool](https://tools.immutable.com/link-reference/)** to understand how `Link` methods work without having to write any code.
 :::
 
 For context, read our [overview of the ImmutableX JS SDK](../js-sdk/index.md).
 
-## 링크 사용법
+## Link usage
 
-링크 SDK는 프론트엔드, 사용자 대면 상호작용에 사용됩니다.
+The Link SDK is used for frontend, user-facing interactions.
 
 ```typescript
 import { Link, ETHTokenType } from '@imtbl/imx-sdk'
@@ -67,9 +66,9 @@ async function sdkExample() {
 }
 ```
 
-## API 클라이언트 사용법
+## API client usage
 
-API 클라이언트는 REST 메서드로의 직접 매핑으로 여기(https://docs.x.immutable.com/reference)에 문서로 작성되어 있습니다.
+The API client is a direct mapping to the REST methods documented here: https://docs.x.immutable.com/reference
 
 ```typescript
 import { ImmutableXClient } from '@imtbl/imx-sdk'

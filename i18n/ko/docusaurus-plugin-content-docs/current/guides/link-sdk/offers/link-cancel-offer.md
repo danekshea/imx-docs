@@ -4,11 +4,7 @@ title: "Link.cancelOffer"
 slug: "/link-cancel-offer"
 excerpt: "Link can now be used to cancel an offer made previously"
 sidebar_position: 2
-keywords:
-  - trading
-  - orderbook
-  - offers
-  - buy-order
+keywords: [trading, orderbook, offers, buy-order]
 ---
 
 :::danger OFFERS IS IN BETA
@@ -39,9 +35,9 @@ Input parameters:
 }
 ```
 
-![Cancel an offer](/img/link-offers/cancel-offer-prompt.png "Cancel an offer")
+![Cancel an offer](/img/link-offers/cancel-offer-prompt.png 'Cancel an offer')
 
-![Cancel an offer confirmation](/img/link-offers/cancel-offer-success.png "Cancel an offer confirmation")
+![Cancel an offer confirmation](/img/link-offers/cancel-offer-success.png 'Cancel an offer confirmation')
 
 ## Errors
 

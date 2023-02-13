@@ -4,8 +4,7 @@ title: 'Personal inventory'
 slug: '/personal-inventory'
 excerpt: 'View account balances and manage assets'
 sidebar_position: 3
-keywords:
-  - imx-wallets
+keywords: [imx-wallets]
 ---
 
 Monitoring and interacting with a user’s account will require both the IMX client and the Link SDK. Additional imports of type constants may also be needed for inventory requests.
@@ -94,7 +93,8 @@ link.history({})
 
 ## User NFT assets
 
-Displaying user assets is a common requirement for games and marketplaces using ImmutableX. The IMX Client provides a quick way to get all the user’s assets: [block:code]
+Displaying user assets is a common requirement for games and marketplaces using ImmutableX. The IMX Client provides a quick way to get all the user’s assets:
+[block:code]
 
 ```javascript
 const assetsRequest = await client.getAssets({ user: address })

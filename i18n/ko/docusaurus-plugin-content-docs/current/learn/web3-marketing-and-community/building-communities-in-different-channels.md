@@ -2,8 +2,7 @@
 sidebar_position: 3
 title: "Building communities in different channels"
 slug: "/learn/building-communities-in-different-channels"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -15,6 +14,8 @@ import ListAdmonition from '@site/src/components/ListAdmonition';
         <li> Sample questions to ask to measure community health </li>
      </ul>
 </ListAdmonition>
+
+
 
 # Introduction
 

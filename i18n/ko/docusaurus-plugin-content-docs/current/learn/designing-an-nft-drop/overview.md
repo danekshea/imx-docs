@@ -3,8 +3,7 @@ sidebar_position: 1
 title: "Overview"
 slug: "/learn/designing-an-nft-drop"
 pagination_next: "learn/designing-an-nft-drop/understanding-launch-mechanics"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';

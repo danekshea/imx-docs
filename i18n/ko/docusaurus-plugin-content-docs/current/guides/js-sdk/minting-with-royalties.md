@@ -3,10 +3,8 @@ id: "minting-with-royalties"
 title: "Minting with royalties"
 slug: "/minting-with-royalties"
 sidebar_position: 6
-keywords:
-  - imx-traders
+keywords: [imx-traders]
 ---
-
 Royalties for a given asset are defined at the point of minting a new asset to the ImmutableX protocol. Please ensure your [recipients are registered](./account-management.md#security-for-your-users) before minting.
 
 ## Royalty fees for newly minted assets

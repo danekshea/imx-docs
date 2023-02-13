@@ -1,8 +1,7 @@
 ---
 title: "Crypto on and off-ramps"
 slug: "/how-to-enable-on-off-ramps"
-keywords:
-  - imx-wallets
+keywords: [imx-wallets]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -16,10 +15,10 @@ Typically, getting crypto onto ImmutableX Layer 2 wallets is a multi-step proces
 
 However, there are crypto on-ramp and off-ramp providers that enable users to get crypto in and out of L2 wallets in a ***single step***. ImmutableX make it easy for you to integrate with the following providers via our SDKs and API:
 
-| Provider                               | How does it work?                                                                                               | Fees                                                                                                                 | Min. purchase / deposit | Restrictions                                                                                                                                                                                                                                                                                                                                                                       |
-| -------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [MoonPay](https://www.moonpay.com/)    | Users can buy crypto with a card payment and it is immediately transferred to their L2 wallet                   | See [MoonPay's transaction fee](https://support.moonpay.com/hc/en-gb/articles/360011930117-What-fees-do-you-charge-) | $20USD                  | See these lists of ***non-supported*** countries:<br/>- [On-ramp](https://support.moonpay.com/hc/en-gb/articles/6557330712721-What-are-our-non-supported-countries-states-and-territories-for-on-ramp-product-)<br/>- [Off-ramp](https://support.moonpay.com/hc/en-gb/articles/360009279877-What-are-our-non-supported-countries-states-and-territories-for-off-ramp-) |
-| [Layerswap](https://www.layerswap.io/) | Users can transfer crypto they own in a centralised exchange account (ie. Coinbase) directly to their L2 wallet | See [Layerswap's transfer fees](https://docs.layerswap.io/user-docs/using-layerswap/fees)                            | 0.025ETH                |                                                                                                                                                                                                                                                                                                                                                                                    |
+| Provider | How does it work? | Fees | Min. purchase / deposit   | Restrictions |
+| --- | --- | --- |---------------------------| --- |
+| [MoonPay](https://www.moonpay.com/) | Users can buy crypto with a card payment and it is immediately transferred to their L2 wallet | See [MoonPay's transaction fee](https://support.moonpay.com/hc/en-gb/articles/360011930117-What-fees-do-you-charge-) | $20USD                    | See these lists of ***non-supported*** countries:<br/>- [On-ramp](https://support.moonpay.com/hc/en-gb/articles/6557330712721-What-are-our-non-supported-countries-states-and-territories-for-on-ramp-product-)<br/>- [Off-ramp](https://support.moonpay.com/hc/en-gb/articles/360009279877-What-are-our-non-supported-countries-states-and-territories-for-off-ramp-) |
+| [Layerswap](https://www.layerswap.io/) | Users can transfer crypto they own in a centralised exchange account (ie. Coinbase) directly to their L2 wallet | See [Layerswap's transfer fees](https://docs.layerswap.io/user-docs/using-layerswap/fees) | 0.009ETH / 15IMX / 12USDC | |
 
 
 <ListAdmonition label="Guides">
@@ -52,16 +51,13 @@ In order to use the Core SDK, you need to [initialize it](../install-initialize/
     <ul>
         <li><a href="https://docs.x.immutable.com/reference/#/operations/createExchange">createExchange</a></li>
     </ul>
-</ListAdmonition>
-
-<Tabs>
-<TabItem value="typescript" label="Typescript Core SDK">
+</ListAdmonition> 
 
 <ListAdmonition label="SDK reference">
     <ul>
         <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-ts/1-0-0/classes/immutablex.immutablex#createExchange">createExchange</a></li>
     </ul>
-</ListAdmonition>
+</ListAdmonition> 
 
 <Tabs>
 <TabItem value="moonpay" label="MoonPay">
@@ -107,8 +103,6 @@ The user will be asked to connect to the exchange they want to use:
 
 </TabItem>
 </Tabs>
-</TabItem>
-</Tabs>
 
 After creating a transaction successfully, you will be provided with the specified provider's widget URL to be rendered where users can proceed with transfer.
 
@@ -123,16 +117,13 @@ The user proceeds with transfer details on the provider's widget.
     </ul>
 </ListAdmonition>
 
-Please consider checking the transaction status in a polling fashion in the background.
-
-<Tabs>
-<TabItem value="typescript" label="Typescript Core SDK">
-
 <ListAdmonition label="SDK reference">
     <ul>
         <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-ts/1-0-0/classes/immutablex.immutablex#getExchange">getExchange</a></li>
     </ul>
 </ListAdmonition> 
+
+Please consider checking the transaction status in a polling fashion in the background.
 
 ```ts
 const getExchangeTransactionResponse = await imxClient.getExchange({
@@ -140,10 +131,8 @@ const getExchangeTransactionResponse = await imxClient.getExchange({
 });
 ```
 
-</TabItem>
-</Tabs>
-
-The transfer process can take few minutes and during that time transaction can return a `pending` or `waitingPayment` status while it's still being processed. The final stage of transaction status can be:
+The transfer process can take few minutes and during that time transaction can return a `pending` or `waitingPayment` status while it's still being processed.
+The final stage of transaction status can be:
 * `completed` - successful completion
 * `failed` - failure encountered
 
@@ -160,16 +149,13 @@ In order to use the Core SDK, you need to [initialize it](../install-initialize/
     <ul>
         <li><a href="https://docs.x.immutable.com/reference/#/operations/createExchange">createExchange</a></li>
     </ul>
-</ListAdmonition>
-
-<Tabs>
-<TabItem value="typescript" label="Typescript Core SDK">
+</ListAdmonition> 
 
 <ListAdmonition label="SDK reference">
     <ul>
         <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-ts/1-0-0/classes/immutablex.immutablex#createExchange">createExchange</a></li>
     </ul>
-</ListAdmonition>
+</ListAdmonition> 
 
 <Tabs>
 <TabItem value="moonpay" label="MoonPay">
@@ -203,9 +189,6 @@ const exchangeTxnParams: ExchangesApiCreateExchangeRequest = {
 const exchangeTxnResponse = await imxClient.createExchange(exchangeTxnParams);
 ```
 
-</TabItem>
-</Tabs>
-
 After creating a transaction successfully, you will be provided with the specified provider's widget URL to be rendered where users can proceed with entering transfer details.
 
 </TabItem>
@@ -219,25 +202,19 @@ After creating a transaction successfully, you will be provided with the specifi
     </ul>
 </ListAdmonition>
 
-Please consider checking the transaction status in a polling fashion in the background.
-
-<Tabs>
-<TabItem value="typescript" label="Typescript Core SDK">
-
 <ListAdmonition label="SDK reference">
     <ul>
         <li><a href="https://docs.x.immutable.com/sdk-references/core-sdk-ts/1-0-0/classes/immutablex.immutablex#getExchange">getExchange</a></li>
     </ul>
 </ListAdmonition> 
 
+Please consider checking the transaction status in a polling fashion in the background.
+
 ```ts
 const transactionDetails = await imxClient.getExchange({
   id: exchangeTxnResponse.id
 });
 ```
-
-</TabItem>
-</Tabs>
 
 ### 4. Generate signers
 Initiating an off-ramp request for a user requires a user's signature, so your application will need to create signers. See the guide on [how to generate signers](../generate-signers/index.md).
@@ -250,9 +227,6 @@ Initiating an off-ramp request for a user requires a user's signature, so your a
         <li><a href="https://docs.x.immutable.com/reference/#/operations/createExchangeTransfer">createExchangeTransfer</a></li>
     </ul>
 </ListAdmonition>
-
-<Tabs>
-<TabItem value="typescript" label="Typescript Core SDK">
 
 <ListAdmonition label="SDK reference">
     <ul>
@@ -277,9 +251,6 @@ const exchangeTransferResponse = await imxClient.exchangeTransfer(walletConnecti
 
 It will prompt the user to sign the request to proceed with the transaction.
 
-</TabItem>
-</Tabs>
-
 ### 6. Verify the transaction status
 
 See [3. Verify the transaction status](#3-verify-the-transaction-status) in the on-ramp guide.
@@ -287,15 +258,15 @@ See [3. Verify the transaction status](#3-verify-the-transaction-status) in the 
 ## API
 
 ### On-ramp endpoints:
-| Step | Description                   | API endpoint                                                                         |
-| ---- | ----------------------------- | ------------------------------------------------------------------------------------ |
-| 1    | Create the on-ramp request    | [createExchange](https://docs.x.immutable.com/reference/#/operations/createExchange) |
-| 2    | Verify the transaction status | [getExchange](https://docs.x.immutable.com/reference/#/operations/getExchange)       |
+| Step | Description | API endpoint |
+| --- | --- | --- |
+| 1 | Create the on-ramp request | [createExchange](https://docs.x.immutable.com/reference/#/operations/createExchange) |
+| 2 | Verify the transaction status | [getExchange](https://docs.x.immutable.com/reference/#/operations/getExchange) |
 
 ### Off-ramp endpoints:
-| Step | Description                                                                   | API endpoint                                                                                                   |
-| ---- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| 1    | Create the off-ramp request                                                   | [createExchange](https://docs.x.immutable.com/reference/#/operations/createExchange)                           |
-| 2    | Get transaction details                                                       | [getExchange](https://docs.x.immutable.com/reference/#/operations/getExchange)                                 |
-| 3    | Get the transaction details to be signed when initiating the off-ramp request | [getExchangeSignableTransfer](https://docs.x.immutable.com/reference/#/operations/getExchangeSignableTransfer) |
-| 4    | Initiate the off-ramp request                                                 | [createExchangeTransfer](https://docs.x.immutable.com/reference/#/operations/createExchangeTransfer)           |
+| Step | Description | API endpoint |
+| --- | --- | --- |
+| 1 | Create the off-ramp request | [createExchange](https://docs.x.immutable.com/reference/#/operations/createExchange) |
+| 2 | Get transaction details | [getExchange](https://docs.x.immutable.com/reference/#/operations/getExchange) |
+| 3 | Get the transaction details to be signed when initiating the off-ramp request | [getExchangeSignableTransfer](https://docs.x.immutable.com/reference/#/operations/getExchangeSignableTransfer) |
+| 4 | Initiate the off-ramp request | [createExchangeTransfer](https://docs.x.immutable.com/reference/#/operations/createExchangeTransfer) |

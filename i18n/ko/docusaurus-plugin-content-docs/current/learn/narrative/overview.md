@@ -3,8 +3,7 @@ sidebar_position: 1
 title: "Overview"
 slug: "/learn/narrative"
 pagination_next: "learn/narrative/designing-a-core-narrative"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -16,6 +15,7 @@ import ListAdmonition from '@site/src/components/ListAdmonition';
         <li>How to start developing your narrative</li>
     </ul>
 </ListAdmonition>
+
 
 ## Introduction
 

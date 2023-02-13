@@ -3,23 +3,22 @@ id: "linksell-and-erc20-support"
 title: "Link.sell and ERC20 support"
 slug: "/linksell-and-erc20-support"
 sidebar_position: 7
-keywords:
-  - imx-wallets
+keywords: [imx-wallets]
 ---
 
-:::note 링크 레퍼런스 도구
-**[링크 레퍼런스 도구](https://tools.immutable.com/link-reference/)**를 확인해 `Link` 메서드가 어떻게 어떤 코드도 작성하지 않고 작동하는지 알아보십시오.
+:::note Link reference tool
+Check out our **[Link reference tool](https://tools.immutable.com/link-reference/)** to understand how `Link` methods work without having to write any code.
 :::
 
-**SDK v1.3.13 이상**은 매도 과정에서 다양한 통화를 지원하여, 사용자들이 ETH 및 화이트리스트 처리된 토큰(USDC, GODS or IMX token)으로 항목을 상장할 수 있게 해줍니다. 상장된 자산은 상장된 통화와 동일한 통화로만 매수할 수 있습니다.
+**SDK v1.3.13+** supports different currencies in the sell process, allowing users to list items in ETH and whitelisted tokens (USDC, GODS or IMX token). The listing can be only bought for the same currency it was listed for.
 
-:::info 제한된 통화 지원
-이뮤터블 X는 USDC, GODS 또는 IMX 토큰만을 지원합니다
+:::info Limited Currency Support
+We only support USDC, GODS or IMX token
 :::
 
-ImmutableX is not prescriptive in how marketplaces handle the sell process. 사용자의 상장 과정 및 상장 오더 그 자체에 영향을 미치기 위해 마켓플레이스에 사용할 수 있는 선택적인 매개 변수가 몇 가지 있습니다.
+ImmutableX is not prescriptive in how marketplaces handle the sell process. There are several optional parameters you can use for your marketplace, to influence the user journey for the listing and the listing order itself.
 
-이용 가능한 매개 변수:
+Available parameters:
 
 ```typescript
 {
@@ -30,9 +29,9 @@ ImmutableX is not prescriptive in how marketplaces handle the sell process. 사�
 }
 ```
 
-## 사용 방법
+## Usage
 
-통화 및 금액이 정해지지 않은 경우, 링크 UI가 사용자에게 통화와 금액을 요청합니다.
+If no currency and no amount is provided, both currency and amount will be requested from the user by Link UI.
 
 ```typescript
 link.sell({
@@ -41,9 +40,9 @@ link.sell({
 })
 ```
 
-![매도 상장 및 금액 및 통화 모두 선택](/img/linksell-and-erc20-support/list-for-sale-select-amount-currency.png "매도 상장 및 금액 및 통화 모두 선택")
+![List for sale and Select both Amount and Currency](/img/linksell-and-erc20-support/list-for-sale-select-amount-currency.png 'List for sale and Select both Amount and Currency')
 
-통화는 정해지지 않았으나 금액은 존재하는 경우, 시스템은 디폴트로 ETH로 매도합니다.
+If no currency is provided, but the amount is present, the system will default to sell in ETH.
 
 ```typescript
 link.sell({
@@ -53,11 +52,11 @@ link.sell({
 })
 ```
 
-![기본 통화는 ETH입니다](/img/linksell-and-erc20-support/list-for-sale-default-eth.png "기본 통화는 ETH입니다")
+![Default currency is ETH](/img/linksell-and-erc20-support/list-for-sale-default-eth.png 'Default currency is ETH')
 
-마켓플레이스가 화이트리스트 처리된 특정 통화로 매도하는 것을 제한하려면, 토큰에 `currencyAddress`를 제공해야 합니다.
+To restrict your marketplace to selling in a specific whitelisted currency, you need to provide `currencyAddress` for a token.
 
-이 플로우에서 링크 UI는 사용자에게 금액을 지정할 것을 요청합니다. 화이트리스트 처리된 토큰 목록은 API 엔드 포인트를 통해 이용할 수 있습니다 [/get_v1-tokens-1]/reference#/operations/listTokens)
+In this flow, Link UI will be displayed asking the user to specify the amount. A list of whitelisted tokens is available via API endpoint [/get_v1-tokens-1]/reference#/operations/listTokens)
 
 ```typescript
 link.sell({
@@ -67,9 +66,9 @@ link.sell({
 })
 ```
 
-![금액만 선택](/img/linksell-and-erc20-support/select-amount.png "금액만 선택")
+![Select amount only](/img/linksell-and-erc20-support/select-amount.png 'Select Amount only')
 
-또한 사용자에게서 특정 통화 _및_ 특정 금액을 제한할 수도 있습니다. 그러면 링크 UI가 사용자에게 통화 및 금액을 확인할 것을 요청합니다.
+You can also restrict users to a specific currency _and_ specific amount. Then Link UI will ask users for confirmation of the currency and amount.
 
 ```typescript
 link.sell({
@@ -80,6 +79,6 @@ link.sell({
 })
 ```
 
-## 오류
+## Errors
 
-오류 응답은 [여기](./link-errors.md#sell)를 확인하십시오.
+See error responses [here](./link-errors.md#sell).

@@ -2,8 +2,7 @@
 sidebar_position: 3
 title: "Designing sub narratives"
 slug: "/learn/designing-sub-narratives"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 
@@ -15,6 +14,7 @@ import ListAdmonition from '@site/src/components/ListAdmonition';
         <li>How to use sub narratives to cater to different audiences</li>
     </ul>
 </ListAdmonition>
+
 
 ## Introduction
 

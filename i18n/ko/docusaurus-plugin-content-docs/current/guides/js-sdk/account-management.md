@@ -4,10 +4,8 @@ title: "Account management"
 slug: "/account-management"
 excerpt: "User wallet registration"
 sidebar_position: 2
-keywords:
-  - imx-wallets
+keywords: [imx-wallets]
 ---
-
 Your web3 wallet (e.g. Metamask) is used to create, connect, and sign transactions on ImmutableX. Using Link SDK calls, we can handle account management activities.
 
 ## Security for your users

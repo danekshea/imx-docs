@@ -3,8 +3,7 @@ sidebar_position: 1
 title: "Overview"
 slug: "/learn/tokenomics"
 pagination_next: "learn/tokenomics/core-tokenomics-concepts"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';

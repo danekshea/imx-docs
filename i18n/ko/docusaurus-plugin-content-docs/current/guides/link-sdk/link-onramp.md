@@ -3,8 +3,7 @@ id: "link-on-ramp"
 title: "Link.onramp"
 slug: "/link-on-ramp"
 sidebar_position: 11
-keywords:
-  - imx-wallets
+keywords: [imx-wallets]
 ---
 
 :::danger On-ramp requires authenticated user
@@ -34,7 +33,7 @@ await link.onramp({})
 
 This displays the Link UI with loaded MoonPay widget:
 
-![On-ramp without parameters](/img/link-sdk-onramp/onramp-without-params.png "On-ramp without parameters")
+![On-ramp without parameters](/img/link-sdk-onramp/onramp-without-params.png 'On-ramp without parameters')
 
 To initialize the on-ramp process for a specific currency:
 
@@ -44,7 +43,7 @@ await link.onramp({ cryptoCurrencies: ['ETH'] })
 
 This displays the Link UI with loaded MoonPay widget:
 
-![On-ramp with specific currency](/img/link-sdk-onramp/onramp-with-currency-chosen.png "On-ramp with specific currency")
+![On-ramp with specific currency](/img/link-sdk-onramp/onramp-with-currency-chosen.png 'On-ramp with specific currency')
 
 To initialize the on-ramp process when a user can choose only specific currencies:
 
@@ -57,9 +56,15 @@ await link.onramp({ cryptoCurrencies: ['IMX', 'GODS'] })
 :::success MoonPay sandbox testing
 To test the transactions in the Sandbox environment, please use the following test cards:
 
-**CARD**: Visa **NUMBER**: 4444493318246892 **DATE**: 12/2023 **CVC**: 123
+**CARD**: Visa
+**NUMBER**: 4444493318246892
+**DATE**: 12/2023
+**CVC**: 123
 
-**CARD**: Mastercard **NUMBER**: 2222755234426838 **DATE**: 01/2024 **CVC**: 123
+**CARD**: Mastercard
+**NUMBER**: 2222755234426838
+**DATE**: 01/2024
+**CVC**: 123
 :::
 
 ### On-ramp with Layerswap provider
@@ -71,7 +76,7 @@ await link.onramp({ provider: 'layerswap' })
 ```
 This displays the Link UI with loaded Layerswap widget:
 
-![On-ramp with specified provider](/img/link-sdk-onramp/onramp-layerswap.png "On-ramp with specified provider")
+![On-ramp with specified provider](/img/link-sdk-onramp/onramp-layerswap.png 'On-ramp with specified provider')
 
 :::success Layerswap sandbox testing
 To test the transactions in the Sandbox environment, please use your exchange account with feature supported Goerli cryptocurrencies

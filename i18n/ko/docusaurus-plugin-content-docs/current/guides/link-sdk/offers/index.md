@@ -2,11 +2,7 @@
 id: "link-offers"
 title: "Link Offers"
 slug: "/link-offers"
-keywords:
-  - trading
-  - orderbook
-  - offer
-  - buy-order
+keywords: [trading, orderbook, offer, buy-order]
 ---
 
 :::danger OFFERS IS IN BETA 

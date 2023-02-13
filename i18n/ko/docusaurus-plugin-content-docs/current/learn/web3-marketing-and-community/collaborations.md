@@ -2,8 +2,7 @@
 sidebar_position: 6
 title: "Collaborations"
 slug: "/learn/collaborations"
-keywords:
-  - imx-growth
+keywords: [imx-growth]
 ---
 
 import ListAdmonition from '@site/src/components/ListAdmonition';
@@ -15,6 +14,7 @@ import ListAdmonition from '@site/src/components/ListAdmonition';
         <li> A template for evaluating collaborations </li>
      </ul>
 </ListAdmonition>
+
 
 # Collaborations and partnerships
 
